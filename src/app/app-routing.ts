@@ -16,6 +16,10 @@ export const baseRoutes: Routes = [
         path: BaseRoutes.EXHIBITORS,
         loadChildren: () => import('./views/exhibitors/exhibitors.module').then((m) => m.ExhibitorsModule),
       },
+      {
+        path: BaseRoutes.APPLICATION,
+        loadChildren: () => import('./views/application/application.module').then((m) => m.ApplicationModule),
+      },
     ],
   }
 ];

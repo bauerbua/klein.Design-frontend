@@ -11,7 +11,7 @@ import { baseRoutes } from './app-routing';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
