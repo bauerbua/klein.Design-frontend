@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { BaseRoutes } from './base.routes';
 import { BaseLayoutComponent } from './shared/components/base-layout/base-layout.component';
 
-export const baseRoutes: Routes = [
+export const entryRoutes: Routes = [
   {
     path: '',
     component: BaseLayoutComponent,
