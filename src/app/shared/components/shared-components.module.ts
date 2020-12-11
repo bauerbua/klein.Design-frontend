@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { BaseLayoutComponent } from './base-layout/base-layout.component';
 import { ExhibitorCardComponent } from './exhibitor-card/exhibitor-card.component';
-import { ContactFormComponent } from './contact-form/contact-form.component';
 import { CircleBannerComponent } from './circle-banner/circle-banner.component';
+import { NewsletterFormComponent } from './newsletter-form/newsletter-form.component';
 
 const components = [
   BaseLayoutComponent,
   ExhibitorCardComponent,
-  ContactFormComponent,
+  NewsletterFormComponent,
   CircleBannerComponent
 ];
 

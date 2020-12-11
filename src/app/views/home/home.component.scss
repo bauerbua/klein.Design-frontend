@@ -1,3 +1,5 @@
+@import "../../../styles/colors";
+
 #home {
   width: 100%;
   display: flex;
@@ -6,12 +8,85 @@
 
   section {
     width: 100%;
-    padding: 0 10%;
+    padding: 20px 10%;
     box-sizing: border-box;
     margin: 20px 0;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
   }
 
   .full-width {
     padding: 0;
   }
+
+  #hero {
+    .heroText {
+      padding: 20px 10%;
+      background-color: $primary;
+      color: white;
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+    }
+  }
+
+  #exhibitors {
+    background-color: lighten($primary, 25%);
+
+    .exhibitor-cards {
+      margin-bottom: 40px;
+    }
+  }
+
+  #aboutUs {
+    .portraits {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+      margin: 0 auto;
+      width: 600px;
+
+      div {
+        width: 150px;
+        padding-top: 150px;
+        border: .5px solid black;
+        border-radius: 50%;
+      }
+    }
+
+    @media only screen and (min-width: 0) and (max-width: 768px) {
+      .portraits {
+        align-items: center;
+        flex-flow: column;
+        width: 100%;
+
+        div {
+          margin: 20px auto;
+        }
+      }
+    }
+  }
+
+  #location {
+    .map {
+      height: 300px;
+      width: 100%;
+      border: none;
+      margin-bottom: 30px;
+    }
+
+    .locationInfo {
+      width: 80%;
+      display: flex;
+      flex-flow: row nowrap;;
+      justify-content: space-between;
+    }
+  }
+
+  #footer {
+    background-color: $primary;
+    margin-bottom: 0;
+  }
+
 }
