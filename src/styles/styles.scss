@@ -10,3 +10,11 @@ body, html {
   margin: 0;
   font-family: quicksand, sans-serif;
 }
+
+hr {
+  border: 0;
+  clear: both;
+  display: block;
+  background-color: rgba(200, 200, 200, 0.8);
+  height: 1px;
+}

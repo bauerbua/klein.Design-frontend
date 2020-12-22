@@ -20,12 +20,7 @@
   }
 
   hr {
-    border: 0;
-    clear: both;
-    display: block;
     width: 50%;
-    background-color: rgba(200, 200, 200, 0.8);
-    height: 1px;
   }
 
   #hero {
@@ -61,7 +56,35 @@
     background-color: lighten($primary, 25%);
 
     .exhibitor-cards {
-      margin-bottom: 40px;
+      width: 100%;
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      padding-bottom: 40px;
+
+      .card {
+        width: 20%;
+        min-width: 200px;
+        margin: 20px;
+        z-index: 3;
+        flex: 0 0 auto;
+      }
+    }
+  }
+
+  #impressionen {
+    height: 400px;
+
+    .rows {
+      width: 100%;
+      height: 50%;
+      white-space: nowrap;
+      overflow: hidden;
+
+      img {
+        height: 100%;
+        width: auto;
+      }
     }
   }
 
