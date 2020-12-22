@@ -1,5 +1,6 @@
 .exhibitor-card {
-  max-width: 300px;
+  max-width: 250px;
+  background-color: white;
 
   img {
     width: 100%;
@@ -9,7 +10,28 @@
 
   .card-body {
     display: flex;
+    padding: 20px;
     flex-flow: column nowrap;
     align-items: center;
+    justify-content: space-between;
+
+    h3 {
+      margin: 0 0 10px 0;
+    }
+
+    .tags {
+      margin: 0 0 20px 0;
+
+      span {
+        font-size: .8em;
+        font-weight: 300;
+        margin: 5px;
+        cursor: pointer;
+      }
+
+      span:hover {
+        text-decoration: underline;
+      }
+    }
   }
 }

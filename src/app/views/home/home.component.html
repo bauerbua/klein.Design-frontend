@@ -1,7 +1,7 @@
 <div id="home">
   <section id="hero" class="full-width">
-    <img src="" alt="klein-design">
-    <app-circle-banner></app-circle-banner>
+    <img class="heroImg" src="../../../assets/images/logo_19122020_klein.svg" alt="img">
+    <app-circle-banner class="banner"></app-circle-banner>
     <div class="heroText">
       <p>
         Unglaublich kreative Aussteller präsentieren handgemachte, originelle und einzigartige Produkte.
@@ -11,7 +11,7 @@
         Geschenke für kleine und große Leute, sowie eine angenehme Atmosphäre laden zum Stöbern ein.
         Lasst euch durch das abwechslungs- reiche und kunterbunte Angebot den Tag versüßen, wir freuen uns auf euren Besuch!
       </p>
-      <button (click)="routeToView('bewerbung')">Weiter zur Bewerbung</button>
+      <button (click)="routeToView('bewerbung')" class="btn-white">Bewerbung</button>
     </div>
   </section>
 
@@ -21,6 +21,7 @@
     <button (click)="routeToView('aussteller')">Alle Aussteller</button>
   </section>
 
+  <hr>
   <section id="impressionen" class="full-width">
     <div class="rows">
       <img *ngFor="let img of imagesUpperRow" alt="klein.Design Impressionen" [src]="img"/>
@@ -29,6 +30,7 @@
       <img *ngFor="let img of imagesLowerRow" alt="klein.Design Impressionen" [src]="img"/>
     </div>
   </section>
+  <hr>
 
   <section id="aboutUs">
     <h1>Über Uns</h1>

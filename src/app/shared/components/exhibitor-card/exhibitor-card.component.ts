@@ -17,7 +17,11 @@ export class ExhibitorCardComponent implements OnInit {
   }
 
   routeToView(id: number): void {
-    this.router.navigate([BaseRoutes.EXHIBITORS + '/' + id]);
+    this.router.navigate([BaseRoutes.EXHIBITORS, id]);
+  }
+
+  routeWithParam(tag: string): void {
+    this.router.navigate([BaseRoutes.EXHIBITORS], {queryParams: {searchBy: tag}});
   }
 
 }

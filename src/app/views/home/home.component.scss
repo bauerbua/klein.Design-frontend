@@ -1,14 +1,13 @@
 @import "../../../styles/colors";
 
 #home {
-  width: 100%;
   display: flex;
   flex-flow: column;
   align-items: center;
 
   section {
     width: 100%;
-    padding: 20px 10%;
+    padding: 20px 20%;
     box-sizing: border-box;
     margin: 20px 0;
     display: flex;
@@ -20,14 +19,41 @@
     padding: 0;
   }
 
+  hr {
+    border: 0;
+    clear: both;
+    display: block;
+    width: 50%;
+    background-color: rgba(200, 200, 200, 0.8);
+    height: 1px;
+  }
+
   #hero {
     .heroText {
-      padding: 20px 10%;
+      width: 100%;
+      padding: 20px;
       background-color: $primary;
-      color: white;
       display: flex;
       flex-flow: column nowrap;
       align-items: center;
+      box-sizing: border-box;
+
+      p {
+        width: 60%;
+        color: white;
+      }
+    }
+
+    .heroImg {
+      width: 30%;
+      align-self: flex-start;
+      margin-left: 20%;
+      opacity: .8;
+    }
+
+    .banner {
+      align-self: flex-end;
+      margin-right: 20%;
     }
   }
 

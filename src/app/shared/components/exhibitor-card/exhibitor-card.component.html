@@ -2,8 +2,8 @@
   <img [src]="exhibitor.img" alt="titelbild">
   <div class="card-body">
     <h3>{{exhibitor.title}}</h3>
-    <div>
-      <span *ngFor="let tag of exhibitor.tags">{{tag}}</span>
+    <div class="tags">
+      <span *ngFor="let tag of exhibitor.tags" (click)="routeWithParam(tag)">{{tag}}</span>
     </div>
     <button (click)="routeToView(exhibitor.id)">Mehr information</button>
   </div>
