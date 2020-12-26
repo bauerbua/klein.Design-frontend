@@ -53,22 +53,13 @@
   }
 
   #exhibitors {
+    padding: 20px 10%;
     background-color: lighten($primary, 25%);
 
-    .exhibitor-cards {
-      width: 100%;
-      display: flex;
-      flex-wrap: nowrap;
+    .gallery {
       overflow-x: auto;
       padding-bottom: 40px;
-
-      .card {
-        width: 20%;
-        min-width: 200px;
-        margin: 20px;
-        z-index: 3;
-        flex: 0 0 auto;
-      }
+      flex-wrap: nowrap;
     }
   }
 

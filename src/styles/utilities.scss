@@ -14,3 +14,9 @@ button {
   color: $primary;
   background-color: white;
 }
+
+.card {
+  min-width: 200px;
+  margin: 20px;
+  z-index: 3;
+}

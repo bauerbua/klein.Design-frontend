@@ -26,7 +26,6 @@ export class HomeComponent implements OnInit {
         const splitIndex = Math.round(selectedImgs.length / 2);
         this.imagesUpperRow = selectedImgs.splice(0, splitIndex);
         this.imagesLowerRow = selectedImgs;
-        console.log(this.imagesLowerRow, this.imagesUpperRow);
       })
     );
     this.subscriptions.push(

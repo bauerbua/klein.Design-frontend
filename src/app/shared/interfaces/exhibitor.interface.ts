@@ -1,6 +1,8 @@
 export interface Exhibitor {
   id: number;
   title: string;
-  coverImg: any;
-  tags: any;
+  coverImg: {
+    url: string;
+  };
+  tags: [];
 }

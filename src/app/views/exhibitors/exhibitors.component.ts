@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Exhibitor } from '../../shared/interfaces/exhibitor.interface';
+import { BaseService } from '../../shared/services/base.service';
+import { apiEndpoints } from '../../../assets/api/api.endpoints';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-exhibitors',
@@ -8,10 +11,17 @@ import { Exhibitor } from '../../shared/interfaces/exhibitor.interface';
 })
 export class ExhibitorsComponent implements OnInit {
   exhibitors: Exhibitor[] = [];
+  searchValue: string;
 
-  constructor() { }
+  constructor(private baseService: BaseService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.baseService.get<Exhibitor[]>(apiEndpoints.EXHIBITORS).subscribe(
+      res => {
+        this.exhibitors = res;
+    });
+    this.route.queryParams.subscribe(params => {
+      this.searchValue = params.searchBy ? params.searchBy : undefined;
+    });
   }
-
 }
