@@ -7,4 +7,7 @@ export interface Exhibitor extends Tag {
     url: string;
   };
   tags: Tag[];
+  images?: [];
+  owner?: string;
+  description?: string;
 }
