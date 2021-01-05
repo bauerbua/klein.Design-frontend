@@ -4,6 +4,6 @@
     <input type="text" id="filterName" placeholder="Durchsuche Aussteller..." [(ngModel)]="searchValue">
   </div>
   <div class="gallery">
-    <app-exhibitor-card class="card" *ngFor="let exhibitor of exhibitors | filterPipe: searchValue" [exhibitor]="exhibitor"></app-exhibitor-card>
+    <app-exhibitor-card class="card" *ngFor="let exhibitor of exhibitors | exhibitorFilter: searchValue" [exhibitor]="exhibitor"></app-exhibitor-card>
   </div>
 </div>

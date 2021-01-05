@@ -1,9 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Exhibitor } from '../interfaces/exhibitor.interface';
 
-@Pipe({ name: 'filterPipe' })
+@Pipe({ name: 'exhibitorFilter' })
 export class FilterPipe implements PipeTransform {
 
-  transform(items: any[], searchValue: string): any[] {
+  transform(items: Exhibitor[], searchValue: string): any[] {
     if (!items) {
       return [];
     }

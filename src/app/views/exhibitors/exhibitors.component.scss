@@ -4,6 +4,7 @@
   min-height: 100vh;
   background-color: lighten($primary, 25%);
   padding: 40px 0;
+  box-sizing: border-box;
 
   .filter {
     width: 60%;
