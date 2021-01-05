@@ -24,4 +24,5 @@ export class ExhibitorsComponent implements OnInit {
       this.searchValue = params.searchBy ? params.searchBy : undefined;
     });
   }
+
 }
