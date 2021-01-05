@@ -17,7 +17,7 @@
 
   <section id="exhibitors">
     <h1>Aussteller</h1>
-    <div class="exhibitor-cards">
+    <div class="gallery">
       <app-exhibitor-card class="card" *ngFor="let exhibitor of exhibitors" [exhibitor]="exhibitor"></app-exhibitor-card>
     </div>
     <button (click)="routeToView('aussteller')">Alle Aussteller</button>

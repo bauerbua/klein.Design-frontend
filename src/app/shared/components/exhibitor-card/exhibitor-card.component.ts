@@ -16,8 +16,8 @@ export class ExhibitorCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  routeToView(id: number): void {
-    this.router.navigate([BaseRoutes.EXHIBITORS, id]);
+  routeToView(exhibitorName: string): void {
+    this.router.navigate([BaseRoutes.EXHIBITORS, exhibitorName]);
   }
 
   routeWithParam(tag: string): void {
