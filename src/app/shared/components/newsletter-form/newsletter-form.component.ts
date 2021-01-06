@@ -10,7 +10,7 @@ import { apiEndpoints } from '../../../../assets/api/api.endpoints';
 export class NewsletterFormComponent implements OnInit {
   email = '';
   response: string;
-  @ViewChild('newsletterForm') form: any;
+  @ViewChild('f') form: any;
 
   constructor(private baseService: BaseService) { }
 

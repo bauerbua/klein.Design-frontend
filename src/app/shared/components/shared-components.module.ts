@@ -7,6 +7,8 @@ import { CircleBannerComponent } from './circle-banner/circle-banner.component';
 import { NewsletterFormComponent } from './newsletter-form/newsletter-form.component';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
 
 const components = [
   BaseLayoutComponent,
@@ -23,6 +25,8 @@ const components = [
     RouterModule,
     FormsModule,
     InputTextModule,
+    ButtonModule,
+    RippleModule,
   ]
 })
 export class SharedComponentsModule { }

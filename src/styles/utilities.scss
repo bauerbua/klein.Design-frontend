@@ -1,18 +1,15 @@
 @import "_colors.scss";
 
 button {
-  background-color: $primary;
-  color: white;
-  border-radius: 3px;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  min-width: 150px;
+  background: $primary !important;
+  color: white !important;
+  border: none !important;
+  font-size: .9rem !important;
 }
 
 .btn-white {
-  color: $primary;
-  background-color: white;
+  color: $primary !important;
+  background-color: white !important;
 }
 
 .card {

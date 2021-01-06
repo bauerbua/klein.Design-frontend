@@ -1,0 +1,17 @@
+form {
+  padding: 30px;
+  background-color: white;
+  border-radius: 3px;
+  height: 130px;
+
+  .form-group {
+    input {
+      margin-right: 10px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+  }
+}

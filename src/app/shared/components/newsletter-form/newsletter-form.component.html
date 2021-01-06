@@ -1,18 +1,25 @@
-<form #newsletterForm="ngForm" (ngSubmit)="onSubmit()">
-  <span class="p-float-label">
-    <input
-      id="float-input"
-      #input="ngModel"
-      name="email"
-      type="text"
-      [ngClass]="[(input.invalid && input.touched) ? 'p-invalid': '']"
-      aria-describedby="invalidMessage"
-      [(ngModel)]="email"
-      pInputText
-      email>
-    <label for="float-input">Email</label>
-  </span>
-  <div><small *ngIf="input.invalid && input.touched" id="invalidMessage" class="p-invalid">invalid</small></div>
-  <div><small *ngIf="response">{{response}}</small></div>
-  <button class="btn-white" type="submit" [disabled]="newsletterForm.invalid">Abschicken</button>
+<h2>Newsletter</h2>
+<form #f="ngForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="icon-input">Email</label>
+    <span class="p-input-icon-left">
+      <i class="pi pi-envelope"></i>
+      <input
+        id="icon-input"
+        #input="ngModel"
+        name="email"
+        type="text"
+        [ngClass]="{'p-invalid' : (input.invalid && input.touched)}"
+        aria-describedby="invalidMessage"
+        [(ngModel)]="email"
+        pInputText
+        required
+        email>
+    </span>
+    <button [disabled]="f.invalid" class="p-button-raised" label="Abschicken" pButton pRipple type="submit"></button>
+  </div>
+  <div>
+    <small *ngIf="input.invalid && input.touched" id="invalidMessage" class="p-invalid">Ungültige Email-Adresse</small>
+    <small *ngIf="response">{{response}}</small>
+  </div>
 </form>

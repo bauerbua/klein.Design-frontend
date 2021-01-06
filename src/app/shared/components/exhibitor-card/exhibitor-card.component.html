@@ -6,6 +6,6 @@
     <div class="tags">
       <span *ngFor="let tag of exhibitor.tags" (click)="routeWithParam(tag.tag)">{{tag.tag | titlecase}}</span>
     </div>
-    <button (click)="routeToView(exhibitor.title)">Mehr information</button>
+    <button (click)="routeToView(exhibitor.title)" class="p-button-raised" label="Mehr Information" pButton pRipple></button>
   </div>
 </div>
