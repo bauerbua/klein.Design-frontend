@@ -1,5 +1,25 @@
-<form>
-  <label for="emailAddress">Email Adresse</label>
-  <input id="emailAddress" type="email" placeholder="info@kreativ-markt.at">
-  <button type="submit">Abschicken</button>
+<h2>Newsletter</h2>
+<form #f="ngForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="icon-input">Email</label>
+    <span class="p-input-icon-left">
+      <i class="pi pi-envelope"></i>
+      <input
+        id="icon-input"
+        #input="ngModel"
+        name="email"
+        type="text"
+        aria-describedby='invalidMessage'
+        (input)="response = ''"
+        [(ngModel)]="email"
+        pInputText
+        required
+        email>
+    </span>
+    <button [disabled]="f.invalid" class="p-button-raised" label="Abschicken" pButton pRipple type="submit"></button>
+  </div>
+  <div>
+    <small *ngIf="input.invalid && input.touched && email !== ''" id="invalidMessage" class="p-invalid">Ungültige Email-Adresse</small>
+    <small *ngIf="response">{{response}}</small>
+  </div>
 </form>

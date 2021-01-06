@@ -1,7 +1,9 @@
 <div id="allExhibitors">
   <div class="filter">
-    <label for="filterName"></label>
-    <input type="text" id="filterName" placeholder="Durchsuche Aussteller..." [(ngModel)]="searchValue">
+    <span class="p-input-icon-left">
+    <i class="pi pi-search"></i>
+    <input [(ngModel)]="searchValue" pInputText placeholder="Durchsuche Aussteller..." type="text">
+  </span>
   </div>
   <div class="gallery">
     <app-exhibitor-card class="card" *ngFor="let exhibitor of exhibitors | exhibitorFilter: searchValue" [exhibitor]="exhibitor"></app-exhibitor-card>
