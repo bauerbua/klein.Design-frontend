@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedComponentsModule } from './components/shared-components.module';
 import { FilterPipe } from './pipes/filter.pipe';
+import {InputTextModule} from 'primeng/inputtext';
 
 @NgModule({
   declarations: [FilterPipe],
   imports: [
     CommonModule,
-    SharedComponentsModule
+    SharedComponentsModule,
+    InputTextModule
   ],
   exports: [
     SharedComponentsModule,
