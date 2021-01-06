@@ -9,8 +9,8 @@
         #input="ngModel"
         name="email"
         type="text"
-        [ngClass]="{'p-invalid' : (input.invalid && input.touched)}"
-        aria-describedby="invalidMessage"
+        aria-describedby='invalidMessage'
+        (input)="response = ''"
         [(ngModel)]="email"
         pInputText
         required
@@ -19,7 +19,7 @@
     <button [disabled]="f.invalid" class="p-button-raised" label="Abschicken" pButton pRipple type="submit"></button>
   </div>
   <div>
-    <small *ngIf="input.invalid && input.touched" id="invalidMessage" class="p-invalid">Ungültige Email-Adresse</small>
+    <small *ngIf="input.invalid && input.touched && email !== ''" id="invalidMessage" class="p-invalid">Ungültige Email-Adresse</small>
     <small *ngIf="response">{{response}}</small>
   </div>
 </form>

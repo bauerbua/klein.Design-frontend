@@ -21,6 +21,10 @@ export class NewsletterFormComponent implements OnInit {
     this.baseService.post<any>(apiEndpoints.NEWSLETTER, this.form.value).subscribe(
       () => {
         this.response = 'Danke für Ihre Anmeldung!';
+      }, err => {
+        if (err.status === 500) {
+          this.response = 'Diese Email existiert bereits';
+        }
       }
     );
   }
