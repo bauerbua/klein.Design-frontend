@@ -1,1 +1,18 @@
-<p>single-exhibitor works!</p>
+<div *ngIf="exhibitor">
+  <h1>{{exhibitor.title}}</h1>
+  <img src="http://localhost:1337{{exhibitor.coverImg.url}}" alt="titelbild">
+  <p>{{exhibitor.description}}</p>
+  <em>{{exhibitor.owner}}</em>
+  <div>
+    <ng-container *ngFor="let link of exhibitor.links">
+      <a [href]="link.facebook" *ngIf="link.facebook">{{link.facebook}}</a>
+      <a [href]="link.twitter" *ngIf="link.twitter">{{link.twitter}}</a>
+      <a [href]="link.website" *ngIf="link.website">{{link.website}}</a>
+      <a [href]="link.instagram" *ngIf="link.instagram">{{link.instagram}}</a>
+    </ng-container>
+  </div>
+  <div class="gallery">
+    <img class="card" *ngFor="let img of exhibitor.images" alt="klein.Design Impressionen" src="http://localhost:1337{{img.url}}"/>
+  </div>
+  <button class="p-button-raised" label="Alle Aussteller" pButton pRipple routerLink="/aussteller"></button>
+</div>

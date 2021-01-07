@@ -21,8 +21,8 @@ export class HomeComponent implements OnInit {
     this.subscriptions.push(
       this.homeService.getImages().subscribe(images => {
         const imgs = images.images;
-        const randomNum = Math.floor(Math.random() * (imgs.length - 20));
-        const selectedImgs = imgs.splice(randomNum, (randomNum + 20));
+        const randomNum = Math.floor(Math.random() * (imgs.length - 25));
+        const selectedImgs = imgs.splice(randomNum, (randomNum + 25));
         const splitIndex = Math.round(selectedImgs.length / 2);
         this.imagesUpperRow = selectedImgs.splice(0, splitIndex);
         this.imagesLowerRow = selectedImgs;
