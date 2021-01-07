@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { BaseLayoutComponent } from './base-layout/base-layout.component';
+import { BaseLayoutComponent } from '../layouts/base-layout/base-layout.component';
 import { ExhibitorCardComponent } from './exhibitor-card/exhibitor-card.component';
 import { CircleBannerComponent } from './circle-banner/circle-banner.component';
 import { NewsletterFormComponent } from './newsletter-form/newsletter-form.component';
