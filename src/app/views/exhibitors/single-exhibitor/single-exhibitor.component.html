@@ -14,5 +14,5 @@
   <div class="gallery">
     <img class="card" *ngFor="let img of exhibitor.images" alt="klein.Design Impressionen" src="http://localhost:1337{{img.url}}"/>
   </div>
-  <button routerLink="/aussteller">Alle Aussteller sehen</button>
+  <button class="p-button-raised" label="Alle Aussteller" pButton pRipple routerLink="/aussteller"></button>
 </div>
