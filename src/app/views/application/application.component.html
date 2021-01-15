@@ -1,1 +1,13 @@
-<p>application works!</p>
+<div class="application-form">
+  <div class="stepper">
+    <p-toast></p-toast>
+    <p-steps [model]="items" [(activeIndex)]="activeIndex" [readonly]="false"></p-steps>
+  </div>
+  <form [formGroup]="form1">
+    <input type="text" [formControlName]="'vorname'">
+    <input type="text" [formControlName]="'nachname'">
+    <input type="email" [formControlName]="'email'">
+    <input type="number" [formControlName]="'telefonnummer'">
+    <input type="text" [formControlName]="'adresse'">
+  </form>
+</div>
