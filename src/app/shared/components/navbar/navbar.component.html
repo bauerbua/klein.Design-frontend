@@ -13,6 +13,11 @@
           <span class="hamburger-inner"></span>
         </span>
       </button>
+      <div class="navMobile" [ngClass]="active ? 'isOpen' : ''">
+        <a routerLink="/">Home</a>
+        <a routerLink="bewerbung">Bewerbung</a>
+        <a routerLink="aussteller">Aussteller</a>
+      </div>
     </div>
   </ng-template>
 </nav>
