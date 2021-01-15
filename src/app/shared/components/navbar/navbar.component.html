@@ -1,0 +1,23 @@
+<nav class="navbar">
+  <ng-container *ngIf="!isMobile; else mobile">
+    <div class="navList">
+      <a routerLink="/">Home</a>
+      <a routerLink="bewerbung">Bewerbung</a>
+      <a routerLink="aussteller">Aussteller</a>
+    </div>
+  </ng-container>
+  <ng-template #mobile>
+    <div class="navList">
+      <button class="hamburger--spin hamburger" type="button" (click)="active=!active" [ngClass]="active ? 'is-active' : ''">
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
+      </button>
+      <div class="navMobile" [ngClass]="active ? 'isOpen' : ''">
+        <a routerLink="/">Home</a>
+        <a routerLink="bewerbung">Bewerbung</a>
+        <a routerLink="aussteller">Aussteller</a>
+      </div>
+    </div>
+  </ng-template>
+</nav>

@@ -9,12 +9,14 @@ import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
+import { NavbarComponent } from './navbar/navbar.component';
 
 const components = [
   BaseLayoutComponent,
   ExhibitorCardComponent,
   NewsletterFormComponent,
-  CircleBannerComponent
+  CircleBannerComponent,
+  NavbarComponent
 ];
 
 @NgModule({
