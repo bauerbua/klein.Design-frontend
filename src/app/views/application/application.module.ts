@@ -7,6 +7,8 @@ import { StepsModule } from 'primeng/steps';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { ReactiveFormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [ApplicationComponent],
@@ -16,6 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ToastModule,
     RouterModule.forChild(applicationRoutes),
     ReactiveFormsModule,
+    InputTextModule,
+    ButtonModule,
   ],
   providers: [MessageService]
 })

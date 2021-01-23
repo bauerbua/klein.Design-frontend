@@ -2,8 +2,27 @@
   width: 60%;
   margin: 0 auto;
 
-  .stepper {
-    width: 60%;
-    margin: 0 auto;
+  .formGroup {
+    justify-content: left;
+    align-items: flex-start;
+    display: flex;
+    flex-flow: column nowrap;
+
+    .input {
+      display: flex;
+      flex-flow: column nowrap;
+      margin: 10px 0;
+      width: 100%;
+    }
+
+    .buttons {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      .btn-right {
+        margin-left: auto;
+      }
+    }
   }
 }

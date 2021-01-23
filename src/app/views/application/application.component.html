@@ -1,13 +1,30 @@
 <div class="application-form">
-  <div class="stepper">
+  <div>
     <p-toast></p-toast>
     <p-steps [model]="items" [(activeIndex)]="activeIndex" [readonly]="false"></p-steps>
   </div>
-  <form [formGroup]="form1">
-    <input type="text" [formControlName]="'vorname'">
-    <input type="text" [formControlName]="'nachname'">
-    <input type="email" [formControlName]="'email'">
-    <input type="number" [formControlName]="'telefonnummer'">
-    <input type="text" [formControlName]="'adresse'">
+  <form [formGroup]="form1" class="formGroup" *ngIf="activeIndex === 0 && form1.controls !== undefined">
+    <ng-container *ngFor="let input of form1Config" class="input">
+      <div class="input">
+        <label [for]="input.formControlName">{{input.label}}</label>
+        <input pInputText [required]="input.isRequired" [type]="input.label" [id]="input.formControlName" [formControlName]="input.formControlName" aria-describedby='invalidMessage'>
+        <small *ngIf="this.form1.get([input.formControlName]).invalid && this.form1.get([input.formControlName]).touched" id="invalidMessage" class="p-invalid">{{input.label}} wird benötigt</small>
+      </div>
+    </ng-container>
+    <div class="buttons">
+      <button pButton type="button" icon="pi pi-check" iconPos="right" label="Nächste Seite" class="btn-right" (click)="nextPage()" [disabled]="form1.invalid"></button>
+    </div>
+  </form>
+  <form [formGroup]="form2" class="formGroup" *ngIf="activeIndex === 1">
+    <ng-container *ngFor="let input of form2Config">
+      <div class="input">
+        <label [for]="input.formControlName">{{input.label}}</label>
+        <input pInputText required [type]="input.label" [id]="input.formControlName" [formControlName]="input.formControlName">
+      </div>
+    </ng-container>
+    <div class="buttons">
+      <button pButton type="button" icon="pi pi-check" iconPos="left" label="Letzte Seite" (click)="previousPage()"></button>
+      <button pButton type="button" icon="pi pi-check" iconPos="right" label="Nächste Seite" class="btn-right" (click)="nextPage()"></button>
+    </div>
   </form>
 </div>
