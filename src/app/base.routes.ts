@@ -1,5 +1,5 @@
 export const BaseRoutes = {
-  HOME: '',
+  HOME: 'home',
   EXHIBITORS: 'aussteller',
   APPLICATION: 'bewerbung',
   ERROR: 'error'

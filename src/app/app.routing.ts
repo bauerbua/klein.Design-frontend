@@ -5,6 +5,11 @@ import { BaseLayoutComponent } from './shared/layouts/base-layout/base-layout.co
 export const entryRoutes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
+    redirectTo: BaseRoutes.HOME
+  },
+  {
+    path: '',
     component: BaseLayoutComponent,
     children: [
       {

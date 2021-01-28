@@ -6,9 +6,11 @@ import { applicationRoutes } from './application.routing';
 import { StepsModule } from 'primeng/steps';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [ApplicationComponent],
@@ -18,8 +20,11 @@ import { ButtonModule } from 'primeng/button';
     ToastModule,
     RouterModule.forChild(applicationRoutes),
     ReactiveFormsModule,
+    FormsModule,
     InputTextModule,
     ButtonModule,
+    InputTextareaModule,
+    DropdownModule
   ],
   providers: [MessageService]
 })

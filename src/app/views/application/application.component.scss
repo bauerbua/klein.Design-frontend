@@ -4,15 +4,15 @@
 
   .formGroup {
     justify-content: left;
-    align-items: flex-start;
     display: flex;
     flex-flow: column nowrap;
+    align-items: stretch;
 
     .input {
       display: flex;
       flex-flow: column nowrap;
       margin: 10px 0;
-      width: 100%;
+      flex-grow: 1;
     }
 
     .buttons {

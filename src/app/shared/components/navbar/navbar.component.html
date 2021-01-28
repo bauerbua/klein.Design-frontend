@@ -1,9 +1,9 @@
 <nav class="navbar">
   <ng-container *ngIf="!isMobile; else mobile">
     <div class="navList">
-      <a routerLink="/">Home</a>
-      <a routerLink="bewerbung">Bewerbung</a>
-      <a routerLink="aussteller">Aussteller</a>
+      <a routerLink="home" routerLinkActive="is-active">Home</a>
+      <a routerLink="bewerbung" routerLinkActive="is-active">Bewerbung</a>
+      <a routerLink="aussteller" routerLinkActive="is-active">Aussteller</a>
     </div>
   </ng-container>
   <ng-template #mobile>

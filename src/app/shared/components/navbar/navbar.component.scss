@@ -28,6 +28,10 @@ $hamburger-padding-y: 8px;
       color: black;
     }
 
+    .is-active {
+      color: $tertiary;
+    }
+
     .navMobile {
       position: absolute;
       top: 0;

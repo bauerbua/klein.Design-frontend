@@ -1,19 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+
+export interface FormConfig {
+  formControlName: string;
+  type: string;
+  label: string;
+  isRequired?: boolean;
+}
 
 @Component({
   selector: 'app-application',
   templateUrl: './application.component.html',
   styleUrls: ['./application.component.scss']
 })
+
 export class ApplicationComponent implements OnInit {
   items;
   activeIndex = 0;
-  form1: FormGroup;
-  form2: FormGroup;
-
-  form1Config = [
+  forms: FormConfig[][] = [];
+  formConfig1: FormConfig[] = [
     {
       formControlName: 'firstname',
       type: 'text',
@@ -44,7 +49,7 @@ export class ApplicationComponent implements OnInit {
       isRequired: true,
     }
   ];
-  form2Config = [
+  formConfig2: FormConfig[] = [
     {
       formControlName: 'companyName',
       type: 'text',
@@ -76,14 +81,47 @@ export class ApplicationComponent implements OnInit {
       label: 'Website'
     },
   ];
+  formConfig3: FormConfig[] = [];
+  formConfig4: FormConfig[] = [
+    {
+      formControlName: 'standplatz',
+      type: 'select',
+      label: 'Standplatz auswählen'
+    },
+    {
+      formControlName: 'tisch',
+      type: 'select',
+      label: 'Benötigte Tische'
+    },
+    {
+      formControlName: 'strom',
+      type: 'select',
+      label: 'Strom'
+    }
+  ];
+  formConfig5: FormConfig[] = [];
 
-  constructor(private messageService: MessageService) {
+  formArray: FormArray = new FormArray([]);
+
+  select;
+
+  constructor() {
 
   }
 
+  getFormGroup(index: number): FormGroup {
+    return this.formArray.controls[index] as FormGroup;
+  }
+
   ngOnInit(): void {
-    this.form1 = new FormGroup(this.generateForm(this.form1Config));
-    this.form2 = new FormGroup(this.generateForm(this.form2Config));
+    this.forms.push(this.formConfig1);
+    this.forms.push(this.formConfig2);
+    this.forms.push(this.formConfig3);
+    this.forms.push(this.formConfig4);
+    this.forms.push(this.formConfig5);
+    this.forms.forEach(config => {
+      this.formArray.push(new FormGroup(this.generateForm(config)));
+    });
     this.items = [
       {
         label: 'Kontaktdaten',
@@ -130,6 +168,7 @@ export class ApplicationComponent implements OnInit {
 
   nextPage(): void {
     this.activeIndex ++;
+    console.log(this.formArray);
   }
 
   previousPage(): void {

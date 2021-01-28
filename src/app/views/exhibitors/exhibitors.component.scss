@@ -1,9 +1,9 @@
 @import "./src/styles/colors";
 
 #allExhibitors {
-  min-height: 100vh;
   background-color: lighten($primary, 25%);
   padding: 40px 0;
+  height: 100%;
   box-sizing: border-box;
 
   .filter {
