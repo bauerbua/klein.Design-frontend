@@ -57,13 +57,15 @@ export class ApplicationComponent implements OnInit {
     },
     {
       formControlName: 'categories',
-      type: 'text',
-      label: 'Kategorien'
+      type: 'select',
+      label: 'Kategorien',
+      multiple: true,
+      options: ['Stoff', 'Holz']
     },
     {
-      formControlName: 'categories',
+      formControlName: 'description',
       type: 'textarea',
-      label: 'Beschreibung'
+      label: 'Beschreibung',
     },
     {
       formControlName: 'facebook',
