@@ -6,10 +6,10 @@ import { ExhibitorCardComponent } from './exhibitor-card/exhibitor-card.componen
 import { CircleBannerComponent } from './circle-banner/circle-banner.component';
 import { NewsletterFormComponent } from './newsletter-form/newsletter-form.component';
 import { FormsModule } from '@angular/forms';
-import { InputTextModule } from 'primeng/inputtext';
-import { ButtonModule } from 'primeng/button';
-import { RippleModule } from 'primeng/ripple';
 import { NavbarComponent } from './navbar/navbar.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 const components = [
   BaseLayoutComponent,
@@ -26,9 +26,9 @@ const components = [
     CommonModule,
     RouterModule,
     FormsModule,
-    InputTextModule,
-    ButtonModule,
-    RippleModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
   ]
 })
 export class SharedComponentsModule { }

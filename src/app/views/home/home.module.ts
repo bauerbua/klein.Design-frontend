@@ -4,8 +4,7 @@ import { RouterModule } from '@angular/router';
 import { homeRoutes } from './home.routing';
 import { SharedComponentsModule } from '../../shared/components/shared-components.module';
 import { HomeComponent } from './home.component';
-import { ButtonModule } from 'primeng/button';
-import { RippleModule } from 'primeng/ripple';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [HomeComponent],
@@ -13,8 +12,7 @@ import { RippleModule } from 'primeng/ripple';
     CommonModule,
     SharedComponentsModule,
     RouterModule.forChild(homeRoutes),
-    ButtonModule,
-    RippleModule
+    MatButtonModule,
   ]
 })
 export class HomeModule { }
