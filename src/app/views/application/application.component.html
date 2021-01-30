@@ -20,9 +20,9 @@
             <ng-container *ngIf="input.type === 'select'">
               <mat-form-field appearance="outline">
                 <mat-label>{{input.label}}</mat-label>
-                <mat-select [formControlName]="input.formControlName" [multiple]="input.multiple">
+                <mat-select [formControlName]="input.formControlName">
                   <mat-option *ngFor="let option of input.options" [value]="option">
-                    {{option | titlecase}}
+                    {{option}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
