@@ -1,36 +1,43 @@
 <div class="application-form">
-  <div>
-    <p-toast></p-toast>
-    <p-steps [model]="items" [(activeIndex)]="activeIndex" [readonly]="false"></p-steps>
-  </div>
-    <form class="formGroup" *ngFor="let form of formArray.controls; index as i">
-      <div *ngIf="activeIndex === i">
-        <div [formGroup]="getFormGroup(i)">
+  <mat-horizontal-stepper #stepper linear="true">
+    <mat-step *ngFor="let form of formArray.controls; index as i" [stepControl]="getFormGroup(i)" label="step">
+      <form>
+        <div [formGroup]="getFormGroup(i)" class="formGroup">
           <ng-container *ngFor="let input of forms[i]">
-            <ng-container *ngIf="!(input.type === 'textarea' || input.type === 'select')">
-              <div class="input">
-                <label [for]="input.formControlName">{{input.label}}</label>
-                <input pInputText [required]="input.isRequired" [type]="input.type" [id]="input.formControlName" [formControlName]="input.formControlName" aria-describedby='invalidMessage'>
-              </div>
+            <ng-container *ngIf="!(input.type === 'textarea' || input.type === 'select' || input.type === 'upload')">
+              <mat-form-field appearance="outline">
+                <mat-label>{{input.label}}</mat-label>
+                <input matInput [required]="input.isRequired" [type]="input.type" [formControlName]="input.formControlName">
+                <mat-error>{{input.label}} wird benötigt</mat-error>
+              </mat-form-field>
             </ng-container>
             <ng-container *ngIf="input.type === 'textarea'">
-              <div class="input">
-                <label [for]="input.formControlName">{{input.label}}</label>
-                <textarea pInputTextarea [required]="input.isRequired" [id]="input.formControlName" [formControlName]="input.formControlName" aria-describedby='invalidMessage'></textarea>
-              </div>
+              <mat-form-field appearance="outline">
+                <mat-label>{{input.label}}</mat-label>
+                <textarea matInput matTextareaAutosize [required]="input.isRequired" [formControlName]="input.formControlName"></textarea>
+              </mat-form-field>
             </ng-container>
             <ng-container *ngIf="input.type === 'select'">
-              <div class="input">
-                <label [for]="input.formControlName">{{input.label}}</label>
-                <p-dropdown [style]="{'minWidth':'100%'}" [options]="['1','2']" [formControlName]="input.formControlName"></p-dropdown>
-              </div>
+              <mat-form-field appearance="outline">
+                <mat-label>{{input.label}}</mat-label>
+                <mat-select [formControlName]="input.formControlName">
+                  <mat-option *ngFor="let option of input.options" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </ng-container>
+            <ng-container *ngIf="input.type === 'upload'">
+              <label>{{input.label}}</label>
+              <input [multiple]="input.multiple" type="file" />
             </ng-container>
           </ng-container>
         </div>
         <div class="buttons">
-          <button *ngIf="i > 0" pButton type="button" icon="pi pi-check" iconPos="left" label="Letzte Seite" (click)="previousPage()"></button>
-          <button *ngIf="i < 4" pButton type="button" icon="pi pi-check" iconPos="right" label="Nächste Seite" class="btn-right" (click)="nextPage()"></button>
+          <button mat-raised-button *ngIf="i > 0" type="button" matStepperPrevious>Letzte Seite</button>
+          <button mat-raised-button *ngIf="i < 4" type="button" class="btn-right" matStepperNext>Nächste Seite</button>
         </div>
-      </div>
-    </form>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
 </div>

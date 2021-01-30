@@ -7,22 +7,14 @@
     display: flex;
     flex-flow: column nowrap;
     align-items: stretch;
+  }
+  .buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 
-    .input {
-      display: flex;
-      flex-flow: column nowrap;
-      margin: 10px 0;
-      flex-grow: 1;
-    }
-
-    .buttons {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-
-      .btn-right {
-        margin-left: auto;
-      }
+    .btn-right {
+      margin-left: auto;
     }
   }
 }

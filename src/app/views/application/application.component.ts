@@ -6,6 +6,8 @@ export interface FormConfig {
   type: string;
   label: string;
   isRequired?: boolean;
+  options?: any;
+  multiple?: boolean;
 }
 
 @Component({
@@ -35,7 +37,6 @@ export class ApplicationComponent implements OnInit {
       formControlName: 'email',
       type: 'email',
       label: 'Email',
-      isRequired: true,
     },
     {
       formControlName: 'phone',
@@ -46,7 +47,6 @@ export class ApplicationComponent implements OnInit {
       formControlName: 'address',
       type: 'text',
       label: 'Adresse',
-      isRequired: true,
     }
   ];
   formConfig2: FormConfig[] = [
@@ -81,29 +81,74 @@ export class ApplicationComponent implements OnInit {
       label: 'Website'
     },
   ];
-  formConfig3: FormConfig[] = [];
+  formConfig3: FormConfig[] = [
+    {
+      formControlName: 'coverImg',
+      type: 'upload',
+      label: 'Titlebild',
+      multiple: false
+    },
+    {
+      formControlName: 'images',
+      type: 'upload',
+      label: 'Fotos',
+      multiple: true
+    },
+    {
+      formControlName: 'logo',
+      type: 'upload',
+      label: 'Logo',
+      multiple: false
+    },
+  ];
   formConfig4: FormConfig[] = [
     {
       formControlName: 'standplatz',
       type: 'select',
-      label: 'Standplatz auswählen'
+      label: 'Standplatz auswählen',
+      isRequired: true,
+      options: [ 'klein', 'groß'],
     },
     {
-      formControlName: 'tisch',
+      formControlName: 'table',
       type: 'select',
-      label: 'Benötigte Tische'
+      label: 'Benötigte Tische',
+      isRequired: true,
+      options: ['1', '2'],
     },
     {
-      formControlName: 'strom',
+      formControlName: 'power',
       type: 'select',
-      label: 'Strom'
+      label: 'Strom',
+      isRequired: true,
+      options: ['ja', 'nein'],
     }
   ];
-  formConfig5: FormConfig[] = [];
+  formConfig5: FormConfig[] = [
+    {
+      formControlName: 'ads',
+      type: 'select',
+      label: 'Werbung',
+      isRequired: true,
+      options: [ 'ja', 'nein'],
+    },
+    {
+      formControlName: 'communication',
+      type: 'select',
+      label: 'Kommunikation über',
+      isRequired: true,
+      options: ['WhatsApp', 'Email'],
+    },
+    {
+      formControlName: 'newsletter',
+      type: 'select',
+      label: 'Newsletter',
+      isRequired: true,
+      options: ['ja', 'nein'],
+    }
+  ];
 
   formArray: FormArray = new FormArray([]);
-
-  select;
 
   constructor() {
 
@@ -122,38 +167,6 @@ export class ApplicationComponent implements OnInit {
     this.forms.forEach(config => {
       this.formArray.push(new FormGroup(this.generateForm(config)));
     });
-    this.items = [
-      {
-        label: 'Kontaktdaten',
-        command: (event: any) => {
-          this.activeIndex = 0;
-        }
-      },
-      {
-        label: 'Produkte & Angebot',
-        command: (event: any) => {
-          this.activeIndex = 1;
-        }
-      },
-      {
-        label: 'Foto-Upload',
-        command: (event: any) => {
-          this.activeIndex = 2;
-        }
-      },
-      {
-        label: 'Standplatz',
-        command: (event: any) => {
-          this.activeIndex = 3;
-        }
-      },
-      {
-        label: 'Von Rechts Wegen',
-        command: (event: any) => {
-          this.activeIndex = 4;
-        }
-      }
-    ];
   }
 
   generateForm(formConfig: any[]): {} {
@@ -168,7 +181,6 @@ export class ApplicationComponent implements OnInit {
 
   nextPage(): void {
     this.activeIndex ++;
-    console.log(this.formArray);
   }
 
   previousPage(): void {
