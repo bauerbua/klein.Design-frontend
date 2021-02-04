@@ -7,15 +7,17 @@ import { SingleExhibitorComponent } from './single-exhibitor/single-exhibitor.co
 import { SharedComponentsModule } from '../../shared/components/shared-components.module';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [ExhibitorsComponent, SingleExhibitorComponent],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(exhibitorsRoutes),
-    SharedComponentsModule,
-    FormsModule,
-    SharedModule,
-  ]
+    imports: [
+        CommonModule,
+        RouterModule.forChild(exhibitorsRoutes),
+        SharedComponentsModule,
+        FormsModule,
+        SharedModule,
+        MatInputModule,
+    ]
 })
 export class ExhibitorsModule { }

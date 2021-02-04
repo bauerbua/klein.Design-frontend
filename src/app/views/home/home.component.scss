@@ -127,6 +127,14 @@
   #footer {
     background-color: $primary;
     margin-bottom: 0;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    padding: 30px;
+
+    .col-3 {
+      width: 30%
+    }
   }
 
 }
