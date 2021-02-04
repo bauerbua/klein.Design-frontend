@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ApplicationFormConfigs } from './application-form.config';
+import { BaseService } from '../../shared/services/base.service';
 
 export interface FormConfig {
   formControlName: string;
@@ -8,6 +10,7 @@ export interface FormConfig {
   isRequired?: boolean;
   options?: any;
   multiple?: boolean;
+  pattern?: string;
 }
 
 @Component({
@@ -20,137 +23,10 @@ export class ApplicationComponent implements OnInit {
   items;
   activeIndex = 0;
   forms: FormConfig[][] = [];
-  formConfig1: FormConfig[] = [
-    {
-      formControlName: 'firstname',
-      type: 'text',
-      label: 'Vorname',
-      isRequired: true,
-    },
-    {
-      formControlName: 'lastname',
-      type: 'text',
-      label: 'Nachname',
-      isRequired: true,
-    },
-    {
-      formControlName: 'email',
-      type: 'email',
-      label: 'Email',
-    },
-    {
-      formControlName: 'phone',
-      type: 'number',
-      label: 'Telefonnummer',
-    },
-    {
-      formControlName: 'address',
-      type: 'text',
-      label: 'Adresse',
-    }
-  ];
-  formConfig2: FormConfig[] = [
-    {
-      formControlName: 'companyName',
-      type: 'text',
-      label: 'Firmenname'
-    },
-    {
-      formControlName: 'categories',
-      type: 'text',
-      label: 'Kategorien'
-    },
-    {
-      formControlName: 'categories',
-      type: 'textarea',
-      label: 'Beschreibung'
-    },
-    {
-      formControlName: 'facebook',
-      type: 'text',
-      label: 'Facebook'
-    },
-    {
-      formControlName: 'twitter',
-      type: 'text',
-      label: 'Twitter'
-    },
-    {
-      formControlName: 'Website',
-      type: 'text',
-      label: 'Website'
-    },
-  ];
-  formConfig3: FormConfig[] = [
-    {
-      formControlName: 'coverImg',
-      type: 'upload',
-      label: 'Titlebild',
-      multiple: false
-    },
-    {
-      formControlName: 'images',
-      type: 'upload',
-      label: 'Fotos',
-      multiple: true
-    },
-    {
-      formControlName: 'logo',
-      type: 'upload',
-      label: 'Logo',
-      multiple: false
-    },
-  ];
-  formConfig4: FormConfig[] = [
-    {
-      formControlName: 'standplatz',
-      type: 'select',
-      label: 'Standplatz auswählen',
-      isRequired: true,
-      options: [ 'klein', 'groß'],
-    },
-    {
-      formControlName: 'table',
-      type: 'select',
-      label: 'Benötigte Tische',
-      isRequired: true,
-      options: ['1', '2'],
-    },
-    {
-      formControlName: 'power',
-      type: 'select',
-      label: 'Strom',
-      isRequired: true,
-      options: ['ja', 'nein'],
-    }
-  ];
-  formConfig5: FormConfig[] = [
-    {
-      formControlName: 'ads',
-      type: 'select',
-      label: 'Werbung',
-      isRequired: true,
-      options: [ 'ja', 'nein'],
-    },
-    {
-      formControlName: 'communication',
-      type: 'select',
-      label: 'Kommunikation über',
-      isRequired: true,
-      options: ['WhatsApp', 'Email'],
-    },
-    {
-      formControlName: 'newsletter',
-      type: 'select',
-      label: 'Newsletter',
-      isRequired: true,
-      options: ['ja', 'nein'],
-    }
-  ];
 
   formArray: FormArray = new FormArray([]);
 
-  constructor() {
+  constructor(private baseService: BaseService) {
 
   }
 
@@ -159,11 +35,9 @@ export class ApplicationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.forms.push(this.formConfig1);
-    this.forms.push(this.formConfig2);
-    this.forms.push(this.formConfig3);
-    this.forms.push(this.formConfig4);
-    this.forms.push(this.formConfig5);
+    for (const config of Object.keys(ApplicationFormConfigs)) {
+      this.forms.push(ApplicationFormConfigs[config]);
+    }
     this.forms.forEach(config => {
       this.formArray.push(new FormGroup(this.generateForm(config)));
     });
@@ -179,12 +53,28 @@ export class ApplicationComponent implements OnInit {
     return group;
   }
 
+  addInput(): void {
+    console.log('add');
+  }
+
   nextPage(): void {
     this.activeIndex ++;
   }
 
   previousPage(): void {
     this.activeIndex --;
+  }
+
+  sendApplication(): void {
+    const reqBody = {};
+    this.formArray.value.forEach(object => {
+      Object.assign(reqBody, object);
+    });
+    /*this.baseService.post(apiEndpoints.EXHIBITORS, reqBody).subscribe(
+      res => {
+        console.log(res);
+      }
+    );*/
   }
 
 }

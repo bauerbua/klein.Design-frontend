@@ -7,35 +7,43 @@
             <ng-container *ngIf="!(input.type === 'textarea' || input.type === 'select' || input.type === 'upload')">
               <mat-form-field appearance="outline">
                 <mat-label>{{input.label}}</mat-label>
-                <input matInput [required]="input.isRequired" [type]="input.type" [formControlName]="input.formControlName">
-                <mat-error>{{input.label}} wird benötigt</mat-error>
+                <input matInput [required]="input.isRequired" [type]="input.type" [formControlName]="input.formControlName" [pattern]="input.pattern">
+                <mat-error>Dieses Feld wird benötigt!</mat-error>
               </mat-form-field>
             </ng-container>
             <ng-container *ngIf="input.type === 'textarea'">
               <mat-form-field appearance="outline">
                 <mat-label>{{input.label}}</mat-label>
-                <textarea matInput matTextareaAutosize [required]="input.isRequired" [formControlName]="input.formControlName"></textarea>
+                <textarea
+                  matInput
+                  matTextareaAutosize
+                  [required]="input.isRequired"
+                  [formControlName]="input.formControlName"
+                ></textarea>
+                <mat-error>Dieses Feld wird benötigt!</mat-error>
               </mat-form-field>
             </ng-container>
             <ng-container *ngIf="input.type === 'select'">
               <mat-form-field appearance="outline">
                 <mat-label>{{input.label}}</mat-label>
-                <mat-select [formControlName]="input.formControlName">
+                <mat-select [formControlName]="input.formControlName" [multiple]="input.multiple" [required]="input.isRequired">
                   <mat-option *ngFor="let option of input.options" [value]="option">
                     {{option}}
                   </mat-option>
                 </mat-select>
+                <mat-error>Dieses Feld wird benötigt!</mat-error>
               </mat-form-field>
             </ng-container>
             <ng-container *ngIf="input.type === 'upload'">
               <label>{{input.label}}</label>
-              <input [multiple]="input.multiple" type="file" />
+              <input type="file" [multiple]="input.multiple" [required]="input.isRequired" [formControlName]="input.formControlName" />
             </ng-container>
           </ng-container>
         </div>
         <div class="buttons">
           <button mat-raised-button *ngIf="i > 0" type="button" matStepperPrevious>Letzte Seite</button>
           <button mat-raised-button *ngIf="i < 4" type="button" class="btn-right" matStepperNext>Nächste Seite</button>
+          <button mat-raised-button *ngIf="i === 4" type="button" class="btn-right" (click)="sendApplication()">Abschließen</button>
         </div>
       </form>
     </mat-step>
