@@ -1,6 +1,6 @@
 <div class="application-form">
-  <mat-horizontal-stepper #stepper linear="true">
-    <mat-step *ngFor="let form of formArray.controls; index as i" [stepControl]="getFormGroup(i)" label="step">
+  <mat-horizontal-stepper #stepper linear="true" *ngIf="!summary">
+    <mat-step *ngFor="let form of formArray.controls; index as i" [stepControl]="getFormGroup(i)" [label]="formLabels[i]">
       <form>
         <div [formGroup]="getFormGroup(i)" class="formGroup">
           <ng-container *ngFor="let input of forms[i]">
@@ -43,9 +43,19 @@
         <div class="buttons">
           <button mat-raised-button *ngIf="i > 0" type="button" matStepperPrevious>Letzte Seite</button>
           <button mat-raised-button *ngIf="i < 4" type="button" class="btn-right" matStepperNext>Nächste Seite</button>
-          <button mat-raised-button *ngIf="i === 4" type="button" class="btn-right" (click)="sendApplication()">Abschließen</button>
+          <button mat-raised-button *ngIf="i === 4" type="button" class="btn-right" (click)="showSummary()">Zusammenfassung</button>
         </div>
       </form>
     </mat-step>
   </mat-horizontal-stepper>
+  <div *ngIf="summary" class="summary">
+    <h1>Zusammenfassung</h1>
+    <div *ngFor="let object of formArray.value" class="group">
+      <div *ngFor="let property of object | keyvalue" class="keyVal">
+        <td>{{property.key}}</td>
+        <td>{{property.value}}</td>
+      </div>
+    </div>
+    <button mat-raised-button type="button" (click)="sendApplication()">Absenden</button>
+  </div>
 </div>

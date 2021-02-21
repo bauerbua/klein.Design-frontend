@@ -26,7 +26,7 @@
   #hero {
     .heroText {
       width: 100%;
-      padding: 20px;
+      padding: 50px 0;
       background-color: $primary;
       display: flex;
       flex-flow: column nowrap;
@@ -40,7 +40,8 @@
     }
 
     .heroImg {
-      width: 30%;
+      width: 40%;
+      min-width: 250px;
       align-self: flex-start;
       margin-left: 20%;
       opacity: .8;
@@ -49,6 +50,8 @@
     .banner {
       align-self: flex-end;
       margin-right: 20%;
+      margin-bottom: -30px;
+      z-index: 3;
     }
   }
 
@@ -56,10 +59,8 @@
     padding: 20px 10%;
     background-color: lighten($primary, 25%);
 
-    .gallery {
-      overflow-x: auto;
-      padding-bottom: 40px;
-      flex-wrap: nowrap;
+    .carousel {
+      width: 80%;
     }
   }
 
@@ -84,7 +85,7 @@
       display: flex;
       flex-flow: row wrap;
       justify-content: space-between;
-      margin: 0 auto;
+      margin: 10px auto;
       width: 600px;
 
       div {
@@ -119,8 +120,19 @@
     .locationInfo {
       width: 80%;
       display: flex;
-      flex-flow: row nowrap;;
+      flex-flow: row wrap;
       justify-content: space-between;
+
+      div {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        margin: 10px 0;
+
+        p {
+          margin: 0 0 0 10px;
+        }
+      }
     }
   }
 
@@ -128,12 +140,19 @@
     background-color: $primary;
     margin-bottom: 0;
     display: flex;
-    flex-flow: row;
+    flex-flow: column nowrap;
     justify-content: space-between;
-    padding: 30px;
+    padding: 30px 30px 15px 30px;
 
-    .col-3 {
-      width: 30%
+    .newsletter {
+      margin: 50px auto;
+    }
+
+    .row {
+      width: 80%;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
     }
   }
 

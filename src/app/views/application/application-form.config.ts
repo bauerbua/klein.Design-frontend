@@ -1,7 +1,7 @@
 import { Patterns } from '../../shared/utilities/patterns';
 
 export const ApplicationFormConfigs = {
-  formConfig1: [
+  Kontaktdaten: [
     {
       formControlName: 'firstname',
       type: 'text',
@@ -30,7 +30,7 @@ export const ApplicationFormConfigs = {
     }
   ],
 
-  formConfig2: [
+  Angebot: [
     {
       formControlName: 'companyName',
       type: 'text',
@@ -57,7 +57,7 @@ export const ApplicationFormConfigs = {
     }
   ],
 
-  formConfig3: [
+  Fotos: [
     {
       formControlName: 'coverImg',
       type: 'upload',
@@ -78,7 +78,7 @@ export const ApplicationFormConfigs = {
     },
   ],
 
-  formConfig4: [
+  Standplatz: [
     {
       formControlName: 'standplatz',
       type: 'select',
@@ -102,7 +102,7 @@ export const ApplicationFormConfigs = {
     }
   ],
 
-  formConfig5: [
+  Rechtliches: [
     {
       formControlName: 'ads',
       type: 'select',

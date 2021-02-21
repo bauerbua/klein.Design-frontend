@@ -17,4 +17,16 @@
       margin-left: auto;
     }
   }
+
+  .summary {
+
+    .group {
+      margin-bottom: 10px;
+
+      .keyVal {
+        display: flex;
+        flex-flow: row nowrap;
+      }
+    }
+  }
 }

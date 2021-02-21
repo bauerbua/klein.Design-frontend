@@ -9,20 +9,22 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [ApplicationComponent],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(applicationRoutes),
-    ReactiveFormsModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatButtonModule,
-    MatStepperModule,
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(applicationRoutes),
+        ReactiveFormsModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatButtonModule,
+        MatStepperModule,
+        MatIconModule,
+    ],
   providers: []
 })
 export class ApplicationModule { }

@@ -29,7 +29,7 @@ $hamburger-padding-y: 8px;
     }
 
     .is-active {
-      color: $tertiary;
+      color: $tertiary !important;
     }
 
     .navMobile {
@@ -45,7 +45,7 @@ $hamburger-padding-y: 8px;
       align-items: center;
       justify-content: flex-start;
       background-color: $primary;
-      transition: .5s linear;
+      transition: .3s linear;
 
       a {
         margin: 10px 0;

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApplicationFormConfigs } from './application-form.config';
-import { BaseService } from '../../shared/services/base.service';
 
 export interface FormConfig {
   formControlName: string;
@@ -23,24 +22,28 @@ export class ApplicationComponent implements OnInit {
   items;
   activeIndex = 0;
   forms: FormConfig[][] = [];
+  summary = false;
+  applicationObj = {};
 
   formArray: FormArray = new FormArray([]);
+  formLabels: string[] = [];
 
-  constructor(private baseService: BaseService) {
+  constructor() {
 
-  }
-
-  getFormGroup(index: number): FormGroup {
-    return this.formArray.controls[index] as FormGroup;
   }
 
   ngOnInit(): void {
     for (const config of Object.keys(ApplicationFormConfigs)) {
+      this.formLabels.push(config);
       this.forms.push(ApplicationFormConfigs[config]);
     }
     this.forms.forEach(config => {
       this.formArray.push(new FormGroup(this.generateForm(config)));
     });
+  }
+
+  getFormGroup(index: number): FormGroup {
+    return this.formArray.controls[index] as FormGroup;
   }
 
   generateForm(formConfig: any[]): {} {
@@ -65,10 +68,16 @@ export class ApplicationComponent implements OnInit {
     this.activeIndex --;
   }
 
-  sendApplication(): void {
-    const reqBody = {};
+  showSummary(): void {
     this.formArray.value.forEach(object => {
-      Object.assign(reqBody, object);
+      Object.assign(this.applicationObj, object);
+    });
+    this.summary = true;
+  }
+
+  sendApplication(): void {
+    this.formArray.value.forEach(object => {
+      Object.assign(this.applicationObj, object);
     });
     /*this.baseService.post(apiEndpoints.EXHIBITORS, reqBody).subscribe(
       res => {

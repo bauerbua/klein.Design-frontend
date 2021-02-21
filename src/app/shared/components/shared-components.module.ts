@@ -10,6 +10,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 const components = [
   BaseLayoutComponent,
@@ -22,13 +23,14 @@ const components = [
 @NgModule({
   declarations: components,
   exports: components,
-  imports: [
-    CommonModule,
-    RouterModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-  ]
+    imports: [
+        CommonModule,
+        RouterModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatIconModule,
+    ]
 })
 export class SharedComponentsModule { }

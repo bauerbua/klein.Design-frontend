@@ -2,6 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Exhibitor } from '../../shared/interfaces/exhibitor.interface';
 import { HomeService } from './home.service';
+import SwiperCore, {
+  Navigation,
+  Pagination,
+  Scrollbar,
+  A11y,
+} from 'swiper/core';
+
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 @Component({
   selector: 'app-home',
@@ -14,6 +22,20 @@ export class HomeComponent implements OnInit {
   imagesLowerRow: any[] = [];
   exhibitors: Exhibitor[] = [];
   subscriptions: any[] = [];
+  breakpoints: {
+    768: {
+      slidesPerView: 1
+    },
+    1000: {
+      slidesPerView: 2
+    },
+    1300: {
+      slidesPerView: 3
+    },
+    2000: {
+      slidesPerView: 4
+    }
+  };
 
   constructor(private homeService: HomeService, private router: Router) {}
 
@@ -38,5 +60,13 @@ export class HomeComponent implements OnInit {
 
   routeToView(path: string): void {
     this.router.navigate([path]);
+  }
+
+  onSwiper(e): void {
+    console.log(e);
+  }
+
+  onSlideChange(): void {
+    console.log('sile');
   }
 }

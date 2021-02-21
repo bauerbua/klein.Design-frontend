@@ -3,8 +3,14 @@
   width: 100%;
   z-index: 5;
 }
+.backButton {
+  position: absolute;
+  top: 130px;
+  left: 50px;
+}
 
- #page-content {
-   padding-top: 80px;
-   box-sizing: content-box;
- }
+#page-content {
+  padding-top: 80px;
+  box-sizing: border-box;
+  height: 100%;
+}
