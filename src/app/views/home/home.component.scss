@@ -9,14 +9,24 @@
     width: 100%;
     padding: 20px 20%;
     box-sizing: border-box;
-    margin: 20px 0;
+    margin: 40px 0;
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
   }
 
+  @media only screen and (min-width: 0) and (max-width: 768px) {
+   section {
+     padding: 20px 10%;
+   }
+  }
+
   .full-width {
     padding: 0;
+  }
+
+  app-footer {
+    width: 100%;
   }
 
   hr {
@@ -135,25 +145,4 @@
       }
     }
   }
-
-  #footer {
-    background-color: $primary;
-    margin-bottom: 0;
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: space-between;
-    padding: 30px 30px 15px 30px;
-
-    .newsletter {
-      margin: 50px auto;
-    }
-
-    .row {
-      width: 80%;
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: space-between;
-    }
-  }
-
 }

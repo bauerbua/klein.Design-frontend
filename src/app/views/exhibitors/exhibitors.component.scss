@@ -4,7 +4,8 @@
   background-color: lighten($primary, 25%);
   padding: 40px 0;
   height: 100%;
-  box-sizing: border-box;
+  display: flex;
+  flex-flow: column;
 
   .filter {
     width: 60%;
@@ -13,5 +14,10 @@
     .mat-form-field {
       width: 100%;
     }
+  }
+
+  .gallery {
+    width: 80%;
+    margin: 0 auto;
   }
 }

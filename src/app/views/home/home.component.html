@@ -27,7 +27,6 @@
         [freeMode]="true"
         [navigation]="true"
         [pagination]="true"
-        [centeredSlidesBounds]="true"
       >
         <ng-template swiperSlide *ngFor="let exhibitor of exhibitors">
           <app-exhibitor-card class="card" [exhibitor]="exhibitor"></app-exhibitor-card>
@@ -39,16 +38,16 @@
     <button mat-raised-button (click)="routeToView('aussteller')">Alle Aussteller</button>
   </section>
 
-  <hr>
   <section id="impressionen" class="full-width">
+    <hr>
     <div class="rows">
       <img *ngFor="let img of imagesUpperRow" alt="klein.Design Impressionen" src="http://localhost:1337{{img.url}}"/>
     </div>
     <div class="rows">
       <img *ngFor="let img of imagesLowerRow" alt="klein.Design Impressionen" src="http://localhost:1337{{img.url}}"/>
     </div>
+    <hr>
   </section>
-  <hr>
 
   <section id="aboutUs">
     <h1>Über Uns</h1>
@@ -82,16 +81,6 @@
           <em>(Keine Kurzparkzone am Wochenende!)</em>
         </p>
       </div>
-    </div>
-  </section>
-
-  <section id="footer">
-    <div class="row newsletter">
-      <app-newsletter-form></app-newsletter-form>
-    </div>
-    <div class="row links">
-      <a routerLink="/impressum">Impressum</a>
-      <p>©2021 Kreativ-Markt. All Rights Reserved</p>
     </div>
   </section>
 </div>
