@@ -28,9 +28,7 @@ export class ApplicationComponent implements OnInit {
   formArray: FormArray = new FormArray([]);
   formLabels: string[] = [];
 
-  constructor() {
-
-  }
+  constructor() {}
 
   ngOnInit(): void {
     for (const config of Object.keys(ApplicationFormConfigs)) {

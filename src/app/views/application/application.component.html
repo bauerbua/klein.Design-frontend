@@ -1,5 +1,6 @@
 <div class="application-form">
-  <mat-horizontal-stepper #stepper linear="true">
+  <h1>Bewerbung Kreativ Markt Nov. 2021</h1>
+  <mat-vertical-stepper #stepper linear="true">
     <mat-step *ngFor="let form of formArray.controls; index as i" [stepControl]="getFormGroup(i)" [label]="formLabels[i]">
       <form>
         <div [formGroup]="getFormGroup(i)" class="formGroup">
@@ -63,6 +64,6 @@
         </div>
       </div>
     </mat-step>
-  </mat-horizontal-stepper>
+  </mat-vertical-stepper>
 
 </div>
