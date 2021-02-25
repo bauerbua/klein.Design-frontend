@@ -15,7 +15,9 @@
     </div>
   </div>
   <hr>
-  <div class="gallery">
-    <img class="card" *ngFor="let img of exhibitor.images" alt="klein.Design Impressionen" src="http://localhost:1337{{img.url}}"/>
+  <div class="images">
+    <div *ngFor="let img of exhibitor.images">
+      <img class="mat-elevation-z8" alt="klein.Design Impressionen" src="http://localhost:1337{{img.url}}"/>
+    </div>
   </div>
 </div>

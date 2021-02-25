@@ -98,7 +98,11 @@
   }
 
   #impressionen {
-    height: 400px;
+    height: 450px;
+
+    hr {
+      margin: 15px 0;
+    }
 
     .rows {
       width: 100%;
