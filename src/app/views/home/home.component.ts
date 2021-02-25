@@ -22,19 +22,41 @@ export class HomeComponent implements OnInit {
   imagesLowerRow: any[] = [];
   exhibitors: Exhibitor[] = [];
   subscriptions: any[] = [];
-  breakpoints: {
-    768: {
-      slidesPerView: 1
-    },
-    1000: {
-      slidesPerView: 2
-    },
-    1300: {
-      slidesPerView: 3
-    },
-    2000: {
-      slidesPerView: 4
-    }
+  slideConfig = {
+    dots: false,
+    infinite: false,
+    speed: 300,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    responsive: [
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          dots: true,
+          arrows: true
+        }
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          dots: true,
+          arrows: true
+        }
+      },
+      {
+        breakpoint: 700,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          dots: true,
+          arrows: true
+        },
+      }
+      ],
   };
 
   constructor(private homeService: HomeService, private router: Router) {}
@@ -60,13 +82,5 @@ export class HomeComponent implements OnInit {
 
   routeToView(path: string): void {
     this.router.navigate([path]);
-  }
-
-  onSwiper(e): void {
-    console.log(e);
-  }
-
-  onSlideChange(): void {
-    console.log('sile');
   }
 }

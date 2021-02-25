@@ -45,8 +45,10 @@
 
       p {
         width: 60%;
+        max-width: 1200px;
         color: white;
       }
+
     }
 
     .heroImg {
@@ -65,12 +67,33 @@
     }
   }
 
+  @media only screen and (min-width: 0) and (max-width: 768px) {
+
+    #hero {
+      .heroText {
+        p {
+          width: 80%;
+        }
+      }
+
+      .heroImg {
+        margin: 0 auto;
+      }
+    }
+  }
+
   #exhibitors {
     padding: 20px 10%;
     background-color: lighten($primary, 25%);
 
-    .carousel {
+    .carousel-wrapper {
       width: 80%;
+      max-width: 1200px;
+
+      .slide {
+        width: 250px;
+        margin: 0 5px;
+      }
     }
   }
 
@@ -91,6 +114,10 @@
   }
 
   #aboutUs {
+    .aboutUs-text {
+      max-width: 1200px;
+    }
+
     .portraits {
       display: flex;
       flex-flow: row wrap;
@@ -129,6 +156,7 @@
 
     .locationInfo {
       width: 80%;
+      max-width: 1200px;
       display: flex;
       flex-flow: row wrap;
       justify-content: space-between;

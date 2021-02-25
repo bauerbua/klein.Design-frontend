@@ -17,23 +17,14 @@
 
   <section id="exhibitors">
     <h1>Aussteller</h1>
-    <div class="carousel">
-      <swiper
-        (swiper)="onSwiper($event)"
-        [spaceBetween]="10"
-        (slideChange)="onSlideChange()"
-        [breakpoints]="breakpoints"
-        [slidesPerView]="1"
-        [freeMode]="true"
-        [navigation]="true"
-        [pagination]="true"
-      >
-        <ng-template swiperSlide *ngFor="let exhibitor of exhibitors">
+    <div class="carousel-wrapper">
+      <ngx-slick-carousel class="carousel"
+                          #slickModal="slick-carousel"
+                          [config]="slideConfig">
+        <div ngxSlickItem *ngFor="let exhibitor of exhibitors" class="slide">
           <app-exhibitor-card class="card" [exhibitor]="exhibitor"></app-exhibitor-card>
-        </ng-template>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-      </swiper>
+        </div>
+      </ngx-slick-carousel>
     </div>
     <button mat-raised-button (click)="routeToView('aussteller')">Alle Aussteller</button>
   </section>
@@ -51,8 +42,10 @@
 
   <section id="aboutUs">
     <h1>Über Uns</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed dignissimos consequuntur modi omnis perspiciatis natus dolore architecto reiciendis harum aliquid rerum hic laborum amet esse laboriosam voluptates culpa maxime consectetur eius, tempore.</p>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi incidunt eius animi at similique. Consequatur, nisi. Expedita, animi, magnam error facere illum rerum rem unde sequi, sed eum ullam laudantium ratione voluptatem quis optio assumenda.</p>
+    <div class="aboutUs-text">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed dignissimos consequuntur modi omnis perspiciatis natus dolore architecto reiciendis harum aliquid rerum hic laborum amet esse laboriosam voluptates culpa maxime consectetur eius, tempore.</p>
+      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi incidunt eius animi at similique. Consequatur, nisi. Expedita, animi, magnam error facere illum rerum rem unde sequi, sed eum ullam laudantium ratione voluptatem quis optio assumenda.</p>
+    </div>
     <div class="portraits">
       <div></div>
       <div></div>
