@@ -11,33 +11,41 @@
         Geschenke für kleine und große Leute, sowie eine angenehme Atmosphäre laden zum Stöbern ein.
         Lasst euch durch das abwechslungs- reiche und kunterbunte Angebot den Tag versüßen, wir freuen uns auf euren Besuch!
       </p>
-      <button (click)="routeToView('bewerbung')" class="p-button-raised btn-white" label="Bewerbung" pButton pRipple></button>
+      <button mat-raised-button (click)="routeToView('bewerbung')">Bewerbung</button>
     </div>
   </section>
 
   <section id="exhibitors">
     <h1>Aussteller</h1>
-    <div class="gallery">
-      <app-exhibitor-card class="card" *ngFor="let exhibitor of exhibitors" [exhibitor]="exhibitor"></app-exhibitor-card>
+    <div class="carousel-wrapper">
+      <ngx-slick-carousel class="carousel"
+                          #slickModal="slick-carousel"
+                          [config]="slideConfig">
+        <div ngxSlickItem *ngFor="let exhibitor of exhibitors" class="slide">
+          <app-exhibitor-card class="card" [exhibitor]="exhibitor"></app-exhibitor-card>
+        </div>
+      </ngx-slick-carousel>
     </div>
-    <button (click)="routeToView('aussteller')" class="p-button-raised" label="Alle Aussteller" pButton pRipple></button>
+    <button mat-raised-button (click)="routeToView('aussteller')">Alle Aussteller</button>
   </section>
 
-  <hr>
   <section id="impressionen" class="full-width">
+    <hr>
     <div class="rows">
       <img *ngFor="let img of imagesUpperRow" alt="klein.Design Impressionen" src="http://localhost:1337{{img.url}}"/>
     </div>
     <div class="rows">
       <img *ngFor="let img of imagesLowerRow" alt="klein.Design Impressionen" src="http://localhost:1337{{img.url}}"/>
     </div>
+    <hr>
   </section>
-  <hr>
 
   <section id="aboutUs">
     <h1>Über Uns</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed dignissimos consequuntur modi omnis perspiciatis natus dolore architecto reiciendis harum aliquid rerum hic laborum amet esse laboriosam voluptates culpa maxime consectetur eius, tempore.</p>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi incidunt eius animi at similique. Consequatur, nisi. Expedita, animi, magnam error facere illum rerum rem unde sequi, sed eum ullam laudantium ratione voluptatem quis optio assumenda.</p>
+    <div class="aboutUs-text">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed dignissimos consequuntur modi omnis perspiciatis natus dolore architecto reiciendis harum aliquid rerum hic laborum amet esse laboriosam voluptates culpa maxime consectetur eius, tempore.</p>
+      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi incidunt eius animi at similique. Consequatur, nisi. Expedita, animi, magnam error facere illum rerum rem unde sequi, sed eum ullam laudantium ratione voluptatem quis optio assumenda.</p>
+    </div>
     <div class="portraits">
       <div></div>
       <div></div>
@@ -50,23 +58,22 @@
     <iframe title="googleMap" class="map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d5307.7084514908875!2d16.327106!3d48.305655!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476d0f1c7b4aafcb%3A0x5be8e85960ad8b95!2sSchiefergarten%201%2C%203400%20Klosterneuburg!5e0!3m2!1sde!2sat!4v1599344586941!5m2!1sde!2sat" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
     <div class="locationInfo">
       <div>
+        <mat-icon>location_on</mat-icon>
         <p>Schiefergarten 1, <br>
           3400 Klosterneuburg</p>
       </div>
       <div>
+        <mat-icon>commute</mat-icon>
         <p><strong>S-Bahn:</strong> Station Klosterneuburg Kierling<br>
-          <strong>Autobus:</strong> Stifsgarten oder Niedermarkt</p>
+          <strong>Autobus:</strong> Stiftsgarten oder Niedermarkt</p>
       </div>
       <div>
+        <mat-icon>local_parking</mat-icon>
         <p>Parkmöglichkeiten am Rathausplatz<br>
           oder Park & Ride Kierling Bahnhof<br>
           <em>(Keine Kurzparkzone am Wochenende!)</em>
         </p>
       </div>
     </div>
-  </section>
-
-  <section id="footer">
-    <app-newsletter-form></app-newsletter-form>
   </section>
 </div>

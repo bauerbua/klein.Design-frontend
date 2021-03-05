@@ -1,0 +1,24 @@
+@import "../../../../styles/colors";
+
+.footer {
+  background-color: $primary;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+
+  .row {
+    width: 80%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin: 20px auto;
+
+    .col {
+      margin: 20px auto;
+
+      .links mat-icon {
+        margin-right: 10px;
+      }
+    }
+  }
+}

@@ -2,10 +2,20 @@
   <div class="filter">
     <span class="p-input-icon-left">
     <i class="pi pi-search"></i>
-    <input [(ngModel)]="searchValue" pInputText placeholder="Durchsuche Aussteller..." type="text">
+      <mat-form-field appearance="outline">
+        <mat-label>Durchsuche Aussteller</mat-label>
+        <input matInput [(ngModel)]="searchValue" type="text">
+      </mat-form-field>
   </span>
   </div>
-  <div class="gallery">
-    <app-exhibitor-card class="card" *ngFor="let exhibitor of exhibitors | exhibitorFilter: searchValue" [exhibitor]="exhibitor"></app-exhibitor-card>
-  </div>
+  <ng-container *ngIf="exhibitors.length >= 1; else noData">
+    <div class="gallery">
+      <app-exhibitor-card class="card" *ngFor="let exhibitor of exhibitors | exhibitorFilter: searchValue" [exhibitor]="exhibitor"></app-exhibitor-card>
+    </div>
+  </ng-container>
+  <ng-template #noData>
+    <div class="gallery">
+      <h3>Es tut uns leid, es scheint ein Problem zu geben, versuche es bitte später erneut!</h3>
+    </div>
+  </ng-template>
 </div>

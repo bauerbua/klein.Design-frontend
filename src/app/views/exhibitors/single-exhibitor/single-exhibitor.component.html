@@ -1,18 +1,24 @@
-<div *ngIf="exhibitor">
+<div *ngIf="exhibitor" class="exhibitor">
   <h1>{{exhibitor.title}}</h1>
-  <img src="http://localhost:1337{{exhibitor.coverImg.url}}" alt="titelbild">
-  <p>{{exhibitor.description}}</p>
-  <em>{{exhibitor.owner}}</em>
-  <div>
-    <ng-container *ngFor="let link of exhibitor.links">
-      <a [href]="link.facebook" *ngIf="link.facebook">{{link.facebook}}</a>
-      <a [href]="link.twitter" *ngIf="link.twitter">{{link.twitter}}</a>
-      <a [href]="link.website" *ngIf="link.website">{{link.website}}</a>
-      <a [href]="link.instagram" *ngIf="link.instagram">{{link.instagram}}</a>
-    </ng-container>
+  <strong><em>{{exhibitor.owner}}</em></strong>
+  <div class="row">
+    <div class="col-7">
+      <p>{{exhibitor.description}}</p>
+    </div>
+    <div class="col-3">
+      <ng-container *ngFor="let link of exhibitor.links">
+        <a [href]="link.facebook" *ngIf="link.facebook"><mat-icon>facebook</mat-icon></a>
+        <a [href]="link.twitter" *ngIf="link.twitter">{{link.twitter}}</a>
+        <a [href]="link.website" *ngIf="link.website"><mat-icon>language</mat-icon></a>
+        <a [href]="link.instagram" *ngIf="link.instagram">{{link.instagram}}</a>
+      </ng-container>
+    </div>
   </div>
-  <div class="gallery">
-    <img class="card" *ngFor="let img of exhibitor.images" alt="klein.Design Impressionen" src="http://localhost:1337{{img.url}}"/>
+  <hr>
+  <div class="images">
+    <div *ngFor="let img of exhibitor.images">
+      <img class="mat-elevation-z8" alt="klein.Design Impressionen" src="http://localhost:1337{{img.url}}"/>
+    </div>
   </div>
-  <button class="p-button-raised" label="Alle Aussteller" pButton pRipple routerLink="/aussteller"></button>
+  <button class="back-btn" mat-raised-button routerLink="/aussteller"><mat-icon>arrow_left</mat-icon>Zurück zu allen Ausstellern</button>
 </div>

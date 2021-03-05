@@ -1,0 +1,35 @@
+.application-form {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 0;
+
+
+  .formGroup {
+    justify-content: left;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+  }
+  .buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .btn-right {
+      margin-left: auto;
+    }
+  }
+
+  .summary {
+
+    .group {
+      margin-bottom: 10px;
+
+      .keyVal {
+        display: flex;
+        flex-flow: row nowrap;
+      }
+    }
+  }
+}

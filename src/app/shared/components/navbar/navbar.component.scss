@@ -8,8 +8,12 @@ $hamburger-padding-y: 8px;
 
 .navbar {
   width: 100%;
-  padding: 30px 0;
-  background-color: white;
+  height: 70px;
+  background-color: rgba(255, 255, 255, .95);
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
 
   .navList {
     width: 60%;
@@ -23,36 +27,67 @@ $hamburger-padding-y: 8px;
     }
 
     a {
+      width: fit-content;
       margin-left: 50px;
       text-decoration: none;
       color: black;
+      position: relative;
+      transition: .3s linear;
+    }
+
+    a:hover {
+      color: $tertiary;
+    }
+
+    a::before {
+      transition: .3s linear;
+      height: 2px;
+      content: "";
+      width: 0;
+      position: absolute;
+      bottom: -5px;
+      background-color: $tertiary;
+    }
+
+    a:hover::before {
+      width: 100%;
+    }
+
+    .is-active {
+      color: $tertiary !important;
+    }
+
+    .is-active::before {
+      width: 100%;
     }
 
     .navMobile {
       position: absolute;
       top: 0;
       left: 0;
-      padding-top: 80px;
       width: 100%;
       height: 0;
+      margin-top: 70px;
       visibility: hidden;
-      display: flex;
-      flex-flow: column nowrap;
-      align-items: center;
-      justify-content: flex-start;
-      background-color: $primary;
       transition: .5s linear;
+      background-color: rgba(255, 255, 255, .95);
 
-      a {
-        margin: 10px 0;
-        color: white;
+      .navItem {
+        padding: 10px;
+        opacity: 0;
       }
     }
 
     .isOpen {
-      height: 100vh;
       visibility: visible;
+      height: 150px;
       transition: .5s linear;
+
+      .navItem {
+        opacity: 1;
+        transition: .3s linear;
+        transition-delay: .8s;
+      }
     }
   }
 }

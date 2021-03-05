@@ -7,9 +7,9 @@ import { SingleExhibitorComponent } from './single-exhibitor/single-exhibitor.co
 import { SharedComponentsModule } from '../../shared/components/shared-components.module';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
-import { InputTextModule } from 'primeng/inputtext';
-import { RippleModule } from 'primeng/ripple';
-import { ButtonModule } from 'primeng/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [ExhibitorsComponent, SingleExhibitorComponent],
@@ -19,9 +19,9 @@ import { ButtonModule } from 'primeng/button';
     SharedComponentsModule,
     FormsModule,
     SharedModule,
-    InputTextModule,
-    RippleModule,
-    ButtonModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
   ]
 })
 export class ExhibitorsModule { }

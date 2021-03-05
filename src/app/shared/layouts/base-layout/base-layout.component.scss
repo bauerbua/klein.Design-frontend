@@ -1,10 +1,21 @@
-#navbar {
-  position: fixed;
-  width: 100%;
-  z-index: 5;
-}
+#page {
+  display: flex;
+  flex-flow: column nowrap;
+  min-height: 100vh;
 
- #page-content {
-   padding-top: 80px;
-   box-sizing: content-box;
- }
+  #navbar {
+    position: fixed;
+    width: 100%;
+    z-index: 5;
+    flex: 0 0 auto;
+  }
+
+  #content {
+    margin-top: 70px;
+    flex: 1 1 auto;
+  }
+
+  #footer {
+    flex: 0 1 auto;
+  }
+}

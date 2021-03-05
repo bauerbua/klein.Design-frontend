@@ -1,25 +1,22 @@
-<h2>Newsletter</h2>
-<form #f="ngForm" (ngSubmit)="onSubmit()">
-  <div class="form-group">
-    <label for="icon-input">Email</label>
-    <span class="p-input-icon-left">
-      <i class="pi pi-envelope"></i>
-      <input
-        id="icon-input"
-        #input="ngModel"
-        name="email"
-        type="text"
-        aria-describedby='invalidMessage'
-        (input)="response = ''"
-        [(ngModel)]="email"
-        pInputText
-        required
-        email>
-    </span>
-    <button [disabled]="f.invalid" class="p-button-raised" label="Abschicken" pButton pRipple type="submit"></button>
-  </div>
-  <div>
-    <small *ngIf="input.invalid && input.touched && email !== ''" id="invalidMessage" class="p-invalid">Ungültige Email-Adresse</small>
-    <small *ngIf="response">{{response}}</small>
-  </div>
-</form>
+<div class="newsletter mat-elevation-z8">
+  <h2>Bleib in Kontakt</h2>
+  <p>Melde dich zu unserem Newsletter an!</p>
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          id="icon-input"
+          #input="ngModel"
+          name="email"
+          type="text"
+          (input)="response = ''"
+          [(ngModel)]="email"
+          required
+          email>
+        <mat-error>Ungültige Email-Adresse</mat-error>
+        <mat-hint *ngIf="response">{{response}}</mat-hint>
+      </mat-form-field>
+      <button mat-raised-button [disabled]="f.invalid" type="submit">Absenden</button>
+  </form>
+</div>

@@ -1,17 +1,25 @@
 @import "./src/styles/colors";
 
 #allExhibitors {
-  min-height: 100vh;
   background-color: lighten($primary, 25%);
   padding: 40px 0;
-  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
 
   .filter {
     width: 60%;
+    max-width: 1200px;
     margin: 0 auto 20px auto;
 
-    span, input {
+    .mat-form-field {
       width: 100%;
     }
+  }
+
+  .gallery {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 }
