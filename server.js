@@ -10,10 +10,10 @@ const express = require('express');
 const app = express();
 
 app.use(requireHTTPS);
-app.use(express.static('./dist/klein-design-frontend'));
+app.use(express.static('./dist/kleinDesignFrontend'));
 
 app.get('/*', (req, res) => {
-  res.sendFile('index.html', {root: 'dist/klein-design-frontend/'});
+  res.sendFile('index.html', {root: 'dist/kleinDesignFrontend/'});
 });
 
 app.listen(process.env.PORT || 8080, function(){
