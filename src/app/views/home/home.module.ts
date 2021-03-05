@@ -6,8 +6,6 @@ import { SharedComponentsModule } from '../../shared/components/shared-component
 import { HomeComponent } from './home.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { SwiperModule } from 'swiper/angular';
-import { NguCarouselModule } from '@ngu/carousel';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @NgModule({
@@ -18,8 +16,6 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     RouterModule.forChild(homeRoutes),
     MatButtonModule,
     MatIconModule,
-    SwiperModule,
-    NguCarouselModule,
     SlickCarouselModule
   ]
 })
