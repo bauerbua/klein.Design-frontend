@@ -7,13 +7,14 @@ function requireHTTPS(req, res, next) {
 }
 
 const express = require('express');
+const path = require('path');
 const app = express();
 
 app.use(requireHTTPS);
-app.use(express.static('./dist/klein-design-frontend'));
+app.use(express.static(__dirname + '/dist/klein-design-frontend'));
 
 app.get('/*', (req, res) => {
-  res.sendFile('./dist/klein-design-frontend/index.html');
+  res.sendFile(path.join(__dirname + '/dist/klein-design-frontend/index.html'));
 });
 
 app.listen(process.env.PORT || 8080, function(){
