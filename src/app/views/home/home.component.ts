@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
     slidesToScroll: 4,
     responsive: [
       {
-        breakpoint: 1200,
+        breakpoint: 1280,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,

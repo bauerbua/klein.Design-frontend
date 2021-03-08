@@ -18,6 +18,7 @@ export class SingleExhibitorComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.baseService.get<Exhibitor>(apiEndpoints.EXHIBITORS + '/' + id).subscribe(
       res => {
+        console.log(res);
         this.exhibitor = res;
       }
     );
