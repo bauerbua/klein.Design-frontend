@@ -22,13 +22,19 @@
   }
 
   .summary {
+    margin-bottom: 20px;
 
-    .group {
-      margin-bottom: 10px;
+    .gridContainer {
+      display: flex;
+      flex-direction: row;
 
-      .keyVal {
-        display: flex;
-        flex-flow: row nowrap;
+      .column {
+        width: 200px;
+        margin: 5px 20px 5px 0;
+      }
+
+      .key {
+        font-weight: 500;
       }
     }
   }

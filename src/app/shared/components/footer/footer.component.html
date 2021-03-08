@@ -5,11 +5,15 @@
     </div>
     <div class="col">
       <div class="links">
-        <mat-icon>alternate_email</mat-icon>
-        <mat-icon>facebook</mat-icon>
+        <div>
+          <mat-icon (click)="openURL('https://www.facebook.com/kreativ.markt.at')">facebook</mat-icon>
+          <mat-icon (click)="openURL('https://www.instagram.com/kreativmarkt/')">tag</mat-icon>
+          <mat-icon (click)="sendMail()">mail</mat-icon>
+        </div>
+        <hr>
+        <a routerLink="/impressum" target='_blank'>Impressum</a>
+        <p>©2021 Kreativ-Markt. All Rights Reserved</p>
       </div>
-      <a routerLink="/impressum">Impressum</a>
-      <p>©2021 Kreativ-Markt. All Rights Reserved</p>
     </div>
   </div>
 </div>

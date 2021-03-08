@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApplicationFormConfigs } from './application-form.config';
+import { BaseService } from '../../shared/services/base.service';
+import { apiEndpoints } from '../../../assets/api/api.endpoints';
 
 export interface FormConfig {
   formControlName: string;
@@ -20,15 +22,14 @@ export interface FormConfig {
 
 export class ApplicationComponent implements OnInit {
   items;
-  activeIndex = 0;
   forms: FormConfig[][] = [];
   summary = false;
-  applicationObj = {};
+  summaryArray = [];
 
   formArray: FormArray = new FormArray([]);
   formLabels: string[] = [];
 
-  constructor() {}
+  constructor(private baseService: BaseService) {}
 
   ngOnInit(): void {
     for (const config of Object.keys(ApplicationFormConfigs)) {
@@ -54,34 +55,42 @@ export class ApplicationComponent implements OnInit {
     return group;
   }
 
-  addInput(): void {
-    console.log('add');
-  }
-
-  nextPage(): void {
-    this.activeIndex ++;
-  }
-
-  previousPage(): void {
-    this.activeIndex --;
-  }
-
-  showSummary(): void {
-    this.formArray.value.forEach(object => {
-      Object.assign(this.applicationObj, object);
-    });
-    this.summary = true;
+  showSummary(stepIndex): void {
+    if (stepIndex === 5) {
+      let summaryArray = [];
+      this.forms.forEach(form => {
+        const mappedArray = form.map(obj => {
+          return {
+            label: obj.label,
+            formControlName: obj.formControlName,
+            value: ''
+          };
+        });
+        summaryArray = summaryArray.concat(mappedArray);
+      });
+      this.formArray.value.forEach(object => {
+        for (const [key, value] of Object.entries(object)) {
+          const index = summaryArray.findIndex(obj => obj.formControlName === key);
+          summaryArray[index].value = value;
+        }
+      });
+      this.summaryArray = summaryArray;
+      this.summary = true;
+    }
   }
 
   sendApplication(): void {
+    let reqBody = {};
+    console.log(this.formArray.value);
     this.formArray.value.forEach(object => {
-      Object.assign(this.applicationObj, object);
+      reqBody = Object.assign(reqBody, object);
     });
-    /*this.baseService.post(apiEndpoints.EXHIBITORS, reqBody).subscribe(
+    console.log(reqBody);
+    this.baseService.post(apiEndpoints.EXHIBITORS, reqBody).subscribe(
       res => {
         console.log(res);
       }
-    );*/
+    );
   }
 
 }

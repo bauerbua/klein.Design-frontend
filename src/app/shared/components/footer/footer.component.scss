@@ -15,9 +15,35 @@
 
     .col {
       margin: 20px auto;
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      align-items: center;
 
-      .links mat-icon {
-        margin-right: 10px;
+      hr {
+        width: 60%;
+        margin: 10px auto;
+        background-color: rgb(240, 240, 240);
+      }
+
+      .links {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        color: white;
+
+        mat-icon, a {
+          margin-right: 10px;
+          cursor: pointer;
+          transition: .3s linear;
+          color: white;
+          text-decoration: none;
+        }
+
+        mat-icon:hover, a:hover {
+          color: $tertiary;
+          transition: .3s linear;
+        }
       }
     }
   }

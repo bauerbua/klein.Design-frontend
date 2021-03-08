@@ -1,6 +1,6 @@
 <div class="application-form">
   <h1>Bewerbung Kreativ Markt Nov. 2021</h1>
-  <mat-vertical-stepper #stepper linear="true">
+  <mat-vertical-stepper #stepper linear="true" (selectionChange)="showSummary($event.selectedIndex)">
     <mat-step *ngFor="let form of formArray.controls; index as i" [stepControl]="getFormGroup(i)" [label]="formLabels[i]">
       <form>
         <div [formGroup]="getFormGroup(i)" class="formGroup">
@@ -46,17 +46,15 @@
         <div class="buttons">
           <button mat-raised-button *ngIf="i > 0" type="button" matStepperPrevious>Letzte Seite</button>
           <button mat-raised-button *ngIf="i < 4" type="button" class="btn-right" matStepperNext>Nächste Seite</button>
-          <button mat-raised-button *ngIf="i === 4" type="button" class="btn-right" matStepperNext (click)="showSummary()">Zusammenfassung</button>
+          <button mat-raised-button *ngIf="i === 4" type="button" class="btn-right" matStepperNext (click)="showSummary(i)">Zusammenfassung</button>
         </div>
       </form>
     </mat-step>
     <mat-step label="Zusammenfassung">
       <div class="summary">
-        <div *ngFor="let object of formArray.value" class="group">
-          <div *ngFor="let property of object | keyvalue" class="keyVal">
-            <td>{{property.key}}</td>
-            <td>{{property.value}}</td>
-          </div>
+        <div *ngFor="let object of summaryArray" class="gridContainer">
+          <span class="column key">{{object.label}}</span>
+          <span class="column">{{object.value}}</span>
         </div>
         <div class="buttons">
           <button mat-raised-button type="button" matStepperPrevious>Letzte Seite</button>

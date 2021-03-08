@@ -3,14 +3,9 @@ import { Patterns } from '../../shared/utilities/patterns';
 export const ApplicationFormConfigs = {
   Kontaktdaten: [
     {
-      formControlName: 'firstname',
+      formControlName: 'owner',
       type: 'text',
-      label: 'Vorname',
-    },
-    {
-      formControlName: 'lastname',
-      type: 'text',
-      label: 'Nachname',
+      label: 'Ganzer Name',
     },
     {
       formControlName: 'email',
@@ -37,9 +32,9 @@ export const ApplicationFormConfigs = {
       label: 'Firmenname'
     },
     {
-      formControlName: 'categories',
+      formControlName: 'tags',
       type: 'select',
-      label: 'Kategorien',
+      label: 'Tags',
       multiple: true,
       options: ['stoff', 'handwerk', 'schmuck']
     },
@@ -83,21 +78,21 @@ export const ApplicationFormConfigs = {
       formControlName: 'standplatz',
       type: 'select',
       label: 'Standplatz auswählen',
-      isRequired: true,
+      isRequired: false,
       options: [ 'klein', 'groß'],
     },
     {
       formControlName: 'table',
       type: 'select',
-      label: 'Benötigte Tische',
-      isRequired: true,
+      label: 'Tische',
+      isRequired: false,
       options: ['1', '2'],
     },
     {
       formControlName: 'power',
       type: 'select',
       label: 'Strom',
-      isRequired: true,
+      isRequired: false,
       options: ['ja', 'nein'],
     }
   ],
@@ -107,7 +102,7 @@ export const ApplicationFormConfigs = {
       formControlName: 'ads',
       type: 'select',
       label: 'Werbung',
-      isRequired: true,
+      isRequired: false,
       options: [ 'ja', 'nein'],
     },
     {
