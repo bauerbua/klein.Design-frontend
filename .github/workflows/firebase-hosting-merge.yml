@@ -10,15 +10,10 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
       - uses: actions/checkout@master
-      - name: Initialize Node
       - uses: actions/setup-node@master
-      - name: Install Dependencies
       - run: npm install
-      - name: Build
       - run: npm run build
-      - name: Deploy
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           args: deploy --only hosting
