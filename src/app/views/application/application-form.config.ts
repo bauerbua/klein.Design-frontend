@@ -41,7 +41,7 @@ export const ApplicationFormConfigs = {
     {
       formControlName: 'description',
       type: 'textarea',
-      label: 'Beschreibung'
+      label: 'Beschreibung',
     },
     {
       formControlName: 'social',

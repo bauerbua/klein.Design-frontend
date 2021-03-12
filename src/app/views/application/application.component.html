@@ -20,10 +20,12 @@
                   cdkTextareaAutosize
                   cdkAutosizeMinRows="3"
                   cdkAutosizeMaxRows="5"
+                  minlength="400"
+                  #textarea
                   [required]="input.isRequired"
                   [formControlName]="input.formControlName"
                 ></textarea>
-                <mat-error>Dieses Feld wird benötigt!</mat-error>
+                <mat-hint>{{textarea.value.length}} von mind. {{textarea.minLength}} Zeichen</mat-hint>
               </mat-form-field>
             </ng-container>
             <ng-container *ngIf="input.type === 'select'">
