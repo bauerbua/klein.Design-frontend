@@ -32,8 +32,8 @@
               <mat-form-field appearance="outline">
                 <mat-label>{{input.label}}</mat-label>
                 <mat-select [formControlName]="input.formControlName" [multiple]="input.multiple" [required]="input.isRequired">
-                  <mat-option *ngFor="let option of input.options" [value]="option">
-                    {{option}}
+                  <mat-option *ngFor="let option of availableOptions" [value]="option">
+                    {{option.tag}}
                   </mat-option>
                 </mat-select>
                 <mat-error>Dieses Feld wird benötigt!</mat-error>
@@ -56,7 +56,7 @@
       <div class="summary">
         <div *ngFor="let object of summaryArray" class="gridContainer">
           <span class="column key">{{object.label}}</span>
-          <span class="column">{{object.value}}</span>
+          <span class="column value">{{object.value}}</span>
         </div>
         <div class="buttons">
           <button mat-raised-button type="button" matStepperPrevious>Letzte Seite</button>

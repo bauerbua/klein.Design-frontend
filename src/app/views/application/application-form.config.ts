@@ -3,48 +3,61 @@ import { Patterns } from '../../shared/utilities/patterns';
 export const ApplicationFormConfigs = {
   Kontaktdaten: [
     {
-      formControlName: 'owner',
+      formControlName: 'vorname',
       type: 'text',
-      label: 'Ganzer Name',
+      label: 'Vorname',
+      isRequired: true
+    },
+    {
+      formControlName: 'nachname',
+      type: 'text',
+      label: 'Nachname',
+      isRequired: true
     },
     {
       formControlName: 'email',
       type: 'email',
       label: 'Email',
+      isRequired: true,
       pattern: Patterns.email
     },
     {
       formControlName: 'phone',
       type: 'number',
       label: 'Telefonnummer',
+      isDisabled: true
     },
     {
       formControlName: 'address',
       type: 'text',
       label: 'Adresse',
+      isDisabled: true
     }
   ],
 
   Angebot: [
     {
-      formControlName: 'companyName',
+      formControlName: 'titel',
       type: 'text',
-      label: 'Firmenname'
+      label: 'Firmenname',
+      isRequired: true
     },
     {
       formControlName: 'tags',
       type: 'select',
       label: 'Tags',
+      isRequired: true,
       multiple: true,
       options: ['stoff', 'handwerk', 'schmuck']
     },
     {
-      formControlName: 'description',
+      formControlName: 'beschreibung',
       type: 'textarea',
       label: 'Beschreibung',
+      required: true
     },
     {
-      formControlName: 'social',
+      formControlName: 'sozial',
       type: 'select',
       label: 'Soziale Medien',
       multiple: true,
@@ -54,22 +67,16 @@ export const ApplicationFormConfigs = {
 
   Fotos: [
     {
-      formControlName: 'coverImg',
+      formControlName: 'titelbild',
       type: 'upload',
       label: 'Titlebild',
       multiple: false
     },
     {
-      formControlName: 'images',
+      formControlName: 'fotos',
       type: 'upload',
       label: 'Fotos',
       multiple: true
-    },
-    {
-      formControlName: 'logo',
-      type: 'upload',
-      label: 'Logo',
-      multiple: false
     },
   ],
 

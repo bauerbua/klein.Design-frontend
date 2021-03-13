@@ -25,6 +25,7 @@ export class ApplicationComponent implements OnInit {
   forms: FormConfig[][] = [];
   summary = false;
   summaryArray = [];
+  availableOptions;
 
   formArray: FormArray = new FormArray([]);
   formLabels: string[] = [];
@@ -39,6 +40,11 @@ export class ApplicationComponent implements OnInit {
     this.forms.forEach(config => {
       this.formArray.push(new FormGroup(this.generateForm(config)));
     });
+    this.baseService.get(apiEndpoints.TAGS).subscribe(res => {
+      console.log(res);
+      this.availableOptions = res;
+    });
+
   }
 
   getFormGroup(index: number): FormGroup {
