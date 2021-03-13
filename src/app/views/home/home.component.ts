@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Exhibitor } from '../../shared/interfaces/exhibitor.interface';
 import { HomeService } from './home.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -9,11 +10,11 @@ import { HomeService } from './home.service';
   styleUrls: ['./home.component.scss'],
   providers: [HomeService]
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   imagesUpperRow: any[] = [];
   imagesLowerRow: any[] = [];
   exhibitors: Exhibitor[] = [];
-  subscriptions: any[] = [];
+  subscriptions: Subscription[] = [];
   slideConfig = {
     dots: false,
     infinite: false,
@@ -56,10 +57,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.subscriptions.push(
       this.homeService.getImages().subscribe(images => {
-        console.log(images);
-        const imgs = images.impressionen;
-        const randomNum = Math.floor(Math.random() * (imgs.length - 25));
-        const selectedImgs = imgs.splice(randomNum, (randomNum + 25));
+        const suffledImgs = images.impressionen.sort(() => 0.5 - Math.random());
+        const selectedImgs = suffledImgs.slice(0, 30);
         const splitIndex = Math.round(selectedImgs.length / 2);
         this.imagesUpperRow = selectedImgs.splice(0, splitIndex);
         this.imagesLowerRow = selectedImgs;
@@ -67,13 +66,19 @@ export class HomeComponent implements OnInit {
     );
     this.subscriptions.push(
       this.homeService.getExhibitors().subscribe(data => {
-        const randomNum = Math.floor(Math.random() * (data.length - 4));
-        this.exhibitors = data.slice(randomNum, (randomNum + 4));
+        const suffledArray = data.sort(() => 0.5 - Math.random());
+        this.exhibitors = suffledArray.slice(0, 4);
       })
     );
   }
 
   routeToView(path: string): void {
     this.router.navigate([path]);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => {
+      sub.unsubscribe();
+    });
   }
 }

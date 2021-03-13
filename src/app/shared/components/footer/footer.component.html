@@ -6,9 +6,9 @@
     <div class="col">
       <div class="links">
         <div>
-          <mat-icon (click)="openURL('https://www.facebook.com/kreativ.markt.at')">facebook</mat-icon>
-          <mat-icon (click)="openURL('https://www.instagram.com/kreativmarkt/')">tag</mat-icon>
-          <mat-icon (click)="sendMail()">mail</mat-icon>
+          <mat-icon svgIcon="facebook" (click)="openURL('https://www.facebook.com/kreativ.markt.at')"></mat-icon>
+          <mat-icon svgIcon="instagram" (click)="openURL('https://www.instagram.com/kreativmarkt/')"></mat-icon>
+          <mat-icon svgIcon="mail" (click)="sendMail()">mail</mat-icon>
         </div>
         <hr>
         <a routerLink="/impressum" target='_blank'>Impressum</a>

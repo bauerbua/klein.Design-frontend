@@ -1,16 +1,16 @@
 <div *ngIf="exhibitor" class="exhibitor">
+  <button class="back-btn" mat-raised-button routerLink="/aussteller"><mat-icon>arrow_left</mat-icon>Alle Aussteller</button>
   <h1>{{exhibitor.titel}}</h1>
   <strong><em>{{exhibitor.vorname}} {{exhibitor.nachname}}</em></strong>
   <div class="row">
-    <div class="col-7">
+    <div class="col">
       <p>{{exhibitor.beschreibung}}</p>
     </div>
-    <div class="col-3">
+    <div class="col">
       <ng-container>
-        <a [href]="exhibitor.links.facebook" *ngIf="exhibitor.links.facebook"><mat-icon>facebook</mat-icon></a>
-        <a [href]="exhibitor.links.twitter" *ngIf="exhibitor.links.twitter">{{exhibitor.links.twitter}}</a>
-        <a [href]="exhibitor.links.website" *ngIf="exhibitor.links.website"><mat-icon>language</mat-icon></a>
-        <a [href]="exhibitor.links.instagram" *ngIf="exhibitor.links.instagram">{{exhibitor.links.instagram}}</a>
+        <a [href]="'//' + exhibitor.links.facebook" target="_blank" *ngIf="exhibitor.links.facebook"><mat-icon svgIcon="facebook"></mat-icon></a>
+        <a [href]="'//' + exhibitor.links.twitter" *ngIf="exhibitor.links.twitter"><mat-icon svgIcon="twitter"></mat-icon></a>
+        <a [href]="'//' + exhibitor.links.instagram" *ngIf="exhibitor.links.instagram"><mat-icon svgIcon="instagram"></mat-icon></a>
       </ng-container>
     </div>
   </div>
@@ -20,5 +20,4 @@
       <img class="mat-elevation-z8" alt="klein.Design Impressionen" [src]="img.url"/>
     </div>
   </div>
-  <button class="back-btn" mat-raised-button routerLink="/aussteller"><mat-icon>arrow_left</mat-icon>Zurück zu allen Ausstellern</button>
 </div>

@@ -6,9 +6,10 @@ export interface Exhibitor extends Tag, Image, Link {
   id: number;
   titel: string;
   titelbild: Image;
+  email: string;
   tags: Tag[];
   fotos?: Image[];
-  links?: Link[];
+  links?: Link;
   vorname?: string;
   nachname?: string;
   beschreibung?: string;

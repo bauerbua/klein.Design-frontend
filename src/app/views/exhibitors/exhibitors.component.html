@@ -1,12 +1,9 @@
 <div id="allExhibitors">
   <div class="filter">
-    <span class="p-input-icon-left">
-    <i class="pi pi-search"></i>
-      <mat-form-field appearance="outline">
-        <mat-label>Durchsuche Aussteller</mat-label>
-        <input matInput [(ngModel)]="searchValue" type="text">
-      </mat-form-field>
-  </span>
+    <mat-form-field appearance="outline">
+      <mat-label>Durchsuche Aussteller</mat-label>
+      <input matInput [(ngModel)]="searchValue" type="text">
+    </mat-form-field>
   </div>
   <ng-container *ngIf="exhibitors.length >= 1 && apiError === false; else noData">
     <div class="gallery">
