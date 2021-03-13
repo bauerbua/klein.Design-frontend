@@ -8,14 +8,14 @@
       </mat-form-field>
   </span>
   </div>
-  <ng-container *ngIf="exhibitors.length >= 1; else noData">
+  <ng-container *ngIf="exhibitors.length >= 1 && apiError === false; else noData">
     <div class="gallery">
       <app-exhibitor-card class="card" *ngFor="let exhibitor of exhibitors | exhibitorFilter: searchValue" [exhibitor]="exhibitor"></app-exhibitor-card>
     </div>
   </ng-container>
   <ng-template #noData>
     <div class="gallery">
-      <h3>Es tut uns leid, es scheint ein Problem zu geben, versuche es bitte später erneut!</h3>
+      <h3 *ngIf="apiError">Es tut uns leid, es scheint ein Problem zu geben, versuche es bitte später erneut!</h3>
     </div>
   </ng-template>
 </div>

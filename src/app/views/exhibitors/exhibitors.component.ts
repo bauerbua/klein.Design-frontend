@@ -12,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ExhibitorsComponent implements OnInit {
   exhibitors: Exhibitor[] = [];
   searchValue: string;
+  apiError: boolean;
 
   constructor(private baseService: BaseService, private route: ActivatedRoute) { }
 
@@ -19,7 +20,11 @@ export class ExhibitorsComponent implements OnInit {
     this.baseService.get<Exhibitor[]>(apiEndpoints.EXHIBITORS).subscribe(
       res => {
         this.exhibitors = res;
-    });
+        this.apiError = false;
+      }, () => {
+        this.apiError = true;
+      },
+    );
     this.route.queryParams.subscribe(params => {
       this.searchValue = params.searchBy ? params.searchBy : undefined;
     });

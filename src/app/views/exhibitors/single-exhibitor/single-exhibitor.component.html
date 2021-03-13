@@ -1,23 +1,23 @@
 <div *ngIf="exhibitor" class="exhibitor">
-  <h1>{{exhibitor.companyName}}</h1>
-  <strong><em>{{exhibitor.owner}}</em></strong>
+  <h1>{{exhibitor.titel}}</h1>
+  <strong><em>{{exhibitor.vorname}} {{exhibitor.nachname}}</em></strong>
   <div class="row">
     <div class="col-7">
-      <p>{{exhibitor.description}}</p>
+      <p>{{exhibitor.beschreibung}}</p>
     </div>
     <div class="col-3">
-      <ng-container *ngFor="let link of exhibitor.links">
-        <a [href]="link.facebook" *ngIf="link.facebook"><mat-icon>facebook</mat-icon></a>
-        <a [href]="link.twitter" *ngIf="link.twitter">{{link.twitter}}</a>
-        <a [href]="link.website" *ngIf="link.website"><mat-icon>language</mat-icon></a>
-        <a [href]="link.instagram" *ngIf="link.instagram">{{link.instagram}}</a>
+      <ng-container>
+        <a [href]="exhibitor.links.facebook" *ngIf="exhibitor.links.facebook"><mat-icon>facebook</mat-icon></a>
+        <a [href]="exhibitor.links.twitter" *ngIf="exhibitor.links.twitter">{{exhibitor.links.twitter}}</a>
+        <a [href]="exhibitor.links.website" *ngIf="exhibitor.links.website"><mat-icon>language</mat-icon></a>
+        <a [href]="exhibitor.links.instagram" *ngIf="exhibitor.links.instagram">{{exhibitor.links.instagram}}</a>
       </ng-container>
     </div>
   </div>
   <hr>
   <div class="images">
-    <div *ngFor="let img of exhibitor.images">
-      <img class="mat-elevation-z8" alt="klein.Design Impressionen" src="http://localhost:1337{{img.url}}"/>
+    <div *ngFor="let img of exhibitor.fotos">
+      <img class="mat-elevation-z8" alt="klein.Design Impressionen" [src]="img.url"/>
     </div>
   </div>
   <button class="back-btn" mat-raised-button routerLink="/aussteller"><mat-icon>arrow_left</mat-icon>Zurück zu allen Ausstellern</button>

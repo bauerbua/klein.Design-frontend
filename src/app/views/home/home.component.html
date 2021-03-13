@@ -32,10 +32,10 @@
   <section id="impressionen" class="full-width">
     <hr>
     <div class="rows">
-      <img *ngFor="let img of imagesUpperRow" alt="klein.Design Impressionen" src="http://localhost:1337{{img.url}}"/>
+      <img *ngFor="let img of imagesUpperRow" alt="klein.Design Impressionen" [src]="img.url"/>
     </div>
     <div class="rows">
-      <img *ngFor="let img of imagesLowerRow" alt="klein.Design Impressionen" src="http://localhost:1337{{img.url}}"/>
+      <img *ngFor="let img of imagesLowerRow" alt="klein.Design Impressionen" [src]="img.url"/>
     </div>
     <hr>
   </section>

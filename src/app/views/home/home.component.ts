@@ -56,7 +56,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.subscriptions.push(
       this.homeService.getImages().subscribe(images => {
-        const imgs = images.images;
+        console.log(images);
+        const imgs = images.impressionen;
         const randomNum = Math.floor(Math.random() * (imgs.length - 25));
         const selectedImgs = imgs.splice(randomNum, (randomNum + 25));
         const splitIndex = Math.round(selectedImgs.length / 2);

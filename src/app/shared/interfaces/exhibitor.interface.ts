@@ -4,11 +4,12 @@ import { Link } from './link.interface';
 
 export interface Exhibitor extends Tag, Image, Link {
   id: number;
-  companyName: string;
-  coverImg: Image;
+  titel: string;
+  titelbild: Image;
   tags: Tag[];
-  images?: Image[];
+  fotos?: Image[];
   links?: Link[];
-  owner?: string;
-  description?: string;
+  vorname?: string;
+  nachname?: string;
+  beschreibung?: string;
 }
