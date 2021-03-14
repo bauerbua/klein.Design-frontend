@@ -22,16 +22,14 @@ export const ApplicationFormConfigs = {
       pattern: Patterns.email
     },
     {
-      formControlName: 'phone',
+      formControlName: 'telefonnummer',
       type: 'number',
       label: 'Telefonnummer',
-      isDisabled: true
     },
     {
-      formControlName: 'address',
+      formControlName: 'adresse',
       type: 'text',
       label: 'Adresse',
-      isDisabled: true
     }
   ],
 
@@ -44,24 +42,42 @@ export const ApplicationFormConfigs = {
     },
     {
       formControlName: 'tags',
-      type: 'select',
+      type: 'tags',
       label: 'Tags',
       isRequired: true,
       multiple: true,
-      options: ['stoff', 'handwerk', 'schmuck']
     },
     {
       formControlName: 'beschreibung',
       type: 'textarea',
       label: 'Beschreibung',
-      required: true
     },
     {
-      formControlName: 'sozial',
-      type: 'select',
+      formControlName: 'links',
+      type: 'formGroup',
       label: 'Soziale Medien',
-      multiple: true,
-      options: ['facebook', 'twitter', 'instagram', 'website']
+      controls: [
+        {
+          formControlName: 'instagram',
+          type: 'link',
+          label: 'Instagram',
+        },
+        {
+          formControlName: 'facebook',
+          type: 'text',
+          label: 'Facebook'
+        },
+        {
+          formControlName: 'twitter',
+          type: 'text',
+          label: 'Twitter'
+        },
+        {
+          formControlName: 'webseite',
+          type: 'text',
+          label: 'Webseite'
+        },
+      ]
     }
   ],
 

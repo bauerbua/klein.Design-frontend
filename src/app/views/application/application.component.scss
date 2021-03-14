@@ -2,15 +2,43 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 0;
-
+  box-sizing: border-box;
+  padding: 40px;
 
   .formGroup {
     justify-content: left;
     display: flex;
     flex-flow: column nowrap;
     align-items: stretch;
+    margin-top: 20px;
+    padding: 20px;
+
+    .singleFile {
+      display: flex;
+      border-radius: 3px;
+      flex-flow: row;
+      padding: 15px;
+      margin: 5px 0;
+
+      span {
+        margin-right: 20px;
+        width: 50%;
+        word-wrap: anywhere;
+      }
+    }
+
+    .nestedFormGroup {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+
+      mat-form-field {
+        flex-grow: 1;
+        margin: 0 10px;
+      }
+    }
   }
+
   .buttons {
     width: 100%;
     margin-top: 20px;
