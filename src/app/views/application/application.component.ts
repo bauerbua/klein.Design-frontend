@@ -41,7 +41,6 @@ export class ApplicationComponent implements OnInit {
       this.formArray.push(new FormGroup(this.generateForm(config)));
     });
     this.baseService.get(apiEndpoints.TAGS).subscribe(res => {
-      console.log(res);
       this.availableOptions = res;
     });
 
@@ -76,8 +75,13 @@ export class ApplicationComponent implements OnInit {
       });
       this.formArray.value.forEach(object => {
         for (const [key, value] of Object.entries(object)) {
-          const index = summaryArray.findIndex(obj => obj.formControlName === key);
-          summaryArray[index].value = value;
+          if (Array.isArray(object[key])) {
+            const index = summaryArray.findIndex(obj => obj.formControlName === key);
+            summaryArray[index].value = object[key].map(obj => obj.tag);
+          } else {
+            const index = summaryArray.findIndex(obj => obj.formControlName === key);
+            summaryArray[index].value = value;
+          }
         }
       });
       this.summaryArray = summaryArray;

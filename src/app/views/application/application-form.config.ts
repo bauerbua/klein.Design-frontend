@@ -44,11 +44,10 @@ export const ApplicationFormConfigs = {
     },
     {
       formControlName: 'tags',
-      type: 'select',
+      type: 'tags',
       label: 'Tags',
       isRequired: true,
       multiple: true,
-      options: ['stoff', 'handwerk', 'schmuck']
     },
     {
       formControlName: 'beschreibung',

@@ -5,7 +5,7 @@
       <form>
         <div [formGroup]="getFormGroup(i)" class="formGroup">
           <ng-container *ngFor="let input of forms[i]">
-            <ng-container *ngIf="!(input.type === 'textarea' || input.type === 'select' || input.type === 'upload')">
+            <ng-container *ngIf="!(input.type === 'textarea' || input.type === 'select' || input.type === 'upload' || input.type === 'tags')">
               <mat-form-field appearance="outline">
                 <mat-label>{{input.label}}</mat-label>
                 <input matInput [required]="input.isRequired" [type]="input.type" [formControlName]="input.formControlName" [pattern]="input.pattern">
@@ -28,12 +28,24 @@
                 <mat-hint>{{textarea.value.length}} von mind. {{textarea.minLength}} Zeichen</mat-hint>
               </mat-form-field>
             </ng-container>
+            <ng-container *ngIf="input.type === 'tags'">
+              <mat-form-field appearance="outline">
+                <mat-label>{{input.label}}</mat-label>
+                <mat-select #tagSelect [formControlName]="input.formControlName" [multiple]="input.multiple" [required]="input.isRequired">
+                  <mat-option *ngFor="let option of availableOptions" [value]="option">
+                    {{option.tag | titlecase}}
+                  </mat-option>
+                </mat-select>
+                <mat-hint>{{tagSelect.value.length}} von 3 tags ausgewählt</mat-hint>
+                <mat-error>Dieses Feld wird benötigt!</mat-error>
+              </mat-form-field>
+            </ng-container>
             <ng-container *ngIf="input.type === 'select'">
               <mat-form-field appearance="outline">
                 <mat-label>{{input.label}}</mat-label>
                 <mat-select [formControlName]="input.formControlName" [multiple]="input.multiple" [required]="input.isRequired">
-                  <mat-option *ngFor="let option of availableOptions" [value]="option">
-                    {{option.tag}}
+                  <mat-option *ngFor="let option of input.options" [value]="option">
+                    {{option}}
                   </mat-option>
                 </mat-select>
                 <mat-error>Dieses Feld wird benötigt!</mat-error>
