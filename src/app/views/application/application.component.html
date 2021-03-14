@@ -1,59 +1,71 @@
 <div class="application-form">
   <h1>Bewerbung Kreativ Markt Nov. 2021</h1>
-  <mat-vertical-stepper #stepper linear="true" (selectionChange)="showSummary($event.selectedIndex)">
+  <mat-vertical-stepper #stepper linear="false" (selectionChange)="showSummary($event.selectedIndex)">
     <mat-step *ngFor="let form of formArray.controls; index as i" [stepControl]="getFormGroup(i)" [label]="formLabels[i]">
       <form>
         <div [formGroup]="getFormGroup(i)" class="formGroup">
           <ng-container *ngFor="let input of forms[i]">
-            <ng-container *ngIf="!(input.type === 'textarea' || input.type === 'select' || input.type === 'upload' || input.type === 'tags')">
-              <mat-form-field appearance="outline">
-                <mat-label>{{input.label}}</mat-label>
-                <input matInput [required]="input.isRequired" [type]="input.type" [formControlName]="input.formControlName" [pattern]="input.pattern">
-                <mat-error>Dieses Feld wird benötigt!</mat-error>
-              </mat-form-field>
-            </ng-container>
-            <ng-container *ngIf="input.type === 'textarea'">
-              <mat-form-field appearance="outline">
-                <mat-label>{{input.label}}</mat-label>
-                <textarea
-                  matInput
-                  cdkTextareaAutosize
-                  cdkAutosizeMinRows="3"
-                  cdkAutosizeMaxRows="5"
-                  minlength="400"
-                  #textarea
-                  [required]="input.isRequired"
-                  [formControlName]="input.formControlName"
-                ></textarea>
-                <mat-hint>{{textarea.value.length}} von mind. {{textarea.minLength}} Zeichen</mat-hint>
-              </mat-form-field>
-            </ng-container>
-            <ng-container *ngIf="input.type === 'tags'">
-              <mat-form-field appearance="outline">
-                <mat-label>{{input.label}}</mat-label>
-                <mat-select #tagSelect [formControlName]="input.formControlName" [multiple]="input.multiple" [required]="input.isRequired">
-                  <mat-option *ngFor="let option of availableOptions" [value]="option">
-                    {{option.tag | titlecase}}
-                  </mat-option>
-                </mat-select>
-                <mat-hint>{{tagSelect.value.length}} von 3 tags ausgewählt</mat-hint>
-                <mat-error>Dieses Feld wird benötigt!</mat-error>
-              </mat-form-field>
-            </ng-container>
-            <ng-container *ngIf="input.type === 'select'">
-              <mat-form-field appearance="outline">
-                <mat-label>{{input.label}}</mat-label>
-                <mat-select [formControlName]="input.formControlName" [multiple]="input.multiple" [required]="input.isRequired">
-                  <mat-option *ngFor="let option of input.options" [value]="option">
-                    {{option}}
-                  </mat-option>
-                </mat-select>
-                <mat-error>Dieses Feld wird benötigt!</mat-error>
-              </mat-form-field>
-            </ng-container>
-            <ng-container *ngIf="input.type === 'upload'">
-              <label>{{input.label}}</label>
-              <input type="file" [multiple]="input.multiple" [required]="input.isRequired" [formControlName]="input.formControlName" />
+            <ng-container [ngSwitch]="
+            input.type === 'textarea' ? 1 :
+            input.type === 'select' ? 2 :
+            input.type === 'tags' ? 3 :
+            input.type === 'upload' ? 4 : -1">
+
+              <ng-container *ngSwitchCase="1">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{input.label}}</mat-label>
+                  <textarea
+                    matInput
+                    cdkTextareaAutosize
+                    cdkAutosizeMinRows="3"
+                    cdkAutosizeMaxRows="5"
+                    minlength="400"
+                    #textarea
+                    [required]="input.isRequired"
+                    [formControlName]="input.formControlName"
+                  ></textarea>
+                  <mat-hint>{{textarea.value.length}} von mind. {{textarea.minLength}} Zeichen</mat-hint>
+                </mat-form-field>
+              </ng-container>
+
+              <ng-container *ngSwitchCase="2">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{input.label}}</mat-label>
+                  <mat-select [formControlName]="input.formControlName" [multiple]="input.multiple" [required]="input.isRequired">
+                    <mat-option *ngFor="let option of input.options" [value]="option">
+                      {{option}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error>Dieses Feld wird benötigt!</mat-error>
+                </mat-form-field>
+              </ng-container>
+
+              <ng-container *ngSwitchCase="3">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{input.label}}</mat-label>
+                  <mat-select #tagSelect [formControlName]="input.formControlName" [multiple]="input.multiple" [required]="input.isRequired">
+                    <mat-option *ngFor="let option of availableOptions" [value]="option">
+                      {{option.tag | titlecase}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-hint>{{tagSelect.value.length}} von 3 tags ausgewählt</mat-hint>
+                  <mat-error>Dieses Feld wird benötigt!</mat-error>
+                </mat-form-field>
+              </ng-container>
+
+              <ng-container *ngSwitchCase="4">
+                <label>{{input.label}}</label>
+                <input type="file" (change)="onFileSelected($event)" [multiple]="input.multiple" [required]="input.isRequired" [formControlName]="input.formControlName" />
+              </ng-container>
+
+              <ng-container *ngSwitchDefault>
+                <mat-form-field appearance="outline">
+                  <mat-label>{{input.label}}</mat-label>
+                  <input matInput [required]="input.isRequired" [type]="input.type" [formControlName]="input.formControlName" [pattern]="input.pattern">
+                  <mat-error>Dieses Feld wird benötigt!</mat-error>
+                </mat-form-field>
+              </ng-container>
+
             </ng-container>
           </ng-container>
         </div>

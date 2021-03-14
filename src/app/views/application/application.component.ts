@@ -29,6 +29,7 @@ export class ApplicationComponent implements OnInit {
 
   formArray: FormArray = new FormArray([]);
   formLabels: string[] = [];
+  requestData: FormData = new FormData();
 
   constructor(private baseService: BaseService) {}
 
@@ -58,6 +59,13 @@ export class ApplicationComponent implements OnInit {
       group[input.formControlName] = new FormControl(disabled, required);
     });
     return group;
+  }
+
+  onFileSelected(e): void {
+    const filesList = e.target.files;
+    for (const file of filesList) {
+      this.requestData.append('files.titelbild', file, file.name);
+    }
   }
 
   showSummary(stepIndex): void {
@@ -90,15 +98,17 @@ export class ApplicationComponent implements OnInit {
   }
 
   sendApplication(): void {
-    let reqBody = {};
-    console.log(this.formArray.value);
+    const reqBody = {};
     this.formArray.value.forEach(object => {
-      reqBody = Object.assign(reqBody, object);
+      Object.assign(reqBody, object);
     });
-    console.log(reqBody);
-    this.baseService.post(apiEndpoints.EXHIBITORS, reqBody).subscribe(
+    this.requestData.append('data', JSON.stringify(reqBody));
+
+    this.baseService.post(apiEndpoints.EXHIBITORS, this.requestData).subscribe(
       res => {
         console.log(res);
+      }, err => {
+        console.log(err);
       }
     );
   }
