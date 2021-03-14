@@ -3,13 +3,14 @@
   <mat-vertical-stepper #stepper linear="false" (selectionChange)="showSummary($event.selectedIndex)">
     <mat-step *ngFor="let form of formArray.controls; index as i" [stepControl]="getFormGroup(i)" [label]="formLabels[i]">
       <form>
-        <div [formGroup]="getFormGroup(i)" class="formGroup">
+        <div [formGroup]="getFormGroup(i)" class="formGroup mat-elevation-z8">
           <ng-container *ngFor="let input of forms[i]">
             <ng-container [ngSwitch]="
             input.type === 'textarea' ? 1 :
             input.type === 'select' ? 2 :
             input.type === 'tags' ? 3 :
-            input.type === 'upload' ? 4 : -1">
+            input.type === 'upload' ? 4 :
+            input.type === 'formGroup' ? 5 : -1">
 
               <ng-container *ngSwitchCase="1">
                 <mat-form-field appearance="outline">
@@ -44,7 +45,7 @@
                 <mat-form-field appearance="outline">
                   <mat-label>{{input.label}}</mat-label>
                   <mat-select #tagSelect [formControlName]="input.formControlName" [multiple]="input.multiple" [required]="input.isRequired">
-                    <mat-option *ngFor="let option of availableOptions" [value]="option">
+                    <mat-option *ngFor="let option of availableOptions" [value]="option" [disabled]="tagSelect.value?.length > 2 && !tagSelect.value?.includes(option)">
                       {{option.tag | titlecase}}
                     </mat-option>
                   </mat-select>
@@ -55,7 +56,24 @@
 
               <ng-container *ngSwitchCase="4">
                 <label>{{input.label}}</label>
-                <input type="file" (change)="onFileSelected($event)" [multiple]="input.multiple" [required]="input.isRequired" [formControlName]="input.formControlName" />
+                <input type="file" #fileInput (change)="onFileSelected($event, input.formControlName)" [multiple]="input.multiple" [required]="input.isRequired" [formControlName]="input.formControlName" />
+                <ng-container *ngFor="let files of fileInput.files">
+                  <div class="singleFile mat-elevation-z2">
+                    <span>{{files.name}}</span>
+                    <span>{{files.size / 1000}} KB</span>
+                  </div>
+                </ng-container>
+              </ng-container>
+
+              <ng-container *ngSwitchCase="5">
+                <legend>{{input.label}}</legend>
+                <div [formGroupName]="input.formControlName" class="nestedFormGroup">
+                  <mat-form-field appearance="outline" *ngFor="let subInput of input.controls">
+                    <mat-label>{{subInput.label}}</mat-label>
+                    <input matInput [required]="subInput.isRequired" [type]="subInput.type" [formControlName]="subInput.formControlName" [pattern]="subInput.pattern">
+                    <mat-error>Dieses Feld wird benötigt!</mat-error>
+                  </mat-form-field>
+                </div>
               </ng-container>
 
               <ng-container *ngSwitchDefault>
@@ -84,10 +102,9 @@
         </div>
         <div class="buttons">
           <button mat-raised-button type="button" matStepperPrevious>Letzte Seite</button>
-          <button mat-raised-button class="btn-right" type="button" (click)="sendApplication()">Absenden</button>
+          <button mat-raised-button class="btn-right" type="button" (click)="sendApplication()" [disabled]="formArray.invalid">Absenden</button>
         </div>
       </div>
     </mat-step>
   </mat-vertical-stepper>
-
 </div>
