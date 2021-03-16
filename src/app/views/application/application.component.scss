@@ -13,7 +13,15 @@
     margin-top: 20px;
     padding: 20px;
 
-    .singleFile {
+    .fileUpload {
+      margin: 20px 0;
+
+      .fileInput {
+        display: none;
+      }
+    }
+
+    .selectedFile {
       display: flex;
       border-radius: 3px;
       flex-flow: row;
