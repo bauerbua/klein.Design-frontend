@@ -56,13 +56,23 @@
 
               <ng-container *ngSwitchCase="4">
                 <label>{{input.label}}</label>
-                <input type="file" #fileInput (change)="onFileSelected($event, input.formControlName)" [multiple]="input.multiple" [required]="input.isRequired" [formControlName]="input.formControlName" />
-                <ng-container *ngFor="let files of fileInput.files">
-                  <div class="singleFile mat-elevation-z2">
-                    <span>{{files.name}}</span>
-                    <span>{{files.size / 1000}} KB</span>
-                  </div>
-                </ng-container>
+                <div class="fileUpload">
+                  <button mat-button (click)="fileInput.click()"><mat-icon>upload</mat-icon> Datei auswählen</button>
+                  <input
+                    type="file"
+                    class="fileInput"
+                    #fileInput
+                    (change)="onFileSelected($event, input.formControlName)"
+                    [multiple]="input.multiple"
+                    [required]="input.isRequired"
+                    [formControlName]="input.formControlName" />
+                   <ng-container *ngFor="let files of fileInput.files">
+                      <div class="selectedFile mat-elevation-z2">
+                        <span>{{files.name}}</span>
+                        <span>{{files.size / 1000}} KB</span>
+                      </div>
+                    </ng-container>
+                </div>
               </ng-container>
 
               <ng-container *ngSwitchCase="5">

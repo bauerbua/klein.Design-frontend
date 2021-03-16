@@ -107,25 +107,22 @@ export class ApplicationComponent implements OnInit {
       });
       this.summaryArray = summaryArray;
       this.summary = true;
+      if (this.formArray.valid) {
+        const reqBody = {};
+        this.formArray.value.forEach(object => {
+          Object.assign(reqBody, object);
+        });
+        this.requestData.append('data', JSON.stringify(reqBody));
+      }
     }
   }
 
   sendApplication(): void {
-    if (this.formArray.valid) {
-      const reqBody = {};
-      this.formArray.value.forEach(object => {
-        Object.assign(reqBody, object);
-      });
-      this.requestData.append('data', JSON.stringify(reqBody));
-      this.baseService.post(apiEndpoints.EXHIBITORS, this.requestData).subscribe(
-        res => {
+    this.baseService.post(apiEndpoints.EXHIBITORS, this.requestData).subscribe(
+      res => {
           console.log(res);
-        }, err => {
+          }, err => {
           console.log(err);
-        }
-      );
+      });
     }
-  }
-
-
 }
