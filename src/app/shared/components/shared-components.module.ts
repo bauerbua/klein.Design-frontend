@@ -12,32 +12,35 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { FooterComponent } from './footer/footer.component';
+import { LoaderComponent } from './loader/loader.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const components = [
   BaseLayoutComponent,
   ExhibitorCardComponent,
   NewsletterFormComponent,
   CircleBannerComponent,
-  NavbarComponent
+  NavbarComponent,
+  FooterComponent
 ];
 
 @NgModule({
   declarations: [
     components,
-    FooterComponent
+    LoaderComponent,
   ],
   exports: [
     components,
-    FooterComponent
   ],
-    imports: [
-        CommonModule,
-        RouterModule,
-        FormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        MatIconModule,
-    ]
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+  ]
 })
 export class SharedComponentsModule { }

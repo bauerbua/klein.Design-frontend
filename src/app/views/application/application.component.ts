@@ -3,12 +3,16 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApplicationFormConfigs } from './application-form.config';
 import { BaseService } from '../../shared/services/base.service';
 import { apiEndpoints } from '../../../assets/api/api.endpoints';
+import { LoaderService } from '../../shared/services/loader.service';
+import { HttpEventType } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export interface FormConfig {
   formControlName: string;
   type: string;
   label: string;
   isRequired?: boolean;
+  placeholder: string;
   controls?: FormConfig[];
   options?: any;
   multiple?: boolean;
@@ -25,14 +29,20 @@ export class ApplicationComponent implements OnInit {
   items;
   forms: FormConfig[][] = [];
   summary = false;
-  summaryArray = [];
+  summaryArray: any[] = [];
   availableOptions;
+
+  images: any[] = [];
 
   formArray: FormArray = new FormArray([]);
   formLabels: string[] = [];
   requestData: FormData = new FormData();
 
-  constructor(private baseService: BaseService) {}
+  constructor(
+    private baseService: BaseService,
+    private loaderService: LoaderService,
+    private router: Router,
+    private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     for (const config of Object.keys(ApplicationFormConfigs)) {
@@ -70,15 +80,22 @@ export class ApplicationComponent implements OnInit {
     return group;
   }
 
-  onFileSelected(e, controlName: string): void {
-    if (controlName === 'titelbild') {
-      this.requestData.append('files.titelbild', e.target.files[0], e.target.files[0].name);
-    } else if (controlName === 'fotos') {
-      const filesList = e.target.files;
-      for (const file of filesList) {
-        this.requestData.append('files.fotos', file, file.name);
-      }
+  onImgSelected(e): void {
+    const filesList = e.target.files;
+    for (const file of filesList) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (!this.images.includes(file)) {
+          this.images.push({file, imgSrc: reader.result});
+        }
+      };
+      reader.readAsDataURL(file);
     }
+  }
+
+  onRemoveImg(file): void {
+    const index = this.images.indexOf(file);
+    this.images.splice(index, 1);
   }
 
   showSummary(stepIndex): void {
@@ -107,22 +124,39 @@ export class ApplicationComponent implements OnInit {
       });
       this.summaryArray = summaryArray;
       this.summary = true;
-      if (this.formArray.valid) {
-        const reqBody = {};
-        this.formArray.value.forEach(object => {
-          Object.assign(reqBody, object);
-        });
-        this.requestData.append('data', JSON.stringify(reqBody));
-      }
     }
   }
 
   sendApplication(): void {
-    this.baseService.post(apiEndpoints.EXHIBITORS, this.requestData).subscribe(
-      res => {
-          console.log(res);
-          }, err => {
-          console.log(err);
+    this.requestData.delete('data');
+    this.requestData.delete('files.fotos');
+    if (this.formArray.valid) {
+      const data = {};
+      this.formArray.value.forEach(object => {
+        Object.assign(data, object);
+      });
+      this.requestData.append('data', JSON.stringify(data));
+      this.images.forEach(img => {
+        console.log(img);
+        this.requestData.append('files.fotos', img.file, img.file.name);
       });
     }
+    const requestOptions = {
+      observe: 'events'
+    };
+    this.baseService.post<any>(apiEndpoints.EXHIBITORS, this.requestData, requestOptions).subscribe(
+      event => {
+        if (event.type === HttpEventType.Sent) {
+          this.loaderService.onActivateLoader();
+        }
+        if (event.type === HttpEventType.Response) {
+          this.loaderService.onDeactivateLoader();
+          this.router.navigate(['geschafft'], {relativeTo: this.route});
+        }
+      }, err => {
+        console.log(err);
+        this.loaderService.onDeactivateLoader();
+      }
+    );
+  }
 }

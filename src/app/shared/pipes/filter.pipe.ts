@@ -20,7 +20,7 @@ export class FilterPipe implements PipeTransform {
           return true;
         }
       }
-      return item.titel.toLocaleLowerCase().includes(searchValue);
+      return item.firmenname.toLocaleLowerCase().includes(searchValue);
     });
   }
 }

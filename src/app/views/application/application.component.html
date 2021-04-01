@@ -1,5 +1,5 @@
 <div class="application-form">
-  <h1>Bewerbung Kreativ Markt Nov. 2021</h1>
+  <h1>Bewerbung kleinDesign Markt Nov. 2021</h1>
   <mat-vertical-stepper #stepper linear="false" (selectionChange)="showSummary($event.selectedIndex)">
     <mat-step *ngFor="let form of formArray.controls; index as i" [stepControl]="getFormGroup(i)" [label]="formLabels[i]">
       <form>
@@ -10,7 +10,8 @@
             input.type === 'select' ? 2 :
             input.type === 'tags' ? 3 :
             input.type === 'upload' ? 4 :
-            input.type === 'formGroup' ? 5 : -1">
+            input.type === 'formGroup' ? 5 :
+            input.type === 'checkbox' ? 6 : -1">
 
               <ng-container *ngSwitchCase="1">
                 <mat-form-field appearance="outline">
@@ -20,12 +21,9 @@
                     cdkTextareaAutosize
                     cdkAutosizeMinRows="3"
                     cdkAutosizeMaxRows="5"
-                    minlength="400"
-                    #textarea
                     [required]="input.isRequired"
                     [formControlName]="input.formControlName"
                   ></textarea>
-                  <mat-hint>{{textarea.value.length}} von mind. {{textarea.minLength}} Zeichen</mat-hint>
                 </mat-form-field>
               </ng-container>
 
@@ -57,19 +55,22 @@
               <ng-container *ngSwitchCase="4">
                 <label>{{input.label}}</label>
                 <div class="fileUpload">
-                  <button mat-button (click)="fileInput.click()"><mat-icon>upload</mat-icon> Datei auswählen</button>
+                  <button mat-button (click)="fileInput.click()"><mat-icon>upload</mat-icon> Dateien auswählen</button>
                   <input
                     type="file"
                     class="fileInput"
                     #fileInput
-                    (change)="onFileSelected($event, input.formControlName)"
+                    (change)="onImgSelected($event)"
                     [multiple]="input.multiple"
                     [required]="input.isRequired"
                     [formControlName]="input.formControlName" />
-                   <ng-container *ngFor="let files of fileInput.files">
+                   <ng-container *ngFor="let file of images">
                       <div class="selectedFile mat-elevation-z2">
-                        <span>{{files.name}}</span>
-                        <span>{{files.size / 1000}} KB</span>
+                        <div class="imgPreview">
+                          <img [src]="file.imgSrc" alt="dein foto">
+                        </div>
+                        <span>{{file.file.size / 1000 | number:'1.0-0'}} KB</span>
+                        <button mat-icon-button (click)="onRemoveImg(file)"><mat-icon>clear</mat-icon></button>
                       </div>
                     </ng-container>
                 </div>
@@ -80,16 +81,34 @@
                 <div [formGroupName]="input.formControlName" class="nestedFormGroup">
                   <mat-form-field appearance="outline" *ngFor="let subInput of input.controls">
                     <mat-label>{{subInput.label}}</mat-label>
-                    <input matInput [required]="subInput.isRequired" [type]="subInput.type" [formControlName]="subInput.formControlName" [pattern]="subInput.pattern">
+                    <ng-container [ngSwitch]="subInput.type === 'select' ? 1 : -1">
+                      <ng-container *ngSwitchCase="1">
+                        <mat-select [formControlName]="subInput.formControlName" [required]="subInput.isRequired">
+                          <mat-option></mat-option>
+                          <mat-option *ngFor="let option of subInput.options" [value]="option">
+                            {{option | titlecase}}
+                          </mat-option>
+                        </mat-select>
+                      </ng-container>
+                      <ng-container *ngSwitchDefault>
+                        <input matInput [required]="subInput.isRequired" [type]="subInput.type" [formControlName]="subInput.formControlName" [pattern]="subInput.pattern">
+                      </ng-container>
+                    </ng-container>
                     <mat-error>Dieses Feld wird benötigt!</mat-error>
                   </mat-form-field>
                 </div>
               </ng-container>
 
+              <ng-container *ngSwitchCase="6">
+                <mat-checkbox [formControlName]="input.formControlName" [required]="input.isRequired">
+                  {{input.label}} {{input.isRequired ? '*' : '(optional)'}}
+                </mat-checkbox>
+              </ng-container>
+
               <ng-container *ngSwitchDefault>
                 <mat-form-field appearance="outline">
                   <mat-label>{{input.label}}</mat-label>
-                  <input matInput [required]="input.isRequired" [type]="input.type" [formControlName]="input.formControlName" [pattern]="input.pattern">
+                  <input matInput [required]="input.isRequired" [type]="input.type" [formControlName]="input.formControlName" [placeholder]="input.placeholder" [pattern]="input.pattern">
                   <mat-error>Dieses Feld wird benötigt!</mat-error>
                 </mat-form-field>
               </ng-container>
@@ -98,9 +117,9 @@
           </ng-container>
         </div>
         <div class="buttons">
-          <button mat-raised-button *ngIf="i > 0" type="button" matStepperPrevious>Letzte Seite</button>
-          <button mat-raised-button *ngIf="i < 4" type="button" class="btn-right" matStepperNext>Nächste Seite</button>
-          <button mat-raised-button *ngIf="i === 4" type="button" class="btn-right" matStepperNext (click)="showSummary(i)">Zusammenfassung</button>
+          <button mat-raised-button *ngIf="i > 0" color="primary" type="button" matStepperPrevious>Letzte Seite</button>
+          <button mat-raised-button *ngIf="i < 4" color="primary" type="button" [disabled]="getFormGroup(i).invalid" class="btn-right" matStepperNext>Nächste Seite</button>
+          <button mat-raised-button *ngIf="i === 4" color="primary" type="button" class="btn-right" matStepperNext (click)="showSummary(i)" [disabled]="getFormGroup(i).invalid">Zusammenfassung</button>
         </div>
       </form>
     </mat-step>
@@ -111,8 +130,8 @@
           <span class="column value">{{object.value}}</span>
         </div>
         <div class="buttons">
-          <button mat-raised-button type="button" matStepperPrevious>Letzte Seite</button>
-          <button mat-raised-button class="btn-right" type="button" (click)="sendApplication()" [disabled]="formArray.invalid">Absenden</button>
+          <button mat-raised-button color="primary" type="button" matStepperPrevious>Letzte Seite</button>
+          <button mat-raised-button color="primary" class="btn-right" type="button" (click)="sendApplication()" [disabled]="formArray.invalid">Absenden</button>
         </div>
       </div>
     </mat-step>

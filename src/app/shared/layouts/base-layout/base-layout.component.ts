@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LoaderService } from '../../services/loader.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-base-layout',
@@ -6,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./base-layout.component.scss']
 })
 export class BaseLayoutComponent implements OnInit {
+  $showLoader: Observable<boolean>;
 
-  constructor() {}
+  constructor(private loaderService: LoaderService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.$showLoader = this.loaderService.showLoader.asObservable();
+  }
 
 }

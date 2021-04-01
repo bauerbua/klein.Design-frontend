@@ -25,13 +25,23 @@
       display: flex;
       border-radius: 3px;
       flex-flow: row;
+      justify-content: space-between;
+      align-items: center;
       padding: 15px;
       margin: 5px 0;
 
       span {
-        margin-right: 20px;
-        width: 50%;
+        margin-right: 10px;
         word-wrap: anywhere;
+      }
+
+      .imgPreview {
+        min-width: 30%;
+        margin-right: 10px;
+
+        img {
+          max-height: 40px;
+        }
       }
     }
 
@@ -67,7 +77,7 @@
 
       .column {
         width: 200px;
-        margin: 5px 20px 5px 0;
+        margin: 5px 30px 5px 0;
       }
 
       .key {
