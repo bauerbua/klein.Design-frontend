@@ -1,0 +1,29 @@
+<label>{{input.label}}</label>
+<div class="fileUpload">
+  <button mat-raised-button color="primary" (click)="fileInput.click()"><mat-icon>upload</mat-icon> Dateien auswählen</button>
+  <input
+    type="file"
+    class="fileInput"
+    accept="image/*"
+    #fileInput
+    (change)="onImgSelected($event)"
+    [multiple]="input.multiple"
+    [required]="input.isRequired"/>
+  <div><small>Hinweis: Alle Bilder werden automatisch optimiert.</small></div>
+  <ng-container>
+    <div class="imagesList">
+      <div class="selectedFile mat-elevation-z2" *ngFor="let image of selectedImages">
+        <div class="imgPreview">
+          <button mat-icon-button (click)="onRemoveImg(image)"><mat-icon>clear</mat-icon></button>
+          <img [src]="image.imgSrc" alt="dein foto">
+        </div>
+        <div class="imgInfo">
+          <small>{{image.file.name}}</small>
+          <div>
+            <span>{{image.file.size / 1000 | number:'1.0-0'}} KB</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

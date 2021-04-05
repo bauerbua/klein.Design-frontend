@@ -1,0 +1,63 @@
+.fileUpload {
+  margin: 20px 0;
+
+  .fileInput {
+    display: none;
+  }
+
+  button {
+    margin-bottom: 20px;
+  }
+}
+
+.imagesList {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.selectedFile {
+  width: 200px;
+  margin: 20px;
+
+  .imgPreview {
+    position: relative;
+    height: 150px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+
+    button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: white;
+    }
+  }
+
+  .imgInfo {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 10px 20px;
+    height: 100px;
+
+    small {
+      word-wrap: anywhere;
+    }
+
+    div {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 5px 0;
+    }
+  }
+}

@@ -6,6 +6,7 @@ import { apiEndpoints } from '../../../assets/api/api.endpoints';
 import { LoaderService } from '../../shared/services/loader.service';
 import { HttpEventType } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 export interface FormConfig {
   formControlName: string;
@@ -30,9 +31,7 @@ export class ApplicationComponent implements OnInit {
   forms: FormConfig[][] = [];
   summary = false;
   summaryArray: any[] = [];
-  availableOptions;
-
-  images: any[] = [];
+  availableOptions$: Observable<any[]>;
 
   formArray: FormArray = new FormArray([]);
   formLabels: string[] = [];
@@ -52,9 +51,7 @@ export class ApplicationComponent implements OnInit {
     this.forms.forEach(config => {
       this.formArray.push(new FormGroup(this.generateForm(config)));
     });
-    this.baseService.get(apiEndpoints.TAGS).subscribe(res => {
-      this.availableOptions = res;
-    });
+    this.availableOptions$ = this.baseService.get(apiEndpoints.TAGS);
   }
 
   getFormGroup(index: number): FormGroup {
@@ -78,24 +75,6 @@ export class ApplicationComponent implements OnInit {
       }
     });
     return group;
-  }
-
-  onImgSelected(e): void {
-    const filesList = e.target.files;
-    for (const file of filesList) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        if (!this.images.includes(file)) {
-          this.images.push({file, imgSrc: reader.result});
-        }
-      };
-      reader.readAsDataURL(file);
-    }
-  }
-
-  onRemoveImg(file): void {
-    const index = this.images.indexOf(file);
-    this.images.splice(index, 1);
   }
 
   showSummary(stepIndex): void {
@@ -132,14 +111,16 @@ export class ApplicationComponent implements OnInit {
     this.requestData.delete('files.fotos');
     if (this.formArray.valid) {
       const data = {};
-      this.formArray.value.forEach(object => {
-        Object.assign(data, object);
+      this.formArray.value.forEach((object) => {
+        if (object.hasOwnProperty('fotos')) {
+          object.fotos.forEach(file => {
+            this.requestData.append('files.fotos', file, file.name);
+          });
+        } else {
+          Object.assign(data, object);
+        }
       });
       this.requestData.append('data', JSON.stringify(data));
-      this.images.forEach(img => {
-        console.log(img);
-        this.requestData.append('files.fotos', img.file, img.file.name);
-      });
     }
     const requestOptions = {
       observe: 'events'

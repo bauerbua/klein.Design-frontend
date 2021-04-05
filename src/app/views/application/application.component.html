@@ -43,7 +43,7 @@
                 <mat-form-field appearance="outline">
                   <mat-label>{{input.label}}</mat-label>
                   <mat-select #tagSelect [formControlName]="input.formControlName" [multiple]="input.multiple" [required]="input.isRequired">
-                    <mat-option *ngFor="let option of availableOptions" [value]="option" [disabled]="tagSelect.value?.length > 2 && !tagSelect.value?.includes(option)">
+                    <mat-option *ngFor="let option of availableOptions$ | async" [value]="option" [disabled]="tagSelect.value?.length > 2 && !tagSelect.value?.includes(option)">
                       {{option.tag | titlecase}}
                     </mat-option>
                   </mat-select>
@@ -53,27 +53,7 @@
               </ng-container>
 
               <ng-container *ngSwitchCase="4">
-                <label>{{input.label}}</label>
-                <div class="fileUpload">
-                  <button mat-button (click)="fileInput.click()"><mat-icon>upload</mat-icon> Dateien auswählen</button>
-                  <input
-                    type="file"
-                    class="fileInput"
-                    #fileInput
-                    (change)="onImgSelected($event)"
-                    [multiple]="input.multiple"
-                    [required]="input.isRequired"
-                    [formControlName]="input.formControlName" />
-                   <ng-container *ngFor="let file of images">
-                      <div class="selectedFile mat-elevation-z2">
-                        <div class="imgPreview">
-                          <img [src]="file.imgSrc" alt="dein foto">
-                        </div>
-                        <span>{{file.file.size / 1000 | number:'1.0-0'}} KB</span>
-                        <button mat-icon-button (click)="onRemoveImg(file)"><mat-icon>clear</mat-icon></button>
-                      </div>
-                    </ng-container>
-                </div>
+                <app-file-upload-input [input]="input" [formControlName]="input.formControlName"></app-file-upload-input>
               </ng-container>
 
               <ng-container *ngSwitchCase="5">
