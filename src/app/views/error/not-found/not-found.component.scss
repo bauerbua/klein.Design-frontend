@@ -1,0 +1,22 @@
+@import "./src/styles/colors";
+
+.split-vertical {
+  display: flex;
+  flex-flow: row wrap;
+  height: 100%;
+
+  .half {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 20px;
+
+    img {
+      width: 400px;
+    }
+  }
+
+  .right {
+    align-items: flex-start;
+  }
+}

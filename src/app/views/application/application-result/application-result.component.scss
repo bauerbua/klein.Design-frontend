@@ -1,0 +1,17 @@
+div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    margin: 20px 0 10px 0;
+  }
+
+  img {
+    max-width: 500px;
+    margin: 60px;
+  }
+}
