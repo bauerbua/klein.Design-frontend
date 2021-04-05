@@ -5,6 +5,7 @@ import { apiEndpoints } from '../../../../assets/api/api.endpoints';
 import { ActivatedRoute } from '@angular/router';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-single-exhibitor',
@@ -12,7 +13,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./single-exhibitor.component.scss']
 })
 export class SingleExhibitorComponent implements OnInit {
-  exhibitor: Exhibitor;
+  exhibitor$: Observable<Exhibitor>;
 
   constructor(
     private baseService: BaseService,
@@ -36,12 +37,7 @@ export class SingleExhibitorComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.baseService.get<Exhibitor>(apiEndpoints.EXHIBITORS + '/' + id).subscribe(
-      res => {
-        console.log(res);
-        this.exhibitor = res;
-      }
-    );
+    this.exhibitor$ = this.baseService.get<Exhibitor>(apiEndpoints.EXHIBITORS + '/' + id);
   }
 
 }

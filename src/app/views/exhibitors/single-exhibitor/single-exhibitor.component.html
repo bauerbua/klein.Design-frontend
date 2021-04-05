@@ -1,4 +1,4 @@
-<div *ngIf="exhibitor" class="exhibitor">
+<div *ngIf="exhibitor$ | async as exhibitor" class="exhibitor">
   <button class="back-btn" mat-raised-button routerLink="/aussteller"><mat-icon>arrow_left</mat-icon>Alle Aussteller</button>
   <h1>{{exhibitor.firmenname}}</h1>
   <strong>{{exhibitor.vorname}} {{exhibitor.nachname}}</strong>
@@ -8,9 +8,9 @@
     </div>
     <div class="col">
       <ng-container>
-        <a [href]="'//' + exhibitor.links.facebook" target="_blank" *ngIf="exhibitor.links.facebook"><mat-icon svgIcon="facebook"></mat-icon></a>
-        <a [href]="'//' + exhibitor.links.instagram" target="_blank" *ngIf="exhibitor.links.instagram"><mat-icon svgIcon="instagram"></mat-icon></a>
-        <a [href]="'//' + exhibitor.links.webseite" target="_blank" *ngIf="exhibitor.links.webseite"><mat-icon svgIcon="twitter"></mat-icon></a>
+        <a [href]="'//' + exhibitor.links.facebook" target="_blank" *ngIf="exhibitor.links?.facebook"><mat-icon svgIcon="facebook"></mat-icon></a>
+        <a [href]="'//' + exhibitor.links.instagram" target="_blank" *ngIf="exhibitor.links?.instagram"><mat-icon svgIcon="instagram"></mat-icon></a>
+        <a [href]="'//' + exhibitor.links.webseite" target="_blank" *ngIf="exhibitor.links?.webseite"><mat-icon svgIcon="twitter"></mat-icon></a>
       </ng-container>
     </div>
   </div>
