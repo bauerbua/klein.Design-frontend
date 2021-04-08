@@ -7,6 +7,7 @@ import { LoaderService } from '../../shared/services/loader.service';
 import { HttpEventType } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { isBoolean, isObject } from '../../shared/utilities/helper-functions';
 
 export interface FormConfig {
   formControlName: string;
@@ -15,9 +16,11 @@ export interface FormConfig {
   isRequired?: boolean;
   placeholder: string;
   controls?: FormConfig[];
+  hint: string;
   options?: any;
   multiple?: boolean;
   pattern?: string;
+  text: string;
 }
 
 @Component({
@@ -36,6 +39,8 @@ export class ApplicationComponent implements OnInit {
   formArray: FormArray = new FormArray([]);
   formLabels: string[] = [];
   requestData: FormData = new FormData();
+  isObject = isObject;
+  isBoolean = isBoolean;
 
   constructor(
     private baseService: BaseService,
@@ -92,15 +97,20 @@ export class ApplicationComponent implements OnInit {
       });
       this.formArray.value.forEach(object => {
         for (const [key, value] of Object.entries(object)) {
+          console.log(value);
+          const index = summaryArray.findIndex(obj => obj.formControlName === key);
           if (Array.isArray(object[key])) {
-            const index = summaryArray.findIndex(obj => obj.formControlName === key);
-            summaryArray[index].value = object[key].map(obj => obj.tag);
+            if (key === 'fotos') {
+              summaryArray[index].value = object[key].length;
+            } else {
+              summaryArray[index].value = object[key].map(obj => obj.tag);
+            }
           } else {
-            const index = summaryArray.findIndex(obj => obj.formControlName === key);
             summaryArray[index].value = value;
           }
         }
       });
+      console.log(summaryArray);
       this.summaryArray = summaryArray;
       this.summary = true;
     }

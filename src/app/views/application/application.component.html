@@ -1,6 +1,6 @@
 <div class="application-form">
   <h1>Bewerbung kleinDesign Markt Nov. 2021</h1>
-  <mat-vertical-stepper #stepper linear="false" (selectionChange)="showSummary($event.selectedIndex)">
+  <mat-vertical-stepper #stepper linear="true" (selectionChange)="showSummary($event.selectedIndex)">
     <mat-step *ngFor="let form of formArray.controls; index as i" [stepControl]="getFormGroup(i)" [label]="formLabels[i]">
       <form>
         <div [formGroup]="getFormGroup(i)" class="formGroup mat-elevation-z8">
@@ -20,10 +20,12 @@
                     matInput
                     cdkTextareaAutosize
                     cdkAutosizeMinRows="3"
-                    cdkAutosizeMaxRows="5"
+                    cdkAutosizeMaxRows="8"
                     [required]="input.isRequired"
                     [formControlName]="input.formControlName"
                   ></textarea>
+                  <mat-hint>{{input?.hint}}</mat-hint>
+                  <mat-error>Dieses Feld wird benötigt!</mat-error>
                 </mat-form-field>
               </ng-container>
 
@@ -35,6 +37,7 @@
                       {{option}}
                     </mat-option>
                   </mat-select>
+                  <mat-hint>{{input?.hint}}</mat-hint>
                   <mat-error>Dieses Feld wird benötigt!</mat-error>
                 </mat-form-field>
               </ng-container>
@@ -57,7 +60,7 @@
               </ng-container>
 
               <ng-container *ngSwitchCase="5">
-                <legend>{{input.label}}</legend>
+                <p>{{input.label}}</p>
                 <div [formGroupName]="input.formControlName" class="nestedFormGroup">
                   <mat-form-field appearance="outline" *ngFor="let subInput of input.controls">
                     <mat-label>{{subInput.label}}</mat-label>
@@ -74,6 +77,7 @@
                         <input matInput [required]="subInput.isRequired" [type]="subInput.type" [formControlName]="subInput.formControlName" [pattern]="subInput.pattern">
                       </ng-container>
                     </ng-container>
+                    <mat-hint>{{input?.hint}}</mat-hint>
                     <mat-error>Dieses Feld wird benötigt!</mat-error>
                   </mat-form-field>
                 </div>
@@ -81,7 +85,7 @@
 
               <ng-container *ngSwitchCase="6">
                 <mat-checkbox [formControlName]="input.formControlName" [required]="input.isRequired">
-                  {{input.label}} {{input.isRequired ? '*' : '(optional)'}}
+                  {{input.text}} {{input.isRequired ? '*' : '(optional)'}}
                 </mat-checkbox>
               </ng-container>
 
@@ -89,6 +93,7 @@
                 <mat-form-field appearance="outline">
                   <mat-label>{{input.label}}</mat-label>
                   <input matInput [required]="input.isRequired" [type]="input.type" [formControlName]="input.formControlName" [placeholder]="input.placeholder" [pattern]="input.pattern">
+                  <mat-hint>{{input?.hint}}</mat-hint>
                   <mat-error>Dieses Feld wird benötigt!</mat-error>
                 </mat-form-field>
               </ng-container>
@@ -105,9 +110,27 @@
     </mat-step>
     <mat-step label="Zusammenfassung">
       <div class="summary">
-        <div *ngFor="let object of summaryArray" class="gridContainer">
-          <span class="column key">{{object.label}}</span>
-          <span class="column value">{{object.value}}</span>
+        <div class="responsive-table mat-elevation-z8">
+          <table>
+            <tr *ngFor="let object of summaryArray" class="row">
+              <ng-container [ngSwitch]="isObject(object.value) ? 1 : isBoolean(object.value) ? 2 : -1">
+                <ng-container *ngSwitchCase="1">
+                  <td class="key">{{object.label}}</td>
+                  <td class="value">
+                    <div *ngFor="let item of object.value | keyvalue">{{item.key | titlecase}}: {{item.value}}</div>
+                  </td>
+                </ng-container>
+                <ng-container *ngSwitchCase="2">
+                  <td class="key">{{object.label}}</td>
+                  <td class="value">{{object.value === true ? 'Ja' : 'Nein'}}</td>
+                </ng-container>
+                <ng-container *ngSwitchDefault>
+                  <td class="key">{{object.label}}</td>
+                  <td class="value">{{object.value}}</td>
+                </ng-container>
+              </ng-container>
+            </tr>
+          </table>
         </div>
         <div class="buttons">
           <button mat-raised-button color="primary" type="button" matStepperPrevious>Letzte Seite</button>

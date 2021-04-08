@@ -6,33 +6,34 @@ export const ApplicationFormConfigs = {
       formControlName: 'vorname',
       type: 'text',
       label: 'Vorname',
-      // isRequired: true
+      isRequired: true
     },
     {
       formControlName: 'nachname',
       type: 'text',
       label: 'Nachname',
-      // isRequired: true
+      isRequired: true
     },
     {
       formControlName: 'email',
       type: 'email',
       label: 'Email',
-      // isRequired: true,
-      pattern: Patterns.email
+      isRequired: true,
+      pattern: Patterns.email,
+      hint: 'klein-design@gmail.com'
     },
     {
       formControlName: 'telefonnummer',
       type: 'text',
       label: 'Telefonnummer',
-      // isRequired: true,
+      isRequired: true,
     },
     {
       formControlName: 'adresse',
       type: 'text',
       label: 'Rechnungsadresse',
-      placeholder: 'Anschrift, PLZ Stadt'
-      // isRequired: true,
+      isRequired: true,
+      hint: 'Mustergasse 1a/3, 0000 Musterstadt'
     }
   ],
 
@@ -41,20 +42,20 @@ export const ApplicationFormConfigs = {
       formControlName: 'firmenname',
       type: 'text',
       label: 'Firmenname',
-      // isRequired: true
+      isRequired: true
     },
     {
       formControlName: 'tags',
       type: 'tags',
       label: 'Tags',
-      // isRequired: true,
+      isRequired: true,
       multiple: true,
     },
     {
       formControlName: 'beschreibung',
       type: 'textarea',
       label: 'Beschreibung',
-      // isRequired: true
+      isRequired: true
     },
     {
       formControlName: 'links',
@@ -74,7 +75,8 @@ export const ApplicationFormConfigs = {
         {
           formControlName: 'webseite',
           type: 'text',
-          label: 'Webseite'
+          label: 'Webseite',
+          hint: 'www.website.com'
         },
       ]
     }
@@ -86,7 +88,7 @@ export const ApplicationFormConfigs = {
       type: 'upload',
       label: 'Fotos',
       multiple: true,
-      // isRequired: true,
+      isRequired: true,
     },
   ],
 
@@ -97,24 +99,24 @@ export const ApplicationFormConfigs = {
       label: 'Standplatz',
       controls: [
         {
-          formControlName: 'standplatz',
+          formControlName: 'groesse',
           type: 'select',
           label: 'Größe',
-          // isRequired: true,
+          isRequired: true,
           options: [ 'klein - (10€)', 'groß - (20€)'],
         },
         {
-          formControlName: 'table',
+          formControlName: 'tische',
           type: 'select',
           label: 'Tische',
-          // isRequired: true,
+          isRequired: true,
           options: ['0', '1 - (12€)', '2 - (35€)', 'Stehtisch - (5€)'],
         },
         {
-          formControlName: 'power',
+          formControlName: 'strom',
           type: 'select',
           label: 'Strom',
-          // isRequired: true,
+          isRequired: true,
           options: ['ja, (3€)', 'nein'],
         }
       ]
@@ -123,15 +125,17 @@ export const ApplicationFormConfigs = {
 
   Rechtliches: [
     {
-      formControlName: 'ads',
+      formControlName: 'werbung',
       type: 'checkbox',
-      label: 'Meine Inhalte dürfen für Werbezwecke verwendet werden',
-      // isRequired: true
+      text: 'Meine Inhalte dürfen für Werbezwecke verwendet werden',
+      label: 'Werbezwecke',
+      isRequired: true
     },
     {
       formControlName: 'newsletter',
       type: 'checkbox',
-      label: 'Anmelden zum Aussteller newsletter',
+      text: 'Anmelden zum Aussteller newsletter',
+      label: 'Newsletter'
     }
   ]
 };

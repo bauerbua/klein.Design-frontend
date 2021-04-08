@@ -1,9 +1,17 @@
+:host::ng-deep.mat-checkbox-layout{
+  white-space: normal !important;
+
+  .mat-checkbox-label {
+    line-height: 20px !important;
+  }
+}
+
 .application-form {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   box-sizing: border-box;
-  padding: 40px;
+  padding: 20px;
 
   .formGroup {
     justify-content: left;
@@ -48,12 +56,17 @@
     .nestedFormGroup {
       display: flex;
       flex-flow: row wrap;
-      justify-content: space-between;
+      justify-content: space-around;
 
       mat-form-field {
         flex-grow: 1;
         margin: 0 10px;
+        min-width: 0;
       }
+    }
+
+    mat-checkbox {
+      margin: 5px 0;
     }
   }
 
@@ -69,24 +82,34 @@
   }
 
   .summary {
-    margin-bottom: 20px;
+    margin: 20px 0;
 
-    .gridContainer {
-      display: flex;
-      flex-direction: row;
+    .responsive-table {
+      width: 100%;
+      overflow-x: auto;
+      padding: 20px;
 
-      .column {
-        width: 200px;
-        margin: 5px 30px 5px 0;
-      }
-
-      .key {
-        font-weight: 500;
-      }
-
-      .value {
+      table {
         width: 100%;
+        min-width: 400px;
+        border-collapse: collapse;
+
+        .row {
+          width: 100%;
+          border-bottom: 0.5px solid lightgray;
+
+          td {
+            padding: 5px;
+            width: 50%;
+          }
+        }
       }
     }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .application-form {
+    margin: 10px;
   }
 }
