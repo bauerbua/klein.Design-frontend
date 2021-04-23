@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Exhibitor } from '../../shared/interfaces/exhibitor.interface';
+import { Exhibitor } from '@shared/interfaces/exhibitor.interface';
 import { HomeService } from './home.service';
 import { Subscription } from 'rxjs';
 
