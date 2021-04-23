@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Exhibitor } from '../../shared/interfaces/exhibitor.interface';
-import { BaseService } from '../../shared/services/base.service';
-import { apiEndpoints } from '../../../assets/api/api.endpoints';
+import { Exhibitor } from '@shared/interfaces/exhibitor.interface';
+import { BaseService } from '@shared/services/base.service';
+import { apiEndpoints } from '@assets/api/api.endpoints';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

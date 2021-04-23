@@ -3,7 +3,7 @@ $hamburger-layer-height: 2px;
 $hamburger-padding-x: 8px;
 $hamburger-padding-y: 8px;
 
-@import "./src/styles/colors";
+@import "styles/colors";
 @import '~hamburgers/_sass/hamburgers/hamburgers.scss';
 
 .navbar {

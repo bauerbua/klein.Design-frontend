@@ -32,6 +32,12 @@
               "node_modules/slick-carousel/slick/slick.scss",
               "node_modules/slick-carousel/slick/slick-theme.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "./src",
+                "./src/styles"
+              ]
+            },
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/slick-carousel/slick/slick.min.js"
