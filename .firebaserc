@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "klein-design"
+  },
+  "targets": {
+    "klein-design": {
+      "hosting": {
+        "kleinDesignFrontend": [
+          "klein-design"
+        ]
+      }
+    }
   }
 }
