@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist",
+    "public": "dist/kleinDesignFrontend/browser",
     "ignore": [
       "firebase.json",
       "**/.*",
