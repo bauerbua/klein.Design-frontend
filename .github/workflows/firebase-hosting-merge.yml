@@ -16,9 +16,12 @@ jobs:
         with:
           node-version: '12.x'
       - run: npm install
-      - run: npm run build:prod
-      - uses: w9jds/firebase-action@master
+      - run: npm run build-prod
+      - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          args: deploy --only hosting
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_KLEIN_DESIGN }}'
+          channelId: live
+          projectId: klein-design
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          FIREBASE_CLI_PREVIEWS: hostingchannels
