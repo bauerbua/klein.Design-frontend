@@ -2,43 +2,44 @@
 name: CI/CD
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
-'on':
+on:
   push:
-    branches:
-      - main
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # build job
   build:
-    - name: Build
+    name: Build
     # The type of runner that the job will run on
-    - runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout Repo
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
       - name: Setup node
-      - uses: actions/setup-node@master
+        uses: actions/setup-node@master
         with:
           node-version: '10.x'
       # Install the dependencies need to build the app
       - name: Install Dependencies
-      - run: npm install
+        run: npm install
       # Runs a set of commands to build
       - name: Build
-      - run: npm run build --prod
+        run: npm run build --prod
       # sotre the artifact
       - name: Archive Production Artifact
-      - uses: actions/upload-artifact@master
+        uses: actions/upload-artifact@master
         with:
-          name: dist
-          path: ./dist
+          name: public
+          path: ./public
   # deploy job
   deploy:
-    - name: Deploy to firebase
-    - runs-on: ubuntu-latest
-    # only run if build job complete successfully
+    name: Deploy to firebase
+    runs-on: ubuntu-latest
+    # only run if build job complte successfully
     needs: [build]
     steps:
       # building the app before deploy
@@ -48,10 +49,10 @@ jobs:
           node-version: '10.x'
       # Install the dependencies need to build the app
       - name: Install Dependencies
-      - run: npm install
+        run: npm install
       # build the app
       - name: Build the app artifact for prod
-      - run: npm run build --prod
+        run: npm run build --prod
       # ddeploy the app artifact to firebase
       - name: Deploy angular app to Firebase
       - uses: FirebaseExtended/action-hosting-deploy@v0
@@ -62,3 +63,5 @@ jobs:
           projectId: klein-design
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels
+
+
