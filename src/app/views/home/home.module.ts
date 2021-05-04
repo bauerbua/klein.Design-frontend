@@ -6,7 +6,7 @@ import { SharedComponentsModule } from '../../shared/components/shared-component
 import { HomeComponent } from './home.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { SlickCarouselModule } from 'ngx-slick-carousel';
+import {IvyCarouselModule} from 'angular-responsive-carousel';
 
 @NgModule({
   declarations: [HomeComponent],
@@ -16,7 +16,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     RouterModule.forChild(homeRoutes),
     MatButtonModule,
     MatIconModule,
-    SlickCarouselModule
+    IvyCarouselModule
   ]
 })
 export class HomeModule { }

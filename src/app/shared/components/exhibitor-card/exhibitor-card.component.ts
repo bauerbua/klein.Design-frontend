@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Exhibitor } from '../../interfaces/exhibitor.interface';
 import { Router } from '@angular/router';
-import { BaseRoutes } from '../../../base.routes';
+import { BaseRoutes } from '@app/base.routes';
 
 @Component({
   selector: 'app-exhibitor-card',

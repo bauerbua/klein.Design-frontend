@@ -18,13 +18,13 @@
   <section id="exhibitors">
     <h1>Aussteller</h1>
     <div class="carousel-wrapper">
-      <ngx-slick-carousel class="carousel"
-                          #slickModal="slick-carousel"
-                          [config]="slideConfig">
-        <div ngxSlickItem *ngFor="let exhibitor of exhibitors" class="slide">
-          <app-exhibitor-card class="card" [exhibitor]="exhibitor"></app-exhibitor-card>
-        </div>
-      </ngx-slick-carousel>
+      <carousel class="carousel" height="350" dots="true" arrowsOutside="true">
+        <ng-container *ngFor="let exhibitor of exhibitors">
+          <div class="carousel-cell">
+            <app-exhibitor-card [exhibitor]="exhibitor"></app-exhibitor-card>
+          </div>
+        </ng-container>
+      </carousel>
     </div>
     <button mat-raised-button (click)="routeToView('aussteller')">Alle Aussteller</button>
   </section>
