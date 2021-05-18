@@ -103,21 +103,32 @@ export const ApplicationFormConfigs = {
           type: 'select',
           label: 'Größe',
           isRequired: true,
-          options: [ 'klein - (10€)', 'groß - (20€)'],
+          options: [
+            {display: 'klein - (10€)', value: 'klein'},
+            {display: 'groß - (20€)', value: 'gross'},
+          ],
         },
         {
           formControlName: 'tische',
           type: 'select',
           label: 'Tische',
           isRequired: true,
-          options: ['0', '1 - (12€)', '2 - (35€)', 'Stehtisch - (5€)'],
+          options: [
+            {display: '0', value: 'null'},
+            {display: '1 - (12€)', value: 'eins'},
+            {display: '2 - (35€)', value: 'zwei'},
+            {display: 'Stehtisch - (5€)', value: 'stehtisch'},
+          ],
         },
         {
           formControlName: 'strom',
           type: 'select',
           label: 'Strom',
           isRequired: true,
-          options: ['ja, (3€)', 'nein'],
+          options: [
+            {display: 'ja - (3€)', value: 'ja'},
+            {display: 'nein', value: 'nein'},
+          ],
         }
       ]
     }
