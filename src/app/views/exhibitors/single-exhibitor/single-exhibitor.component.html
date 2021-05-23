@@ -1,7 +1,9 @@
 <div *ngIf="exhibitor$ | async as exhibitor" class="exhibitor">
-  <button class="back-btn" mat-raised-button routerLink="/aussteller"><mat-icon>arrow_left</mat-icon>Alle Aussteller</button>
-  <h1>{{exhibitor.firmenname}}</h1>
-  <strong>{{exhibitor.vorname}} {{exhibitor.nachname}}</strong>
+  <div class="heading">
+    <button class="back-btn" mat-icon-button routerLink="/aussteller"><mat-icon>arrow_back</mat-icon></button>
+    <h1>{{exhibitor.firmenname | titlecase}}</h1>
+  </div>
+  <strong>{{exhibitor.vorname | titlecase}} {{exhibitor.nachname | titlecase}}</strong>
   <div class="row">
     <div class="col">
       <p>{{exhibitor.beschreibung}}</p>

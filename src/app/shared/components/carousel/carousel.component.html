@@ -1,0 +1,10 @@
+<section class="carousel-wrapper">
+  <div class="carousel-inner">
+    <ng-container
+      *ngFor="let item of items"
+      [ngTemplateOutlet]="templateRef"
+      [ngTemplateOutletContext]="{$implicit: item}"
+    >
+    </ng-container>
+  </div>
+</section>

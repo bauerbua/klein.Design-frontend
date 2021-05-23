@@ -1,7 +1,7 @@
 <div class="exhibitor-card mat-elevation-z5">
   <img [src]="exhibitor.titelbild.url" alt="titelbild">
   <div class="card-body">
-    <h3>{{exhibitor.firmenname}}</h3>
+    <h3>{{exhibitor.firmenname | titlecase}}</h3>
     <hr/>
     <div class="tags">
       <span *ngFor="let tag of exhibitor.tags" (click)="routeWithParam(tag.tag)">{{tag.tag | titlecase}}</span>

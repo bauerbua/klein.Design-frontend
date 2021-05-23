@@ -6,9 +6,20 @@
   margin: 0 auto;
   padding: 40px 0;
 
+  .heading {
+    display: flex;
+    align-items: center;
+
+    h1 {
+      margin: 0;
+      padding: 0 0 0 10px;
+      border-left: 1px solid rgb(200, 200, 200);
+    }
+  }
+
   strong {
     display: block;
-    margin: 10px 0;
+    margin: 20px 0;
   }
 
   hr {
@@ -51,9 +62,5 @@
         width: 100%;
       }
     }
-  }
-
-  .back-btn {
-    margin-bottom: 25px;
   }
 }

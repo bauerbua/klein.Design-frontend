@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApplicationFormConfigs } from './application-form.config';
-import { BaseService } from '../../shared/services/base.service';
-import { apiEndpoints } from '../../../assets/api/api.endpoints';
-import { LoaderService } from '../../shared/services/loader.service';
+import { BaseService } from '@shared/services/base.service';
+import { apiEndpoints } from '@assets/api/api.endpoints';
+import { LoaderService } from '@shared/services/loader.service';
 import { HttpEventType } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { isBoolean, isObject } from '../../shared/utilities/helper-functions';
+import { isBoolean, isObject } from '@shared/utilities/helper-functions';
 
 export interface FormConfig {
   formControlName: string;
@@ -97,7 +97,6 @@ export class ApplicationComponent implements OnInit {
       });
       this.formArray.value.forEach(object => {
         for (const [key, value] of Object.entries(object)) {
-          console.log(value);
           const index = summaryArray.findIndex(obj => obj.formControlName === key);
           if (Array.isArray(object[key])) {
             if (key === 'fotos') {
@@ -110,7 +109,6 @@ export class ApplicationComponent implements OnInit {
           }
         }
       });
-      console.log(summaryArray);
       this.summaryArray = summaryArray;
       this.summary = true;
     }

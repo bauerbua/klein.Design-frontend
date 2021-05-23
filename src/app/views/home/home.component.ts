@@ -2,7 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Exhibitor } from '@shared/interfaces/exhibitor.interface';
 import { HomeService } from './home.service';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,7 @@ import { Subscription } from 'rxjs';
 export class HomeComponent implements OnInit, OnDestroy {
   imagesUpperRow: any[] = [];
   imagesLowerRow: any[] = [];
-  exhibitors: Exhibitor[] = [];
+  exhibitors$: Observable<Exhibitor[]>;
   subscriptions: Subscription[] = [];
   slideConfig = {
     dots: false,
@@ -64,10 +65,9 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.imagesLowerRow = selectedImgs;
       })
     );
-    this.subscriptions.push(
-      this.homeService.getExhibitors().subscribe(data => {
-        const suffledArray = data.sort(() => 0.5 - Math.random());
-        this.exhibitors = suffledArray.slice(0, 4);
+    this.exhibitors$ = this.homeService.getExhibitors().pipe(
+      map(exhibitors => {
+        return exhibitors.sort(() => 0.5 - Math.random()).slice(0, 4);
       })
     );
   }

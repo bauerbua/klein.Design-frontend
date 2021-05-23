@@ -6,10 +6,12 @@ $hamburger-padding-y: 8px;
 @import "styles/colors";
 @import '~hamburgers/_sass/hamburgers/hamburgers.scss';
 
+$navbar-color: rgba(255, 255, 255, .98);
+
 .navbar {
   width: 100%;
   height: 70px;
-  background-color: rgba(255, 255, 255, .95);
+  background-color: $navbar-color;
   display: flex;
   flex-flow: row;
   justify-content: center;
@@ -69,8 +71,8 @@ $hamburger-padding-y: 8px;
       height: 0;
       margin-top: 70px;
       visibility: hidden;
-      transition: .5s linear;
-      background-color: rgba(255, 255, 255, .95);
+      transition: .3s linear;
+      background-color: $navbar-color;
 
       .navItem {
         padding: 10px;
@@ -81,12 +83,12 @@ $hamburger-padding-y: 8px;
     .isOpen {
       visibility: visible;
       height: 150px;
-      transition: .5s linear;
+      transition: .3s linear;
 
       .navItem {
         opacity: 1;
         transition: .3s linear;
-        transition-delay: .8s;
+        transition-delay: .3s;
       }
     }
   }

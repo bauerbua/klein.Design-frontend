@@ -54,7 +54,6 @@ export class FileUploadInputComponent implements OnInit, ControlValueAccessor {
         reader.readAsDataURL(file);
         reader.onload = () => {
           this.cropImage(reader.result as string, file).then((croppedImg) => {
-            // console.log(croppedImg);
             this.selectedImages.push(croppedImg);
             this.onChange(this.selectedImages.map((image) => image.file));
           });

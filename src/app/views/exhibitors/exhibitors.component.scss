@@ -1,8 +1,7 @@
 @import "styles/colors";
 
 #allExhibitors {
-  background-color: lighten($primary, 25%);
-  padding: 40px 0;
+  padding: 20px 0;
   height: 100%;
   display: flex;
   flex-flow: column;

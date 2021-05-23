@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FooterComponent } from './footer/footer.component';
 import { LoaderComponent } from './loader/loader.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CarouselComponent } from './carousel/carousel.component';
 
 const components = [
   BaseLayoutComponent,
@@ -21,13 +22,14 @@ const components = [
   NewsletterFormComponent,
   CircleBannerComponent,
   NavbarComponent,
-  FooterComponent
+  FooterComponent,
+  CarouselComponent,
+  LoaderComponent,
 ];
 
 @NgModule({
   declarations: [
     components,
-    LoaderComponent,
   ],
   exports: [
     components,

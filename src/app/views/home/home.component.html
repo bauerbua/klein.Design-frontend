@@ -18,13 +18,11 @@
   <section id="exhibitors">
     <h1>Aussteller</h1>
     <div class="carousel-wrapper">
-      <carousel class="carousel" height="350" dots="true" arrowsOutside="true">
-        <ng-container *ngFor="let exhibitor of exhibitors">
-          <div class="carousel-cell">
-            <app-exhibitor-card [exhibitor]="exhibitor"></app-exhibitor-card>
-          </div>
-        </ng-container>
-      </carousel>
+      <app-carousel [items]="exhibitors$ | async">
+        <ng-template let-item>
+          <app-exhibitor-card class="carousel-item" [exhibitor]="item"></app-exhibitor-card>
+        </ng-template>
+      </app-carousel>
     </div>
     <button mat-raised-button (click)="routeToView('aussteller')">Alle Aussteller</button>
   </section>

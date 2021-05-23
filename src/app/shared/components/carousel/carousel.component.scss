@@ -1,0 +1,22 @@
+.carousel-wrapper {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+
+  .carousel-inner {
+    display: flex;
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+  }
+
+  .arrow-right {
+    margin-left: 20px;
+  }
+
+  .arrow-left {
+    margin-right: 20px;
+  }
+}
