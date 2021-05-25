@@ -17,12 +17,24 @@
 
   <section id="exhibitors">
     <h1>Aussteller</h1>
-    <div class="carousel-wrapper">
-      <app-carousel [items]="exhibitors$ | async">
-        <ng-template let-item>
-          <app-exhibitor-card class="carousel-item" [exhibitor]="item"></app-exhibitor-card>
-        </ng-template>
-      </app-carousel>
+    <div class="wrapper">
+      <ng-container *ngIf="exhibitors$ | async as exhibitors; else loadingOrError">
+        <app-carousel [items]="exhibitors">
+          <ng-template let-item>
+            <app-exhibitor-card class="carousel-item" [exhibitor]="item"></app-exhibitor-card>
+          </ng-template>
+        </app-carousel>
+      </ng-container>
+      <ng-template #loadingOrError>
+        <div class="loadingOrError">
+          <ng-container *ngIf="loadingError$ | async; else loading">
+            <h3>Es tut uns leid, es scheint ein Problem zu geben, versuche es bitte später erneut!</h3>
+          </ng-container>
+          <ng-template #loading>
+            <mat-spinner></mat-spinner>
+          </ng-template>
+        </div>
+      </ng-template>
     </div>
     <button mat-raised-button (click)="routeToView('aussteller')">Alle Aussteller</button>
   </section>

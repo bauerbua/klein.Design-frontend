@@ -88,13 +88,20 @@
       margin: 0;
     }
 
-    .carousel-wrapper {
+    .wrapper {
       width: 100%;
       max-width: 1200px;
 
       .carousel-item {
         width: 250px;
         margin: 10px;
+      }
+
+      .loadingOrError {
+        min-height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     }
   }

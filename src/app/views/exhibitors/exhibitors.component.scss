@@ -5,7 +5,7 @@
   height: 100%;
   display: flex;
   flex-flow: column;
-  min-height: 510px;
+  min-height: 300px;
 
   .filter {
     width: 60%;
@@ -21,7 +21,6 @@
     width: 80%;
     max-width: 1200px;
     margin: 0 auto;
-    min-height: 350px;
   }
 
   @media only screen and (max-width: 768px) {
