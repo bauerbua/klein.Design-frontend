@@ -5,14 +5,19 @@
       <input matInput [(ngModel)]="searchValue" type="text">
     </mat-form-field>
   </div>
-  <ng-container *ngIf="exhibitors.length >= 1 && apiError === false; else noData">
+  <ng-container *ngIf="exhibitors$ | async as exhibitors; else loadingOrError">
     <div class="gallery">
       <app-exhibitor-card class="card" *ngFor="let exhibitor of exhibitors | exhibitorFilter: searchValue" [exhibitor]="exhibitor"></app-exhibitor-card>
     </div>
   </ng-container>
-  <ng-template #noData>
+  <ng-template #loadingOrError>
     <div class="gallery">
-      <h3 *ngIf="apiError">Es tut uns leid, es scheint ein Problem zu geben, versuche es bitte später erneut!</h3>
+      <ng-container *ngIf="loadingError$ | async; else loading">
+        <h3>Es tut uns leid, es scheint ein Problem zu geben, versuche es bitte später erneut!</h3>
+      </ng-container>
+      <ng-template #loading>
+        <mat-spinner></mat-spinner>
+      </ng-template>
     </div>
   </ng-template>
 </div>

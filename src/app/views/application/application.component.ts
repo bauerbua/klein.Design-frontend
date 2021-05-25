@@ -142,8 +142,7 @@ export class ApplicationComponent implements OnInit {
           this.loaderService.onDeactivateLoader();
           this.router.navigate(['geschafft'], {relativeTo: this.route});
         }
-      }, err => {
-        console.log(err);
+      }, () => {
         this.loaderService.onDeactivateLoader();
       }
     );

@@ -10,18 +10,20 @@ import { SharedModule } from '../../shared/shared.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [ExhibitorsComponent, SingleExhibitorComponent],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(exhibitorsRoutes),
-    SharedComponentsModule,
-    FormsModule,
-    SharedModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-  ]
+    imports: [
+        CommonModule,
+        RouterModule.forChild(exhibitorsRoutes),
+        SharedComponentsModule,
+        FormsModule,
+        SharedModule,
+        MatInputModule,
+        MatButtonModule,
+        MatIconModule,
+        MatProgressSpinnerModule,
+    ]
 })
 export class ExhibitorsModule { }
