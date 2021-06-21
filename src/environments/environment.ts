@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // BASE_URL: 'http://localhost:1337/',
-  BASE_URL: 'https://klein-design-backend.herokuapp.com/',
+  BASE_URL: 'http://localhost:1337/',
+  // BASE_URL: 'https://klein-design-backend.herokuapp.com/',
 };
 
 /*
