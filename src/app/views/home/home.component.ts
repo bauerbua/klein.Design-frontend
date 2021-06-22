@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Exhibitor } from '@shared/interfaces/exhibitor.interface';
 import { HomeService } from './home.service';
 import { Observable, of, Subject, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Meta, Title } from '@angular/platform-browser';
+import { SeoService } from '@shared/services/seo.service';
 
 @Component({
   selector: 'app-home',
@@ -19,15 +19,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   loadingError$ = new Subject<boolean>();
   subscriptions: Subscription[] = [];
 
-  constructor(private homeService: HomeService, private router: Router, private meta: Meta, private title: Title) {}
+  constructor(
+    private homeService: HomeService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private seoService: SeoService) {}
 
   ngOnInit(): void {
-    this.title.setTitle('Home');
-    this.meta.addTags([
-      {name: 'tag:card', content: 'some content'},
-      {name: 'og:url', content: '/home'},
-    ]);
-
+    const { meta } = this.route.snapshot.data;
+    this.seoService.updateTitle(meta.title);
+    this.seoService.updateDescription(meta.description);
     this.subscriptions.push(
       this.homeService.getImages().subscribe(images => {
         const suffledImgs = images.impressionen.sort(() => 0.5 - Math.random());
