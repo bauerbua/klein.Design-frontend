@@ -8,11 +8,7 @@
     "build:prod": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "dev:ssr": "ng run kleinDesignFrontend:serve-ssr",
-    "serve:ssr": "node dist/kleinDesignFrontend/server/main.js",
-    "build:ssr": "ng build --prod && ng run kleinDesignFrontend:server:production",
-    "prerender": "ng run kleinDesignFrontend:prerender"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
@@ -27,7 +23,6 @@
     "@angular/platform-browser-dynamic": "~11.2.11",
     "@angular/platform-server": "~11.2.11",
     "@angular/router": "~11.2.11",
-    "@nguniversal/express-engine": "^11.2.1",
     "express": "^4.17.1",
     "firebase": "^7.0 || ^8.0",
     "hamburgers": "^1.1.3",
