@@ -8,6 +8,7 @@ import { HttpEventType } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { isBoolean, isObject } from '@shared/utilities/helper-functions';
+import { SeoService } from '@shared/services/seo.service';
 
 export interface FormConfig {
   formControlName: string;
@@ -46,9 +47,13 @@ export class ApplicationComponent implements OnInit {
     private baseService: BaseService,
     private loaderService: LoaderService,
     private router: Router,
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute,
+    private seoService: SeoService) {}
 
   ngOnInit(): void {
+    const { meta } = this.route.snapshot.data;
+    this.seoService.updateTitle(meta.title);
+    this.seoService.updateDescription(meta.description);
     for (const config of Object.keys(ApplicationFormConfigs)) {
       this.formLabels.push(config);
       this.forms.push(ApplicationFormConfigs[config]);
