@@ -12,7 +12,7 @@ export class SeoService {
     @Inject(DOCUMENT) private dom,
     private titleService: Title,
     private metaService: Meta,
-  ) { }
+  ) {}
 
   updateTitle(title: string): void {
     this.titleService.setTitle(title);
