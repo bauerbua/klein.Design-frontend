@@ -44,7 +44,6 @@
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
-    "angular-responsive-carousel": "^2.0.2",
     "codelyzer": "^6.0.0",
     "enhanced-resolve": "^3.3.0",
     "firebase-admin": "^8.10.0",
