@@ -1,8 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { SharedModule } from '@shared/shared.module';
-
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { entryRoutes } from './app.routing';
@@ -16,9 +13,8 @@ import { ImprintComponent } from '@views/imprint/imprint.component';
         ImprintComponent,
     ],
     imports: [
-      BrowserModule.withServerTransition({ appId: 'serverApp' }),
+      BrowserModule,
       HttpClientModule,
-      SharedModule,
       BrowserAnimationsModule,
       RouterModule.forRoot(entryRoutes, {
     initialNavigation: 'enabled'
