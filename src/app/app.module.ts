@@ -9,16 +9,16 @@ import { ImprintComponent } from '@views/imprint/imprint.component';
 
 @NgModule({
     declarations: [
-        AppComponent,
-        ImprintComponent,
+      AppComponent,
+      ImprintComponent,
     ],
     imports: [
       BrowserModule,
       HttpClientModule,
       BrowserAnimationsModule,
       RouterModule.forRoot(entryRoutes, {
-    initialNavigation: 'enabled'
-}),
+        initialNavigation: 'enabled'
+      }),
     ],
   providers: [],
   bootstrap: [AppComponent]

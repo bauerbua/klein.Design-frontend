@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApplicationFormConfigs } from './application-form.config';
 import { BaseService } from '@shared/services/base.service';
@@ -43,6 +43,13 @@ export class ApplicationComponent implements OnInit {
   isObject = isObject;
   isBoolean = isBoolean;
 
+  isMobile: boolean;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(): void {
+    this.isMobile = (window.innerWidth <= 900);
+  }
+
   constructor(
     private baseService: BaseService,
     private loaderService: LoaderService,
@@ -51,6 +58,7 @@ export class ApplicationComponent implements OnInit {
     private seoService: SeoService) {}
 
   ngOnInit(): void {
+    this.isMobile = (window.innerWidth <= 900);
     const { meta } = this.route.snapshot.data;
     this.seoService.updateTitle(meta.title);
     this.seoService.updateDescription(meta.description);
@@ -127,7 +135,7 @@ export class ApplicationComponent implements OnInit {
       this.formArray.value.forEach((object) => {
         if (object.hasOwnProperty('fotos')) {
           object.fotos.forEach(file => {
-            this.requestData.append('files.fotos', file, file.name);
+            this.requestData.append('files.fotos', file);
           });
         } else {
           Object.assign(data, object);
@@ -147,9 +155,15 @@ export class ApplicationComponent implements OnInit {
           this.loaderService.onDeactivateLoader();
           this.router.navigate(['geschafft'], {relativeTo: this.route});
         }
-      }, () => {
+      }, (error) => {
+        alert(`Ein Fehler ist aufgetreten: ${error.error.statusCode} ${error.error.message}`);
         this.loaderService.onDeactivateLoader();
       }
     );
+  }
+
+
+  applyValues(stepValues: {}): void {
+    console.log(stepValues);
   }
 }

@@ -1,4 +1,4 @@
-import { Patterns } from '../../shared/utilities/patterns';
+import { Patterns } from '@shared/utilities/patterns';
 
 export const ApplicationFormConfigs = {
   Kontaktdaten: [
@@ -6,13 +6,13 @@ export const ApplicationFormConfigs = {
       formControlName: 'vorname',
       type: 'text',
       label: 'Vorname',
-      isRequired: true
+      // isRequired: true
     },
     {
       formControlName: 'nachname',
       type: 'text',
       label: 'Nachname',
-      isRequired: true
+      // isRequired: true
     },
     {
       formControlName: 'email',

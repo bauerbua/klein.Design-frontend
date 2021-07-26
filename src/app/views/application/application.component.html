@@ -1,6 +1,6 @@
 <div class="application-form">
   <h1>Bewerbung kleinDesign Markt Nov. 2021</h1>
-  <mat-vertical-stepper #stepper linear="true" (selectionChange)="showSummary($event.selectedIndex)">
+  <!--<mat-vertical-stepper #stepper linear="true" (selectionChange)="showSummary($event.selectedIndex)">
     <mat-step *ngFor="let form of formArray.controls; index as i" [stepControl]="getFormGroup(i)" [label]="formLabels[i]">
       <form>
         <div [formGroup]="getFormGroup(i)" class="formGroup mat-elevation-z8">
@@ -32,7 +32,11 @@
               <ng-container *ngSwitchCase="2">
                 <mat-form-field appearance="outline">
                   <mat-label>{{input.label}}</mat-label>
-                  <mat-select [formControlName]="input.formControlName" [multiple]="input.multiple" [required]="input.isRequired">
+                  <mat-select
+                    [formControlName]="input.formControlName"
+                    [multiple]="input.multiple"
+                    [required]="input.isRequired"
+                  >
                     <mat-option *ngFor="let option of input.options" [value]="option">
                       {{option}}
                     </mat-option>
@@ -138,5 +142,106 @@
         </div>
       </div>
     </mat-step>
-  </mat-vertical-stepper>
+  </mat-vertical-stepper>-->
+
+  <ng-template #contact_details>
+    <app-contact-details (contactDetailsChanged)="applyValues($event)"></app-contact-details>
+  </ng-template>
+
+  <ng-template #company_details>
+    <app-company-details [availableOptions]="availableOptions$ | async" (companyDetailsChanged)="applyValues($event)"></app-company-details>
+  </ng-template>
+
+  <ng-template #fotos>
+    <div>
+      fotos
+    </div>
+  </ng-template>
+
+  <ng-template #stand>
+    <app-stand (selectionChanged)="applyValues($event)"></app-stand>
+  </ng-template>
+
+  <ng-template #summary>
+    <app-application-summary></app-application-summary>
+  </ng-template>
+
+  <ng-container *ngIf="!isMobile; else desktop">
+    <mat-horizontal-stepper>
+      <mat-step label="Kontaktdaten">
+        <ng-container *ngTemplateOutlet="contact_details"></ng-container>
+        <div class="buttons">
+          <button mat-fab color="primary" matTooltip="Nächste Seite" class="btn-right" type="button" matStepperNext><mat-icon>arrow_forward</mat-icon></button>
+        </div>
+      </mat-step>
+      <mat-step label="Angebot">
+        <ng-container *ngTemplateOutlet="company_details"></ng-container>
+        <div class="buttons">
+          <button mat-fab color="primary" matTooltip="Letze Seite" type="button" matStepperPrevious><mat-icon>arrow_backward</mat-icon></button>
+          <button mat-fab color="primary" matTooltip="Nächste Seite" class="btn-right" type="button" matStepperNext><mat-icon>arrow_forward</mat-icon></button>
+        </div>
+      </mat-step>
+      <mat-step label="Fotos">
+        <ng-container *ngTemplateOutlet="fotos"></ng-container>
+        <div class="buttons">
+          <button mat-fab color="primary" matTooltip="Letze Seite" type="button" matStepperPrevious><mat-icon>arrow_backward</mat-icon></button>
+          <button mat-fab color="primary" matTooltip="Nächste Seite" class="btn-right" type="button" matStepperNext><mat-icon>arrow_forward</mat-icon></button>
+        </div>
+      </mat-step>
+      <mat-step label="Standplatz">
+        <ng-container *ngTemplateOutlet="stand"></ng-container>
+        <div class="buttons">
+          <button mat-fab color="primary" matTooltip="Letze Seite" type="button" matStepperPrevious><mat-icon>arrow_backward</mat-icon></button>
+          <button mat-fab color="primary" matTooltip="Nächste Seite" class="btn-right" type="button" matStepperNext><mat-icon>arrow_forward</mat-icon></button>
+        </div>
+      </mat-step>
+      <mat-step label="Zusammenfassung">
+        <ng-container *ngTemplateOutlet="summary"></ng-container>
+        <div class="buttons">
+          <button mat-fab color="primary" matTooltip="Letze Seite" type="button" matStepperPrevious><mat-icon>arrow_backward</mat-icon></button>
+          <button mat-fab color="primary" matTooltip="Bewerbung absenden" class="btn-right" type="button" (click)="sendApplication()" [disabled]="formArray.invalid"><mat-icon>send</mat-icon></button>
+        </div>
+      </mat-step>-->
+    </mat-horizontal-stepper>
+  </ng-container>
+
+  <ng-template #desktop>
+    <mat-vertical-stepper>
+      <mat-step label="Kontaktdaten">
+        <ng-container *ngTemplateOutlet="contact_details"></ng-container>
+        <div class="buttons">
+          <button mat-fab color="primary" matTooltip="Letze Seite" type="button" matStepperPrevious><mat-icon>arrow_backward</mat-icon></button>
+          <button mat-fab color="primary" matTooltip="Nächste Seite" class="btn-right" type="button" matStepperNext><mat-icon>arrow_forward</mat-icon></button>
+        </div>
+      </mat-step>
+      <mat-step label="Angebot">
+        <ng-container *ngTemplateOutlet="company_details"></ng-container>
+        <div class="buttons">
+          <button mat-fab color="primary" matTooltip="Letze Seite" type="button" matStepperPrevious><mat-icon>arrow_backward</mat-icon></button>
+          <button mat-fab color="primary" matTooltip="Nächste Seite" class="btn-right" type="button" matStepperNext><mat-icon>arrow_forward</mat-icon></button>
+        </div>
+      </mat-step>
+      <mat-step label="Fotos">
+        <ng-container *ngTemplateOutlet="fotos"></ng-container>
+        <div class="buttons">
+          <button mat-fab color="primary" matTooltip="Letze Seite" type="button" matStepperPrevious><mat-icon>arrow_backward</mat-icon></button>
+          <button mat-fab color="primary" matTooltip="Nächste Seite" class="btn-right" type="button" matStepperNext><mat-icon>arrow_forward</mat-icon></button>
+        </div>
+      </mat-step>
+      <mat-step label="Standplatz">
+        <ng-container *ngTemplateOutlet="stand"></ng-container>
+        <div class="buttons">
+          <button mat-fab color="primary" matTooltip="Letze Seite" type="button" matStepperPrevious><mat-icon>arrow_backward</mat-icon></button>
+          <button mat-fab color="primary" matTooltip="Nächste Seite" class="btn-right" type="button" matStepperNext><mat-icon>arrow_forward</mat-icon></button>
+        </div>
+      </mat-step>
+      <mat-step label="Zusammenfassung">
+        <ng-container *ngTemplateOutlet="summary"></ng-container>
+        <div class="buttons">
+          <button mat-fab color="primary" matTooltip="Letze Seite" type="button" matStepperPrevious><mat-icon>arrow_backward</mat-icon></button>
+          <button mat-fab color="primary" matTooltip="Bewerbung absenden" class="btn-right" type="button" (click)="sendApplication()"><mat-icon>send</mat-icon></button>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
+  </ng-template>
 </div>
