@@ -7,7 +7,7 @@ import { StandApiInterface } from '@views/application/application-steps/stand/st
   styleUrls: ['./stand.component.scss']
 })
 export class StandComponent {
-  @Output() selectionChanged = new EventEmitter<StandApiInterface>();
+  @Output() selectionChanged = new EventEmitter<any>();
 
   standSize = [
     {
@@ -58,7 +58,7 @@ export class StandComponent {
   powerSelection = [
     {
       label: 'Nein',
-      value: 'ja',
+      value: 'nein',
       icon: 'power_off',
       price: 0,
       isSelected: false,
@@ -78,7 +78,7 @@ export class StandComponent {
     this.standSize.map((item) => item.isSelected = false);
     this.standSize[i].isSelected = true;
     this.standValuesObject.groesse = stand.value;
-    this.selectionChanged.next(this.standValuesObject);
+    this.selectionChanged.next({standplatz: this.standValuesObject});
     const index = this.tables.findIndex((element) => element.value === 'zwei');
     this.tables[index].isHidden = !!(stand.value === 'klein' && index);
     if (this.tables[index].isHidden) {
@@ -91,7 +91,7 @@ export class StandComponent {
     this.tables.map((item) => item.isSelected = false);
     this.tables[i].isSelected = true;
     this.standValuesObject.tische = table.value;
-    this.selectionChanged.next(this.standValuesObject);
+    this.selectionChanged.next({standplatz: this.standValuesObject});
     this.calculatePrice();
   }
 
@@ -99,7 +99,7 @@ export class StandComponent {
     this.powerSelection.map((item) => item.isSelected = false);
     this.powerSelection[i].isSelected = true;
     this.standValuesObject.strom = power.value;
-    this.selectionChanged.next(this.standValuesObject);
+    this.selectionChanged.next({standplatz: this.standValuesObject});
     this.calculatePrice();
   }
 

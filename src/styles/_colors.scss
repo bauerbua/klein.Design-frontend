@@ -1,6 +1,6 @@
 $primary: rgb(155, 178, 184);
 $secondary: rgb(2, 46, 101);
-$tertiary: rgb(222, 182, 88);
+$accent: rgb(222, 182, 88);
 
 /* For use in src/lib/core/theming/_palette.scss */
 $md-primary: (
@@ -36,7 +36,7 @@ $md-primary: (
   )
 );
 
-$md-secondary: (
+$md-accent: (
   50 : #e5f4f3,
   100 : #bee4e1,
   200 : #93d3cd,

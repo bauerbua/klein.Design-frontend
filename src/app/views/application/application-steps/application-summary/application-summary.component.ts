@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { isObject } from '@shared/utilities/helper-functions';
 
 @Component({
   selector: 'app-application-summary',
   templateUrl: './application-summary.component.html',
   styleUrls: ['./application-summary.component.scss']
 })
-export class ApplicationSummaryComponent implements OnInit {
+export class ApplicationSummaryComponent {
+  @Input() summary = {};
+  isObject = isObject;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  returnZero(): any {
+    return 0;
   }
-
 }

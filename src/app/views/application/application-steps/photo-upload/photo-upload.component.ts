@@ -1,50 +1,17 @@
-import { Component, Input, OnInit, forwardRef } from '@angular/core';
-import { FormConfig } from '../../application.component';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-file-upload-input',
-  templateUrl: './file-upload-input.component.html',
-  styleUrls: ['./file-upload-input.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => FileUploadInputComponent),
-      multi: true
-    }
-  ]
+  selector: 'app-photo-upload',
+  templateUrl: './photo-upload.component.html',
+  styleUrls: ['./photo-upload.component.scss']
 })
-export class FileUploadInputComponent implements OnInit, ControlValueAccessor {
-  @Input() input: FormConfig;
+export class PhotoUploadComponent {
+  @Output() photosSelected = new EventEmitter<any>();
 
-  value: any;
   selectedImages: any[] = [];
 
   constructor(private sanitizer: DomSanitizer) { }
-
-  onTouched: () => void;
-  onChange: (value: any) => void;
-
-  ngOnInit(): void {
-  }
-
-  writeValue(value: any[]): void {
-    if (value) {
-      this.selectedImages = value;
-    } else {
-      this.selectedImages = [];
-    }
-  }
-
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-
 
   onImgSelected($event): any {
     const filesList = $event.target.files;
@@ -55,7 +22,7 @@ export class FileUploadInputComponent implements OnInit, ControlValueAccessor {
         reader.onload = () => {
           this.cropImage(reader.result as string, file).then((croppedImg) => {
             this.selectedImages.push(croppedImg);
-            this.onChange(this.selectedImages.map((image) => image.file));
+            this.photosSelected.next(this.selectedImages);
           });
         };
       }
@@ -65,7 +32,7 @@ export class FileUploadInputComponent implements OnInit, ControlValueAccessor {
   onRemoveImg(file: any): void {
     const index = this.selectedImages.indexOf(file);
     this.selectedImages.splice(index, 1);
-    this.onChange(this.selectedImages.map((image) => image.file));
+    this.photosSelected.next(this.selectedImages);
   }
 
   cropImage(imageSrc: string, file: File): Promise<any> {

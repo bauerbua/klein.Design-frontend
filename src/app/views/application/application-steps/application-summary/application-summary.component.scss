@@ -1,0 +1,28 @@
+.summaryStep {
+  padding: 20px 0;
+
+  h2 {
+    margin: 0;
+  }
+
+  table {
+    border-spacing: 30px 5px;
+    border-collapse: separate;
+
+    .key {
+      font-weight: 500;
+    }
+  }
+}
+
+.legal-checkbox {
+  width: fit-content;
+  display: flex;
+  flex-flow: row nowrap;
+  margin: 10px 0;
+
+  mat-checkbox {
+    margin-right: 10px;
+    font-size: 1em;
+  }
+}

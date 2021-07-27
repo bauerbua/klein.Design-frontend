@@ -12,7 +12,6 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ApplicationResultComponent } from './application-result/application-result.component';
-import { FileUploadInputComponent } from './custom-inputs/file-upload-input/file-upload-input.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ContactDetailsComponent } from './application-steps/contact-details/contact-details.component';
 import { CompanyDetailsComponent } from './application-steps/company-details/company-details.component';
@@ -21,16 +20,17 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ApplicationSummaryComponent } from './application-steps/application-summary/application-summary.component';
+import { PhotoUploadComponent } from './application-steps/photo-upload/photo-upload.component';
 
 @NgModule({
   declarations: [
     ApplicationComponent,
     ApplicationResultComponent,
-    FileUploadInputComponent,
     ContactDetailsComponent,
     CompanyDetailsComponent,
     StandComponent,
-    ApplicationSummaryComponent
+    ApplicationSummaryComponent,
+    PhotoUploadComponent
   ],
   imports: [
     CommonModule,
