@@ -1,20 +1,23 @@
-<label>{{input.label}}</label>
+<div class="photos-heading">
+  <h2>Fotos hochladen</h2>
+  <mat-icon
+    matTooltip="Zugelassene Formate: .jpg, .jpeg, .png. Alle Fotos werden automatisch Größenoptimiert."
+  >help_outline</mat-icon>
+</div>
 <div class="fileUpload">
-  <button mat-raised-button color="primary" (click)="fileInput.click()"><mat-icon>upload</mat-icon> Dateien auswählen</button>
   <input
     type="file"
     class="fileInput"
     accept="image/*"
     #fileInput
     (change)="onImgSelected($event)"
-    [multiple]="input.multiple"
-    [required]="input.isRequired"/>
-  <div><small>Hinweis: Alle Bilder werden automatisch optimiert.</small></div>
+    multiple
+    required/>
   <ng-container>
     <div class="imagesList">
       <div class="selectedFile mat-elevation-z2" *ngFor="let image of selectedImages">
         <div class="imgPreview">
-          <button mat-icon-button (click)="onRemoveImg(image)"><mat-icon>clear</mat-icon></button>
+          <button mat-mini-fab matTooltip="Foto entfernen" color="accent" (click)="onRemoveImg(image)"><mat-icon>delete_outline</mat-icon></button>
           <img [src]="image.imgSrc" alt="dein foto">
         </div>
         <div class="imgInfo">
@@ -26,4 +29,12 @@
       </div>
     </div>
   </ng-container>
+  <button
+    mat-fab
+    color="accent"
+    matTooltip="Fotos hinzufügen"
+    (click)="fileInput.click()"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
 </div>

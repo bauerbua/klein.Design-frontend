@@ -1,0 +1,71 @@
+<form #form="ngForm">
+  <div class="row">
+    <mat-form-field appearance="outline">
+      <mat-label>Vorname</mat-label>
+      <input
+        matInput
+        required
+        type="text"
+        ngModel
+        name="vorname"
+      >
+      <mat-error>Dieses Feld wird benötigt!</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Nachname</mat-label>
+      <input
+        matInput
+        required
+        type="text"
+        ngModel
+        name="nachname"
+      >
+      <mat-error>Dieses Feld wird benötigt!</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        required
+        type="email"
+        [pattern]="patterns.email"
+        ngModel
+        name="email"
+        #email="ngModel"
+      >
+      <mat-error *ngIf="email.errors?.pattern">Bite geben Sie eine gültige Email-Adresse ein</mat-error>
+      <mat-error *ngIf="email.errors?.required">Dieses Feld wird benötigt!</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Telefonnummer</mat-label>
+      <input
+        matInput
+        required
+        type="text"
+        ngModel
+        name="telefonnummer"
+      >
+      <mat-error>Dieses Feld wird benötigt!</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+    <mat-form-field appearance="outline">
+      <mat-label>Adresse</mat-label>
+      <input
+        matInput
+        required
+        type="text"
+        ngModel
+        name="adresse"
+      >
+      <mat-hint>Musterstraße 1a/1, 0000 Musterstadt</mat-hint>
+      <mat-error>Dieses Feld wird benötigt!</mat-error>
+    </mat-form-field>
+  </div>
+</form>

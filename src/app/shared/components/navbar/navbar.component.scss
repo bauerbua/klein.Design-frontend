@@ -38,7 +38,7 @@ $navbar-color: rgba(255, 255, 255, .98);
     }
 
     a:hover {
-      color: $tertiary;
+      color: $accent;
     }
 
     a::before {
@@ -48,7 +48,7 @@ $navbar-color: rgba(255, 255, 255, .98);
       width: 0;
       position: absolute;
       bottom: -5px;
-      background-color: $tertiary;
+      background-color: $accent;
     }
 
     a:hover::before {
@@ -56,7 +56,7 @@ $navbar-color: rgba(255, 255, 255, .98);
     }
 
     .is-active {
-      color: $tertiary !important;
+      color: $accent !important;
     }
 
     .is-active::before {

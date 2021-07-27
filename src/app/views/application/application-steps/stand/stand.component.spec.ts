@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FileUploadInputComponent } from './file-upload-input.component';
+import { StandComponent } from './stand.component';
 
-describe('FileUploadInputComponent', () => {
-  let component: FileUploadInputComponent;
-  let fixture: ComponentFixture<FileUploadInputComponent>;
+describe('StandComponent', () => {
+  let component: StandComponent;
+  let fixture: ComponentFixture<StandComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FileUploadInputComponent ]
+      declarations: [ StandComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FileUploadInputComponent);
+    fixture = TestBed.createComponent(StandComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

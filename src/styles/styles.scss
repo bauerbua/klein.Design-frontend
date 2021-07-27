@@ -13,7 +13,7 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $kleinDesignFrontend-primary: mat.define-palette($md-primary);
-$kleinDesignFrontend-accent: mat.define-palette($md-secondary);
+$kleinDesignFrontend-accent: mat.define-palette($md-accent);
 
 // The warn palette is optional (defaults to red).
 $kleinDesignFrontend-warn: mat.define-palette(mat.$red-palette);
@@ -53,4 +53,8 @@ hr {
   display: block;
   background-color: rgba(200, 200, 200, 0.8);
   height: 1px;
+}
+
+.mat-tooltip {
+  font-size: 12px !important;
 }

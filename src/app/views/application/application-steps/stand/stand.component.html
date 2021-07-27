@@ -1,0 +1,44 @@
+<form action="">
+  <div class="row-heading">
+    <h3>Wählen Sie eine Standplatzgröße</h3>
+    <mat-icon
+      matTooltip="Der Große Standplatz hat eine Größe von 2m2. Der kleine Standplatz 1m2."
+    >help_outline</mat-icon>
+  </div>
+  <div class="row">
+    <div class="option" [ngClass]="{ 'selected' : stand.isSelected }" *ngFor="let stand of standSize; index as i" (click)="selectStandSize(stand, i)">
+      <mat-icon>{{stand.icon}}</mat-icon>
+      <p>{{stand.label}}</p>
+      <span>{{stand.price | currency:'EUR' }}</span>
+    </div>
+  </div>
+
+  <div class="row-heading">
+    <h3>Wieviele Tische benötigen Sie?</h3>
+    <mat-icon>help_outline</mat-icon>
+  </div>
+  <div class="row" >
+    <ng-container *ngFor="let table of tables; index as i">
+      <div class="option" *ngIf="!table.isHidden" [ngClass]="{ 'selected' : table.isSelected, 'disabled' : table.isDisabled }" (click)="selectTable(table, i)">
+        <p>{{table.label}}</p>
+        <span>{{table.price | currency:'EUR' }}</span>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="row-heading">
+    <h3>Benötigen Sie einen Stromanschluss?</h3>
+    <mat-icon>help_outline</mat-icon>
+  </div>
+  <div class="row">
+    <div class="option" [ngClass]="{ 'selected' : power.isSelected }" *ngFor="let power of powerSelection; index as i" (click)="selectPower(power, i)">
+      <mat-icon>{{power.icon}}</mat-icon>
+      <p>{{power.label}}</p>
+      <span>{{power.price | currency:'EUR' }}</span>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="total">
+    Gesamt: <span>{{total | currency:'EUR'}}</span>
+  </div>
+</form>

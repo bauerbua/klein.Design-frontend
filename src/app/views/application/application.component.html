@@ -1,142 +1,102 @@
 <div class="application-form">
   <h1>Bewerbung kleinDesign Markt Nov. 2021</h1>
-  <mat-vertical-stepper #stepper linear="true" (selectionChange)="showSummary($event.selectedIndex)">
-    <mat-step *ngFor="let form of formArray.controls; index as i" [stepControl]="getFormGroup(i)" [label]="formLabels[i]">
-      <form>
-        <div [formGroup]="getFormGroup(i)" class="formGroup mat-elevation-z8">
-          <ng-container *ngFor="let input of forms[i]">
-            <ng-container [ngSwitch]="
-            input.type === 'textarea' ? 1 :
-            input.type === 'select' ? 2 :
-            input.type === 'tags' ? 3 :
-            input.type === 'upload' ? 4 :
-            input.type === 'formGroup' ? 5 :
-            input.type === 'checkbox' ? 6 : -1">
 
-              <ng-container *ngSwitchCase="1">
-                <mat-form-field appearance="outline">
-                  <mat-label>{{input.label}}</mat-label>
-                  <textarea
-                    matInput
-                    cdkTextareaAutosize
-                    cdkAutosizeMinRows="3"
-                    cdkAutosizeMaxRows="8"
-                    [required]="input.isRequired"
-                    [formControlName]="input.formControlName"
-                  ></textarea>
-                  <mat-hint>{{input?.hint}}</mat-hint>
-                  <mat-error>Dieses Feld wird benötigt!</mat-error>
-                </mat-form-field>
-              </ng-container>
+  <ng-template #contact_details>
+    <app-contact-details (contactDetailsChanged)="applyValues($event, 'Kontaktdaten')"></app-contact-details>
+  </ng-template>
 
-              <ng-container *ngSwitchCase="2">
-                <mat-form-field appearance="outline">
-                  <mat-label>{{input.label}}</mat-label>
-                  <mat-select [formControlName]="input.formControlName" [multiple]="input.multiple" [required]="input.isRequired">
-                    <mat-option *ngFor="let option of input.options" [value]="option">
-                      {{option}}
-                    </mat-option>
-                  </mat-select>
-                  <mat-hint>{{input?.hint}}</mat-hint>
-                  <mat-error>Dieses Feld wird benötigt!</mat-error>
-                </mat-form-field>
-              </ng-container>
+  <ng-template #company_details>
+    <app-company-details [availableOptions]="availableOptions$ | async" (companyDetailsChanged)="applyValues($event, 'Angebot')"></app-company-details>
+  </ng-template>
 
-              <ng-container *ngSwitchCase="3">
-                <mat-form-field appearance="outline">
-                  <mat-label>{{input.label}}</mat-label>
-                  <mat-select #tagSelect [formControlName]="input.formControlName" [multiple]="input.multiple" [required]="input.isRequired">
-                    <mat-option *ngFor="let option of availableOptions$ | async" [value]="option" [disabled]="tagSelect.value?.length > 2 && !tagSelect.value?.includes(option)">
-                      {{option.tag | titlecase}}
-                    </mat-option>
-                  </mat-select>
-                  <mat-hint>{{tagSelect.value.length}} von 3 tags ausgewählt</mat-hint>
-                  <mat-error>Dieses Feld wird benötigt!</mat-error>
-                </mat-form-field>
-              </ng-container>
+  <ng-template #fotos>
+    <app-photo-upload (photosSelected)="applyPhotos($event, 'Fotos')"></app-photo-upload>
+  </ng-template>
 
-              <ng-container *ngSwitchCase="4">
-                <app-file-upload-input [input]="input" [formControlName]="input.formControlName"></app-file-upload-input>
-              </ng-container>
+  <ng-template #stand>
+    <app-stand (selectionChanged)="applyValues($event, 'Standplatz')"></app-stand>
+  </ng-template>
 
-              <ng-container *ngSwitchCase="5">
-                <p>{{input.label}}</p>
-                <div [formGroupName]="input.formControlName" class="nestedFormGroup">
-                  <mat-form-field appearance="outline" *ngFor="let subInput of input.controls">
-                    <mat-label>{{subInput.label}}</mat-label>
-                    <ng-container [ngSwitch]="subInput.type === 'select' ? 1 : -1">
-                      <ng-container *ngSwitchCase="1">
-                        <mat-select [formControlName]="subInput.formControlName" [required]="subInput.isRequired">
-                          <mat-option></mat-option>
-                          <mat-option *ngFor="let option of subInput.options" [value]="option.value">
-                            {{option.display | titlecase}}
-                          </mat-option>
-                        </mat-select>
-                      </ng-container>
-                      <ng-container *ngSwitchDefault>
-                        <input matInput [required]="subInput.isRequired" [type]="subInput.type" [formControlName]="subInput.formControlName" [pattern]="subInput.pattern">
-                      </ng-container>
-                    </ng-container>
-                    <mat-hint>{{input?.hint}}</mat-hint>
-                    <mat-error>Dieses Feld wird benötigt!</mat-error>
-                  </mat-form-field>
-                </div>
-              </ng-container>
+  <ng-template #summary>
+    <app-application-summary [summary]="summaryObject"></app-application-summary>
+  </ng-template>
 
-              <ng-container *ngSwitchCase="6">
-                <mat-checkbox [formControlName]="input.formControlName" [required]="input.isRequired">
-                  {{input.text}} {{input.isRequired ? '*' : '(optional)'}}
-                </mat-checkbox>
-              </ng-container>
-
-              <ng-container *ngSwitchDefault>
-                <mat-form-field appearance="outline">
-                  <mat-label>{{input.label}}</mat-label>
-                  <input matInput [required]="input.isRequired" [type]="input.type" [formControlName]="input.formControlName" [placeholder]="input.placeholder" [pattern]="input.pattern">
-                  <mat-hint>{{input?.hint}}</mat-hint>
-                  <mat-error>Dieses Feld wird benötigt!</mat-error>
-                </mat-form-field>
-              </ng-container>
-
-            </ng-container>
-          </ng-container>
-        </div>
+  <ng-container *ngIf="!isMobile; else desktop">
+    <mat-horizontal-stepper>
+      <mat-step label="Kontaktdaten">
+        <ng-container *ngTemplateOutlet="contact_details"></ng-container>
         <div class="buttons">
-          <button mat-raised-button *ngIf="i > 0" color="primary" type="button" matStepperPrevious>Letzte Seite</button>
-          <button mat-raised-button *ngIf="i < 4" color="primary" type="button" [disabled]="getFormGroup(i).invalid" class="btn-right" matStepperNext>Nächste Seite</button>
-          <button mat-raised-button *ngIf="i === 4" color="primary" type="button" class="btn-right" matStepperNext (click)="showSummary(i)" [disabled]="getFormGroup(i).invalid">Zusammenfassung</button>
+          <button mat-fab color="primary" matTooltip="Nächste Seite" class="btn-right" type="button" matStepperNext><mat-icon>arrow_forward</mat-icon></button>
         </div>
-      </form>
-    </mat-step>
-    <mat-step label="Zusammenfassung">
-      <div class="summary">
-        <div class="responsive-table mat-elevation-z8">
-          <table>
-            <tr *ngFor="let object of summaryArray" class="row">
-              <ng-container [ngSwitch]="isObject(object.value) ? 1 : isBoolean(object.value) ? 2 : -1">
-                <ng-container *ngSwitchCase="1">
-                  <td class="key">{{object.label}}</td>
-                  <td class="value">
-                    <div *ngFor="let item of object.value | keyvalue">{{item.key | titlecase}}: {{item.value}}</div>
-                  </td>
-                </ng-container>
-                <ng-container *ngSwitchCase="2">
-                  <td class="key">{{object.label}}</td>
-                  <td class="value">{{object.value === true ? 'Ja' : 'Nein'}}</td>
-                </ng-container>
-                <ng-container *ngSwitchDefault>
-                  <td class="key">{{object.label}}</td>
-                  <td class="value">{{object.value}}</td>
-                </ng-container>
-              </ng-container>
-            </tr>
-          </table>
-        </div>
+      </mat-step>
+      <mat-step label="Angebot">
+        <ng-container *ngTemplateOutlet="company_details"></ng-container>
         <div class="buttons">
-          <button mat-raised-button color="primary" type="button" matStepperPrevious>Letzte Seite</button>
-          <button mat-raised-button color="primary" class="btn-right" type="button" (click)="sendApplication()" [disabled]="formArray.invalid">Absenden</button>
+          <button mat-fab color="primary" matTooltip="Letze Seite" type="button" matStepperPrevious><mat-icon>arrow_backward</mat-icon></button>
+          <button mat-fab color="primary" matTooltip="Nächste Seite" class="btn-right" type="button" matStepperNext><mat-icon>arrow_forward</mat-icon></button>
         </div>
-      </div>
-    </mat-step>
-  </mat-vertical-stepper>
+      </mat-step>
+      <mat-step label="Fotos">
+        <ng-container *ngTemplateOutlet="fotos"></ng-container>
+        <div class="buttons">
+          <button mat-fab color="primary" matTooltip="Letze Seite" type="button" matStepperPrevious><mat-icon>arrow_backward</mat-icon></button>
+          <button mat-fab color="primary" matTooltip="Nächste Seite" class="btn-right" type="button" matStepperNext><mat-icon>arrow_forward</mat-icon></button>
+        </div>
+      </mat-step>
+      <mat-step label="Standplatz">
+        <ng-container *ngTemplateOutlet="stand"></ng-container>
+        <div class="buttons">
+          <button mat-fab color="primary" matTooltip="Letze Seite" type="button" matStepperPrevious><mat-icon>arrow_backward</mat-icon></button>
+          <button mat-fab color="primary" matTooltip="Nächste Seite" class="btn-right" type="button" matStepperNext><mat-icon>arrow_forward</mat-icon></button>
+        </div>
+      </mat-step>
+      <mat-step label="Zusammenfassung">
+        <ng-container *ngTemplateOutlet="summary"></ng-container>
+        <div class="buttons">
+          <button mat-fab color="primary" matTooltip="Letze Seite" type="button" matStepperPrevious><mat-icon>arrow_backward</mat-icon></button>
+          <button mat-fab color="primary" matTooltip="Bewerbung absenden" class="btn-right" type="button" (click)="sendApplication()"><mat-icon>send</mat-icon></button>
+        </div>
+      </mat-step>-->
+    </mat-horizontal-stepper>
+  </ng-container>
+
+  <ng-template #desktop>
+    <mat-vertical-stepper>
+      <mat-step label="Kontaktdaten">
+        <ng-container *ngTemplateOutlet="contact_details"></ng-container>
+        <div class="buttons">
+          <button mat-fab color="primary" matTooltip="Letze Seite" type="button" matStepperPrevious><mat-icon>arrow_backward</mat-icon></button>
+          <button mat-fab color="primary" matTooltip="Nächste Seite" class="btn-right" type="button" matStepperNext><mat-icon>arrow_forward</mat-icon></button>
+        </div>
+      </mat-step>
+      <mat-step label="Angebot">
+        <ng-container *ngTemplateOutlet="company_details"></ng-container>
+        <div class="buttons">
+          <button mat-fab color="primary" matTooltip="Letze Seite" type="button" matStepperPrevious><mat-icon>arrow_backward</mat-icon></button>
+          <button mat-fab color="primary" matTooltip="Nächste Seite" class="btn-right" type="button" matStepperNext><mat-icon>arrow_forward</mat-icon></button>
+        </div>
+      </mat-step>
+      <mat-step label="Fotos">
+        <ng-container *ngTemplateOutlet="fotos"></ng-container>
+        <div class="buttons">
+          <button mat-fab color="primary" matTooltip="Letze Seite" type="button" matStepperPrevious><mat-icon>arrow_backward</mat-icon></button>
+          <button mat-fab color="primary" matTooltip="Nächste Seite" class="btn-right" type="button" matStepperNext><mat-icon>arrow_forward</mat-icon></button>
+        </div>
+      </mat-step>
+      <mat-step label="Standplatz">
+        <ng-container *ngTemplateOutlet="stand"></ng-container>
+        <div class="buttons">
+          <button mat-fab color="primary" matTooltip="Letze Seite" type="button" matStepperPrevious><mat-icon>arrow_backward</mat-icon></button>
+          <button mat-fab color="primary" matTooltip="Nächste Seite" class="btn-right" type="button" matStepperNext><mat-icon>arrow_forward</mat-icon></button>
+        </div>
+      </mat-step>
+      <mat-step label="Zusammenfassung">
+        <ng-container *ngTemplateOutlet="summary"></ng-container>
+        <div class="buttons">
+          <button mat-fab color="primary" matTooltip="Letze Seite" type="button" matStepperPrevious><mat-icon>arrow_backward</mat-icon></button>
+          <button mat-fab color="primary" matTooltip="Bewerbung absenden" class="btn-right" type="button" (click)="sendApplication()"><mat-icon>send</mat-icon></button>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
+  </ng-template>
 </div>

@@ -1,0 +1,18 @@
+<div>
+  <div class="summaryStep" *ngFor="let summaryStep of summary | keyvalue: returnZero">
+    <h2>{{summaryStep.key}}</h2>
+    <table>
+      <tr *ngFor="let summaryStepItem of summaryStep.value | keyvalue : returnZero">
+        <td class=key>{{summaryStepItem.key | titlecase}}</td>
+          <td class="value">
+            <ng-container *ngIf="isObject(summaryStepItem.value); else regular">
+              <div *ngFor="let item of summaryStepItem.value | keyvalue">{{item.key | titlecase}}: {{item.value}}</div>
+            </ng-container>
+            <ng-template #regular>
+              {{summaryStepItem.value}}
+            </ng-template>
+          </td>
+      </tr>
+    </table>
+  </div>
+</div>
