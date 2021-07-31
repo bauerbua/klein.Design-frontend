@@ -37,6 +37,7 @@
         name="email"
         #email="ngModel"
       >
+      <mat-hint>example@email.com</mat-hint>
       <mat-error *ngIf="email.errors?.pattern">Bite geben Sie eine gültige Email-Adresse ein</mat-error>
       <mat-error *ngIf="email.errors?.required">Dieses Feld wird benötigt!</mat-error>
     </mat-form-field>

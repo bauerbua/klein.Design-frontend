@@ -19,6 +19,11 @@ export class ApplicationComponent implements OnInit {
   summaryObject = {};
   requestObject = {};
 
+  stepOneValid: boolean;
+  stepTwoValid: boolean;
+  stepThreeValid: boolean;
+  stepFourValid: boolean;
+
   isMobile: boolean;
 
   @HostListener('window:resize', ['$event'])
@@ -72,7 +77,6 @@ export class ApplicationComponent implements OnInit {
     this.summaryObject[title] = {anzahl: photos.length};
     this.requestData.delete('files.fotos');
     photos.forEach((photo) => {
-      console.log(photo);
       this.requestData.append('files.fotos', photo.file);
     });
   }

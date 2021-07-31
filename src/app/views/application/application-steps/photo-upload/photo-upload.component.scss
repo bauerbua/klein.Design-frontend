@@ -16,6 +16,7 @@
 .fileUpload {
   margin: 20px auto;
   display: flex;
+  flex-flow: row wrap;
   justify-content: center;
   align-items: center;
   min-height: 200px;
@@ -82,4 +83,30 @@
       margin: 5px 0;
     }
   }
+}
+
+.validation {
+  font-size: 1.1em;
+  margin: 25px;
+  float: right;
+  display: flex;
+  align-items: center;
+
+  p {
+    margin: 0;
+  }
+
+  mat-icon {
+    margin-left: 10px;
+  }
+}
+
+.valid {
+  mat-icon {
+    color: green;
+  }
+}
+
+.validationError {
+ color: red;
 }

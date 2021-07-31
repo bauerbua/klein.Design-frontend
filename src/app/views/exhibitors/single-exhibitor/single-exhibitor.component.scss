@@ -17,29 +17,23 @@
     }
   }
 
-  strong {
-    display: block;
-    margin: 20px 0;
-  }
+  .info {
+    div {
+      margin: 20px 0;
 
-  hr {
-    width: 60%;
-    margin: 20px auto;
-  }
-
-  .row {
-    display: flex;
-    flex-flow: row wrap;
-
-    .col {
-      width: 100%;
-      display: flex;
-      flex-flow: row nowrap;
+      p {
+        line-height: 1.5em;
+      }
 
       a {
         color: inherit;
         text-decoration: none;
         margin-right: 10px;
+
+        mat-icon {
+          width: 30px;
+          height: 30px;
+        }
       }
 
       mat-icon:hover, a:hover, img:hover {
@@ -47,6 +41,11 @@
         transition: .3s linear;
       }
     }
+  }
+
+  hr {
+    width: 60%;
+    margin: 20px auto;
   }
 
   .images {
@@ -63,4 +62,13 @@
       }
     }
   }
+}
+
+.isLoading {
+  width: 100%;
+  height: 600px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -9,11 +9,13 @@ import { NgForm } from '@angular/forms';
 export class CompanyDetailsComponent implements OnInit, OnChanges {
   @ViewChild('form', { static: true }) ngForm: NgForm;
   @Output() companyDetailsChanged = new EventEmitter<any>();
+  @Output() isValid = new EventEmitter<boolean>();
   @Input() availableOptions: {}[] = [];
 
   ngOnInit(): void {
     this.ngForm.form.valueChanges.subscribe((form) => {
       this.companyDetailsChanged.next(form);
+      this.isValid.next(this.ngForm.form.valid);
     });
   }
 

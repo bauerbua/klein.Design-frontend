@@ -8,21 +8,25 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class PhotoUploadComponent {
   @Output() photosSelected = new EventEmitter<any>();
+  @Output() isValid = new EventEmitter<boolean>();
 
   selectedImages: any[] = [];
+  totalSize = 0;
+  validSize = true;
 
   constructor(private sanitizer: DomSanitizer) { }
 
   onImgSelected($event): any {
     const filesList = $event.target.files;
     for (const file of filesList) {
-      if (!this.selectedImages.some((image) => image.name === file.name)) {
+      if (!this.selectedImages.some((image) => image.file.name === file.name)) {
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = () => {
           this.cropImage(reader.result as string, file).then((croppedImg) => {
             this.selectedImages.push(croppedImg);
             this.photosSelected.next(this.selectedImages);
+            this.isValid.next(this.checkValidity());
           });
         };
       }
@@ -33,6 +37,7 @@ export class PhotoUploadComponent {
     const index = this.selectedImages.indexOf(file);
     this.selectedImages.splice(index, 1);
     this.photosSelected.next(this.selectedImages);
+    this.isValid.next(this.checkValidity());
   }
 
   cropImage(imageSrc: string, file: File): Promise<any> {
@@ -66,5 +71,19 @@ export class PhotoUploadComponent {
       };
       img.src = imageSrc;
     });
+  }
+
+  checkValidity(): boolean {
+    const size = this.calculateSize();
+    this.validSize = size <= 1000000;
+    return (this.selectedImages.length >= 1 && this.validSize);
+  }
+
+  calculateSize(): number {
+    this.totalSize = 0;
+    this.selectedImages.forEach(image => {
+      this.totalSize += image.file.size;
+    });
+    return this.totalSize;
   }
 }

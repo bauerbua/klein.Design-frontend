@@ -46,6 +46,15 @@
   <h3>Social Media Links</h3>
   <div class="row" ngModelGroup="links">
     <mat-form-field appearance="outline">
+      <mat-label>Website</mat-label>
+      <input
+        matInput
+        type="text"
+        name="website"
+        ngModel
+      >
+    </mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Instagram</mat-label>
       <input
         matInput
@@ -64,15 +73,6 @@
         ngModel
       >
       <mat-error>Dieses Feld wird benötigt!</mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Twitter</mat-label>
-      <input
-        matInput
-        type="text"
-        name="twitter"
-        ngModel
-      >
     </mat-form-field>
   </div>
 

@@ -17,7 +17,8 @@ import { ImprintComponent } from '@views/imprint/imprint.component';
       HttpClientModule,
       BrowserAnimationsModule,
       RouterModule.forRoot(entryRoutes, {
-        initialNavigation: 'enabled'
+        initialNavigation: 'enabled',
+        scrollPositionRestoration: 'enabled'
       }),
     ],
   providers: [],

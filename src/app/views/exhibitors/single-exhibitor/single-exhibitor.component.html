@@ -1,25 +1,37 @@
-<div *ngIf="exhibitor$ | async as exhibitor" class="exhibitor">
-  <div class="heading">
-    <button class="back-btn" mat-icon-button routerLink="/aussteller"><mat-icon>arrow_back</mat-icon></button>
-    <h1>{{exhibitor.firmenname | titlecase}}</h1>
-  </div>
-  <strong>{{exhibitor.vorname | titlecase}} {{exhibitor.nachname | titlecase}}</strong>
-  <div class="row">
-    <div class="col">
-      <p>{{exhibitor.beschreibung}}</p>
+<ng-container *ngIf="exhibitor$ | async as exhibitor; else loadingOrError">
+  <div class="exhibitor">
+    <div class="heading">
+      <button class="back-btn" mat-icon-button routerLink="/aussteller"><mat-icon>arrow_back</mat-icon></button>
+      <h1>{{exhibitor.firmenname | titlecase}}</h1>
     </div>
-    <div class="col">
-      <ng-container>
+    <div class="info">
+      <div>
+        <h2>{{exhibitor.vorname | titlecase}} {{exhibitor.nachname | titlecase}}</h2>
+      </div>
+      <div class="links">
         <a [href]="'//' + exhibitor.links.facebook" target="_blank" *ngIf="exhibitor.links?.facebook"><mat-icon svgIcon="facebook"></mat-icon></a>
         <a [href]="'//' + exhibitor.links.instagram" target="_blank" *ngIf="exhibitor.links?.instagram"><mat-icon svgIcon="instagram"></mat-icon></a>
         <a [href]="'//' + exhibitor.links.webseite" target="_blank" *ngIf="exhibitor.links?.webseite"><mat-icon svgIcon="twitter"></mat-icon></a>
-      </ng-container>
+      </div>
+      <div>
+        <p>{{exhibitor.beschreibung}}</p>
+      </div>
+    </div>
+    <hr>
+    <div class="images">
+      <div *ngFor="let img of exhibitor.fotos">
+        <img class="mat-elevation-z8" alt="klein.Design Impressionen" [src]="img.url"/>
+      </div>
     </div>
   </div>
-  <hr>
-  <div class="images">
-    <div *ngFor="let img of exhibitor.fotos">
-      <img class="mat-elevation-z8" alt="klein.Design Impressionen" [src]="img.url"/>
-    </div>
+</ng-container>
+<ng-template #loadingOrError>
+  <div class="isLoading">
+    <ng-container *ngIf="loadingError$ | async; else loading">
+      <h3>Es tut uns leid, es scheint ein Problem zu geben, versuche es bitte später erneut!</h3>
+    </ng-container>
+    <ng-template #loading>
+      <mat-spinner></mat-spinner>
+    </ng-template>
   </div>
-</div>
+</ng-template>

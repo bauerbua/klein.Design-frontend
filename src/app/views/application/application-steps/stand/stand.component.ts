@@ -8,6 +8,7 @@ import { StandApiInterface } from '@views/application/application-steps/stand/st
 })
 export class StandComponent {
   @Output() selectionChanged = new EventEmitter<any>();
+  @Output() isValid: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   standSize = [
     {
@@ -85,6 +86,7 @@ export class StandComponent {
       this.tables[index].isSelected = false;
     }
     this.calculatePrice();
+    this.isValid.next(this.checkValidity());
   }
 
   selectTable(table, i: number): void {
@@ -101,6 +103,7 @@ export class StandComponent {
     this.standValuesObject.strom = power.value;
     this.selectionChanged.next({standplatz: this.standValuesObject});
     this.calculatePrice();
+    this.isValid.next(this.checkValidity());
   }
 
   calculatePrice(): void {
@@ -115,6 +118,11 @@ export class StandComponent {
       sum.push(this.powerSelection.find((el) => el.isSelected === true).price);
     }
     this.total = sum.reduce((a, b) => a + b, 0);
+    this.isValid.next(this.checkValidity());
+  }
+
+  checkValidity(): boolean {
+    return (Object.keys(this.standValuesObject).length === 3);
   }
 
 }

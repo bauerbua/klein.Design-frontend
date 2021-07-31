@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { BaseService } from '../../../shared/services/base.service';
-import { Exhibitor } from '../../../shared/interfaces/exhibitor.interface';
-import { apiEndpoints } from '../../../../assets/api/api.endpoints';
+import { BaseService } from '@shared/services/base.service';
+import { Exhibitor } from '@shared/interfaces/exhibitor.interface';
+import { apiEndpoints } from '@assets/api/api.endpoints';
 import { ActivatedRoute } from '@angular/router';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Observable } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-single-exhibitor',
@@ -14,6 +15,7 @@ import { Observable } from 'rxjs';
 })
 export class SingleExhibitorComponent implements OnInit {
   exhibitor$: Observable<Exhibitor>;
+  loadingError$ = new Subject<boolean>();
 
   constructor(
     private baseService: BaseService,
@@ -37,7 +39,13 @@ export class SingleExhibitorComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.exhibitor$ = this.baseService.get<Exhibitor>(apiEndpoints.EXHIBITORS + '/' + id);
+    this.exhibitor$ = this.baseService.get<Exhibitor>(apiEndpoints.EXHIBITORS + '/' + id).pipe(
+      catchError((error) => {
+        console.error(error);
+        this.loadingError$.next(true);
+        return of<Exhibitor>();
+      })
+    );
   }
 
 }

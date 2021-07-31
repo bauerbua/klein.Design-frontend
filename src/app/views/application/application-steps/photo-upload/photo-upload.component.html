@@ -1,7 +1,7 @@
 <div class="photos-heading">
   <h2>Fotos hochladen</h2>
   <mat-icon
-    matTooltip="Zugelassene Formate: .jpg, .jpeg, .png. Alle Fotos werden automatisch Größenoptimiert."
+    matTooltip="Zugelassene Formate: .jpg, .jpeg, .png, .svg. Alle Fotos werden automatisch Größenoptimiert."
   >help_outline</mat-icon>
 </div>
 <div class="fileUpload">
@@ -37,4 +37,9 @@
   >
     <mat-icon>add</mat-icon>
   </button>
+</div>
+<mat-divider></mat-divider>
+<div class="validation" [ngClass]="validSize ? 'valid' : 'validationError'">
+  <p [matTooltip]="validSize ? null : 'Die Gesamtgröße darf 1000 KB nicht überschreiten!'"><span>{{totalSize / 1000 | number:'1.1-1' }} KB</span>  / max. 1000KB</p>
+  <mat-icon>{{ validSize ? 'check_circle' : 'error'}}</mat-icon>
 </div>
