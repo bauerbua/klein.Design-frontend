@@ -35,12 +35,14 @@
         matInput
         name="beschreibung"
         ngModel
+        #textarea="ngModel"
         cdkTextareaAutosize
         cdkAutosizeMinRows="3"
         cdkAutosizeMaxRows="8"
         required
       ></textarea>
-      <mat-error>Dieses Feld wird benötigt!</mat-error>
+      <mat-hint>Bitte schreiben Sie mindestens 100 Wörter.</mat-hint>
+      <mat-error *ngIf="textarea.errors?.required">Dieses Feld wird benötigt!</mat-error>
     </mat-form-field>
   </div>
   <h3>Social Media Links</h3>
@@ -53,6 +55,7 @@
         name="website"
         ngModel
       >
+      <mat-hint>www.my-website.com</mat-hint>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Instagram</mat-label>
@@ -62,7 +65,6 @@
         name="instagram"
         ngModel
       >
-      <mat-hint>www.instagram.com</mat-hint>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Facebook</mat-label>

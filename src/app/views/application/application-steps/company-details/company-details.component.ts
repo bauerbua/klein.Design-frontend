@@ -24,4 +24,6 @@ export class CompanyDetailsComponent implements OnInit, OnChanges {
       this.availableOptions = this.availableOptions.sort((a: any, b: any) => a.tag.localeCompare(b.tag));
     }
   }
+
+
 }
